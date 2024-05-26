@@ -1,0 +1,759 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<ui version="4.0">
+ <class>TableEditWidget</class>
+ <widget class="QWidget" name="TableEditWidget">
+  <property name="geometry">
+   <rect>
+    <x>0</x>
+    <y>0</y>
+    <width>698</width>
+    <height>437</height>
+   </rect>
+  </property>
+  <property name="windowTitle">
+   <string>Form</string>
+  </property>
+  <layout class="QGridLayout" name="gridLayout" rowstretch="2,20">
+   <property name="leftMargin">
+    <number>0</number>
+   </property>
+   <property name="topMargin">
+    <number>0</number>
+   </property>
+   <property name="rightMargin">
+    <number>0</number>
+   </property>
+   <property name="bottomMargin">
+    <number>0</number>
+   </property>
+   <item row="0" column="0">
+    <widget class="QWidget" name="widget_2" native="true">
+     <property name="styleSheet">
+      <string notr="true">background:#1191d3;</string>
+     </property>
+     <layout class="QHBoxLayout" name="horizontalLayout_3" stretch="20">
+      <item>
+       <widget class="QLabel" name="label_2">
+        <property name="sizePolicy">
+         <sizepolicy hsizetype="Preferred" vsizetype="Ignored">
+          <horstretch>0</horstretch>
+          <verstretch>0</verstretch>
+         </sizepolicy>
+        </property>
+        <property name="font">
+         <font>
+          <pointsize>14</pointsize>
+         </font>
+        </property>
+        <property name="styleSheet">
+         <string notr="true">color:#ffffff;
+</string>
+        </property>
+        <property name="text">
+         <string>设置</string>
+        </property>
+        <property name="alignment">
+         <set>Qt::AlignCenter</set>
+        </property>
+       </widget>
+      </item>
+     </layout>
+    </widget>
+   </item>
+   <item row="1" column="0">
+    <widget class="QTabWidget" name="tabWidget">
+     <property name="styleSheet">
+      <string notr="true">QTabBar::tab{
+background:#ffffff;
+width:200%;
+border-radius:3px;
+border:1px solid #1191d3;
+
+padding:5px;
+}
+QTabBar::tab:hover{
+background:rgb(217, 217, 217);
+}
+QTabBar::tab:selected{
+color:#ffffff;
+background:#1191d3;
+}
+QTabWidget::tab-bar{
+alignment:center;
+}</string>
+     </property>
+     <property name="currentIndex">
+      <number>0</number>
+     </property>
+     <widget class="QWidget" name="tab">
+      <attribute name="title">
+       <string>课程表设置</string>
+      </attribute>
+      <layout class="QHBoxLayout" name="horizontalLayout_4">
+       <property name="leftMargin">
+        <number>0</number>
+       </property>
+       <property name="topMargin">
+        <number>0</number>
+       </property>
+       <property name="rightMargin">
+        <number>0</number>
+       </property>
+       <property name="bottomMargin">
+        <number>0</number>
+       </property>
+       <item>
+        <widget class="QWidget" name="widget" native="true">
+         <layout class="QVBoxLayout" name="verticalLayout" stretch="5,5,45">
+          <property name="spacing">
+           <number>5</number>
+          </property>
+          <property name="leftMargin">
+           <number>25</number>
+          </property>
+          <property name="topMargin">
+           <number>10</number>
+          </property>
+          <property name="rightMargin">
+           <number>25</number>
+          </property>
+          <property name="bottomMargin">
+           <number>25</number>
+          </property>
+          <item>
+           <layout class="QHBoxLayout" name="horizontalLayout" stretch="10,0,0,0,2">
+            <item>
+             <widget class="QLineEdit" name="lineEdit">
+              <property name="styleSheet">
+               <string notr="true">QLineEdit{
+
+border-bottom: 1px solid #1191d3;; /* 边框宽度为1px，颜色为#A0A0A0 */
+	border-radius: 3px; /* 边框圆角 */
+	padding-left: 5px; /* 文本距离左边界有5px */
+	background-color: #FAFAFA; /* 背景颜色 */
+	color: #000000; /* 文本颜色 */
+	selection-background-color: #1191d3; /* 选中文本的背景颜色 */
+	selection-color: #F2F2F2; /* 选中文本的颜色 */
+	font-family: &quot;Microsoft YaHei&quot;; /* 文本字体族 */
+	font-size: 10pt; /* 文本字体大小 */
+}
+QLineEdit:hover,QLineEdit:editble{
+border-bottom: 1px solid rgb(255, 58, 58);
+}</string>
+              </property>
+              <property name="text">
+               <string/>
+              </property>
+              <property name="placeholderText">
+               <string>输入名称</string>
+              </property>
+              <property name="clearButtonEnabled">
+               <bool>false</bool>
+              </property>
+             </widget>
+            </item>
+            <item>
+             <widget class="QTimeEdit" name="timeEdit">
+              <property name="toolTip">
+               <string>输入上课时间</string>
+              </property>
+              <property name="styleSheet">
+               <string notr="true">QDateTimeEdit{
+
+border-bottom: 1px solid #1191d3;; /* 边框宽度为1px，颜色为#A0A0A0 */
+	border-radius: 3px; /* 边框圆角 */
+	padding-left: 5px; /* 文本距离左边界有5px */
+	background-color: #FAFAFA; /* 背景颜色 */
+	color: #000000; /* 文本颜色 */
+	selection-background-color: #1191d3; /* 选中文本的背景颜色 */
+	selection-color: #F2F2F2; /* 选中文本的颜色 */
+	font-family: &quot;Microsoft YaHei&quot;; /* 文本字体族 */
+	font-size: 10pt; /* 文本字体大小 */
+}
+QDateTimeEdit:hover{
+border-bottom: 1px solid rgb(255, 58, 58);
+}
+QDateTimeEdit::down-button{
+width:7px;
+background:#F0F0F0;
+border-image: url(&quot;:/res/down.png&quot;);
+}
+QDateTimeEdit::up-button{
+width:7px;
+background:#F0F0F0;
+border-image: url(&quot;:/res/up.png&quot;);
+}
+QDateTimeEdit::down-button:hover{
+background:#1191d3;
+}
+QDateTimeEdit::up-button:hover{
+background:#1191d3;
+}</string>
+              </property>
+             </widget>
+            </item>
+            <item>
+             <widget class="QTimeEdit" name="timeEdit_2">
+              <property name="toolTip">
+               <string>输入下课时间</string>
+              </property>
+              <property name="styleSheet">
+               <string notr="true">QDateTimeEdit{
+
+border-bottom: 1px solid #1191d3;; /* 边框宽度为1px，颜色为#A0A0A0 */
+	border-radius: 3px; /* 边框圆角 */
+	padding-left: 5px; /* 文本距离左边界有5px */
+	background-color: #FAFAFA; /* 背景颜色 */
+	color: #000000; /* 文本颜色 */
+	selection-background-color: #1191d3; /* 选中文本的背景颜色 */
+	selection-color: #F2F2F2; /* 选中文本的颜色 */
+	font-family: &quot;Microsoft YaHei&quot;; /* 文本字体族 */
+	font-size: 10pt; /* 文本字体大小 */
+}
+QDateTimeEdit:hover{
+border-bottom: 1px solid rgb(255, 58, 58);
+}
+QDateTimeEdit::down-button{
+width:7px;
+background:#F0F0F0;
+border-image: url(&quot;:/res/down.png&quot;);
+}
+QDateTimeEdit::up-button{
+width:7px;
+background:#F0F0F0;
+border-image: url(&quot;:/res/up.png&quot;);
+}
+QDateTimeEdit::down-button:hover{
+background:#1191d3;
+}
+QDateTimeEdit::up-button:hover{
+background:#1191d3;
+}</string>
+              </property>
+             </widget>
+            </item>
+            <item>
+             <widget class="QSpinBox" name="spinBox">
+              <property name="toolTip">
+               <string>输入离上课的课间时间</string>
+              </property>
+              <property name="styleSheet">
+               <string notr="true">QSpinBox{
+
+border-bottom: 1px solid #1191d3;; /* 边框宽度为1px，颜色为#A0A0A0 */
+	border-radius: 3px; /* 边框圆角 */
+	padding-left: 5px; /* 文本距离左边界有5px */
+	background-color: #FAFAFA; /* 背景颜色 */
+	color: #000000; /* 文本颜色 */
+	selection-background-color: #1191d3; /* 选中文本的背景颜色 */
+	selection-color: #F2F2F2; /* 选中文本的颜色 */
+	font-family: &quot;Microsoft YaHei&quot;; /* 文本字体族 */
+	font-size: 10pt; /* 文本字体大小 */
+}
+QSpinBox:hover{
+border-bottom: 1px solid rgb(255, 58, 58);
+}
+QSpinBox::down-button{
+width:7px;
+background:#F0F0F0;
+border-image: url(&quot;:/res/down.png&quot;);
+}
+QSpinBox::up-button{
+width:7px;
+background:#F0F0F0;
+border-image: url(&quot;:/res/up.png&quot;);
+}
+QSpinBox::down-button:hover{
+background:#1191d3;
+}
+QSpinBox::up-button:hover{
+background:#1191d3;
+}</string>
+              </property>
+             </widget>
+            </item>
+            <item>
+             <widget class="QPushButton" name="pushButton">
+              <property name="styleSheet">
+               <string notr="true">QPushButton{
+
+border-bottom: 1px solid #1191d3;; /* 边框宽度为1px，颜色为#A0A0A0 */
+	border-radius: 3px; /* 边框圆角 */
+	
+	background-color: #FAFAFA; /* 背景颜色 */
+	color: #000000; /* 文本颜色 */
+	padding:3px;
+
+}
+QPushButton:hover{
+border-bottom: 1px solid rgb(255, 58, 58);
+}
+</string>
+              </property>
+              <property name="text">
+               <string>添加</string>
+              </property>
+             </widget>
+            </item>
+           </layout>
+          </item>
+          <item>
+           <layout class="QHBoxLayout" name="horizontalLayout_2">
+            <item>
+             <widget class="QRadioButton" name="radioButton">
+              <property name="styleSheet">
+               <string notr="true">QRadioButton::indicator{
+	width:15px;
+	height:15px;
+	border-image:url(&quot;:/radiobutton/radiobutton/stable.png&quot;);
+}
+QRadioButton::indicator:unchecked:hover{
+	border-image:url(&quot;:/radiobutton/radiobutton/hover.png&quot;);
+}
+QRadioButton::indicator:checked{
+	border-image:url(&quot;:/radiobutton/radiobutton/checked.png&quot;);
+}
+QRadioButton::indicator:unchecked{
+	border-image:url(&quot;:/radiobutton/radiobutton/stable.png&quot;);
+}</string>
+              </property>
+              <property name="text">
+               <string>周一</string>
+              </property>
+              <property name="checked">
+               <bool>true</bool>
+              </property>
+             </widget>
+            </item>
+            <item>
+             <widget class="QRadioButton" name="radioButton_2">
+              <property name="styleSheet">
+               <string notr="true">QRadioButton::indicator{
+	width:15px;
+	height:15px;
+	border-image:url(&quot;:/radiobutton/radiobutton/stable.png&quot;);
+}
+QRadioButton::indicator:unchecked:hover{
+	border-image:url(&quot;:/radiobutton/radiobutton/hover.png&quot;);
+}
+QRadioButton::indicator:checked{
+	border-image:url(&quot;:/radiobutton/radiobutton/checked.png&quot;);
+}
+QRadioButton::indicator:unchecked{
+	border-image:url(&quot;:/radiobutton/radiobutton/stable.png&quot;);
+}</string>
+              </property>
+              <property name="text">
+               <string>周二</string>
+              </property>
+             </widget>
+            </item>
+            <item>
+             <widget class="QRadioButton" name="radioButton_3">
+              <property name="styleSheet">
+               <string notr="true">QRadioButton::indicator{
+	width:15px;
+	height:15px;
+	border-image:url(&quot;:/radiobutton/radiobutton/stable.png&quot;);
+}
+QRadioButton::indicator:unchecked:hover{
+	border-image:url(&quot;:/radiobutton/radiobutton/hover.png&quot;);
+}
+QRadioButton::indicator:checked{
+	border-image:url(&quot;:/radiobutton/radiobutton/checked.png&quot;);
+}
+QRadioButton::indicator:unchecked{
+	border-image:url(&quot;:/radiobutton/radiobutton/stable.png&quot;);
+}</string>
+              </property>
+              <property name="text">
+               <string>周三</string>
+              </property>
+             </widget>
+            </item>
+            <item>
+             <widget class="QRadioButton" name="radioButton_4">
+              <property name="styleSheet">
+               <string notr="true">QRadioButton::indicator{
+	width:15px;
+	height:15px;
+	border-image:url(&quot;:/radiobutton/radiobutton/stable.png&quot;);
+}
+QRadioButton::indicator:unchecked:hover{
+	border-image:url(&quot;:/radiobutton/radiobutton/hover.png&quot;);
+}
+QRadioButton::indicator:checked{
+	border-image:url(&quot;:/radiobutton/radiobutton/checked.png&quot;);
+}
+QRadioButton::indicator:unchecked{
+	border-image:url(&quot;:/radiobutton/radiobutton/stable.png&quot;);
+}</string>
+              </property>
+              <property name="text">
+               <string>周四</string>
+              </property>
+             </widget>
+            </item>
+            <item>
+             <widget class="QRadioButton" name="radioButton_5">
+              <property name="styleSheet">
+               <string notr="true">QRadioButton::indicator{
+	width:15px;
+	height:15px;
+	border-image:url(&quot;:/radiobutton/radiobutton/stable.png&quot;);
+}
+QRadioButton::indicator:unchecked:hover{
+	border-image:url(&quot;:/radiobutton/radiobutton/hover.png&quot;);
+}
+QRadioButton::indicator:checked{
+	border-image:url(&quot;:/radiobutton/radiobutton/checked.png&quot;);
+}
+QRadioButton::indicator:unchecked{
+	border-image:url(&quot;:/radiobutton/radiobutton/stable.png&quot;);
+}</string>
+              </property>
+              <property name="text">
+               <string>周五</string>
+              </property>
+             </widget>
+            </item>
+           </layout>
+          </item>
+          <item>
+           <widget class="QTableWidget" name="tableWidget">
+            <property name="styleSheet">
+             <string notr="true">QTableWidget{
+background:#ffffff;
+border-radius:10px;
+}
+QTableWidget::item{
+border:none;
+border-radius:3px;
+}
+QTableWidget::item:selected{
+background:#1191d3;
+}
+QTableWidget::item:hover{
+color:#000000;
+background:rgb(217, 217, 217);
+}
+QHeaderView::section{
+border:1px solid white;
+border-radius:3px;
+text-align:center;
+background:#1191d3;
+padding:3px;
+color:#ffffff;
+}
+QScrollBar::handle:vertical{
+background:#1191d3;
+
+}</string>
+            </property>
+            <row/>
+            <column>
+             <property name="text">
+              <string>课程</string>
+             </property>
+            </column>
+            <column>
+             <property name="text">
+              <string>上课时间</string>
+             </property>
+            </column>
+            <column>
+             <property name="text">
+              <string>下课时间</string>
+             </property>
+            </column>
+            <column>
+             <property name="text">
+              <string>课间时间</string>
+             </property>
+            </column>
+            <item row="0" column="0">
+             <property name="text">
+              <string>1</string>
+             </property>
+            </item>
+            <item row="0" column="1">
+             <property name="text">
+              <string>1</string>
+             </property>
+            </item>
+            <item row="0" column="2">
+             <property name="text">
+              <string>1</string>
+             </property>
+            </item>
+            <item row="0" column="3">
+             <property name="text">
+              <string>1</string>
+             </property>
+            </item>
+           </widget>
+          </item>
+         </layout>
+        </widget>
+       </item>
+      </layout>
+     </widget>
+     <widget class="QWidget" name="tab_2">
+      <attribute name="title">
+       <string>关于</string>
+      </attribute>
+      <layout class="QVBoxLayout" name="verticalLayout_2" stretch="0,10,0,11">
+       <item>
+        <spacer name="verticalSpacer_2">
+         <property name="orientation">
+          <enum>Qt::Vertical</enum>
+         </property>
+         <property name="sizeHint" stdset="0">
+          <size>
+           <width>20</width>
+           <height>40</height>
+          </size>
+         </property>
+        </spacer>
+       </item>
+       <item>
+        <layout class="QHBoxLayout" name="horizontalLayout_5">
+         <item>
+          <widget class="ClickLabel" name="label">
+           <property name="styleSheet">
+            <string notr="true">image:url(&quot;:/res/a.png&quot;)</string>
+           </property>
+           <property name="text">
+            <string/>
+           </property>
+          </widget>
+         </item>
+         <item>
+          <layout class="QVBoxLayout" name="verticalLayout_3" stretch="3,3,3">
+           <item>
+            <widget class="QLabel" name="label_3">
+             <property name="font">
+              <font>
+               <pointsize>28</pointsize>
+              </font>
+             </property>
+             <property name="text">
+              <string>课程表</string>
+             </property>
+            </widget>
+           </item>
+           <item>
+            <widget class="QLabel" name="label_4">
+             <property name="font">
+              <font>
+               <pointsize>18</pointsize>
+              </font>
+             </property>
+             <property name="text">
+              <string>版本2.0</string>
+             </property>
+            </widget>
+           </item>
+           <item>
+            <widget class="QLabel" name="label_5">
+             <property name="font">
+              <font>
+               <pointsize>14</pointsize>
+              </font>
+             </property>
+             <property name="text">
+              <string>Powered By Aero8m</string>
+             </property>
+            </widget>
+           </item>
+          </layout>
+         </item>
+        </layout>
+       </item>
+       <item>
+        <widget class="QLabel" name="label_6">
+         <property name="font">
+          <font>
+           <pointsize>14</pointsize>
+          </font>
+         </property>
+         <property name="text">
+          <string>基于Qt 6.2.4 编写</string>
+         </property>
+         <property name="alignment">
+          <set>Qt::AlignCenter</set>
+         </property>
+        </widget>
+       </item>
+       <item>
+        <spacer name="verticalSpacer">
+         <property name="orientation">
+          <enum>Qt::Vertical</enum>
+         </property>
+         <property name="sizeHint" stdset="0">
+          <size>
+           <width>20</width>
+           <height>40</height>
+          </size>
+         </property>
+        </spacer>
+       </item>
+      </layout>
+     </widget>
+     <widget class="QWidget" name="tab_3">
+      <attribute name="title">
+       <string>彩蛋设置</string>
+      </attribute>
+      <layout class="QHBoxLayout" name="horizontalLayout_6">
+       <property name="leftMargin">
+        <number>0</number>
+       </property>
+       <property name="topMargin">
+        <number>0</number>
+       </property>
+       <property name="rightMargin">
+        <number>0</number>
+       </property>
+       <property name="bottomMargin">
+        <number>0</number>
+       </property>
+       <item>
+        <layout class="QVBoxLayout" name="verticalLayout_4" stretch="1,2,5,1">
+         <item>
+          <layout class="QHBoxLayout" name="horizontalLayout_7">
+           <item>
+            <widget class="QCheckBox" name="checkBox_2">
+             <property name="font">
+              <font>
+               <pointsize>11</pointsize>
+              </font>
+             </property>
+             <property name="styleSheet">
+              <string notr="true">QCheckBox{
+border:none;
+}
+
+QCheckBox::indicator{/*选择框尺寸*/
+    border: 0px solid #b1b1b1;
+	width: 50px;
+	height: 50px;
+}
+QCheckBox::indicator:unchecked{
+image:url(&quot;:/res/checkbutton/unchecked.png&quot;);
+}
+QCheckBox::indicator:checked{
+image:url(&quot;:/res/checkbutton/checked.png&quot;);
+}
+QCheckBox:hover{
+color:#1191d3;
+}</string>
+             </property>
+             <property name="text">
+              <string>打开口吐芬芳</string>
+             </property>
+            </widget>
+           </item>
+           <item>
+            <widget class="QCheckBox" name="checkBox">
+             <property name="font">
+              <font>
+               <pointsize>11</pointsize>
+              </font>
+             </property>
+             <property name="styleSheet">
+              <string notr="true">QCheckBox{
+border:none;
+}
+
+QCheckBox::indicator{/*选择框尺寸*/
+    border: 0px solid #b1b1b1;
+	width: 50px;
+	height: 50px;
+}
+QCheckBox::indicator:unchecked{
+image:url(&quot;:/res/checkbutton/unchecked.png&quot;);
+}
+QCheckBox::indicator:checked{
+image:url(&quot;:/res/checkbutton/checked.png&quot;);
+}
+QCheckBox:hover{
+color:#1191d3;
+}</string>
+             </property>
+             <property name="text">
+              <string>打开木鱼</string>
+             </property>
+            </widget>
+           </item>
+          </layout>
+         </item>
+         <item>
+          <widget class="QLabel" name="label_9">
+           <property name="font">
+            <font>
+             <pointsize>14</pointsize>
+            </font>
+           </property>
+           <property name="text">
+            <string>修改设置后请重启程序</string>
+           </property>
+          </widget>
+         </item>
+         <item>
+          <spacer name="verticalSpacer_3">
+           <property name="orientation">
+            <enum>Qt::Vertical</enum>
+           </property>
+           <property name="sizeHint" stdset="0">
+            <size>
+             <width>20</width>
+             <height>40</height>
+            </size>
+           </property>
+          </spacer>
+         </item>
+         <item>
+          <layout class="QHBoxLayout" name="horizontalLayout_9" stretch="1">
+           <item>
+            <widget class="QPushButton" name="pushButton_2">
+             <property name="styleSheet">
+              <string notr="true">QPushButton{
+
+border-bottom: 1px solid #1191d3;; /* 边框宽度为1px，颜色为#A0A0A0 */
+	border-radius: 3px; /* 边框圆角 */
+	
+	background-color: #FAFAFA; /* 背景颜色 */
+	color: #000000; /* 文本颜色 */
+	padding:3px;
+
+}
+QPushButton:hover{
+border-bottom: 1px solid rgb(255, 58, 58);
+}
+</string>
+             </property>
+             <property name="text">
+              <string>关闭</string>
+             </property>
+            </widget>
+           </item>
+          </layout>
+         </item>
+        </layout>
+       </item>
+      </layout>
+     </widget>
+    </widget>
+   </item>
+  </layout>
+ </widget>
+ <customwidgets>
+  <customwidget>
+   <class>ClickLabel</class>
+   <extends>QLabel</extends>
+   <header>clicklabel.h</header>
+  </customwidget>
+ </customwidgets>
+ <resources/>
+ <connections/>
+</ui>
