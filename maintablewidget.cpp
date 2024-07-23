@@ -1,83 +1,131 @@
 #include "maintablewidget.h"
 #include "ui_maintablewidget.h"
+
 #include "API.h"
-#include<windows.h>
+
 MainTableWidget::MainTableWidget(QWidget *parent)
     : QWidget(parent)
     , ui(new Ui::MainTableWidget)
 {
     ui->setupUi(this);
     qDebug() << TABLE_JSON;
-    readTimeTable();
     readConfig();
+    readTimeTable();
+
     EditWindow.setConfig(Config);
     if (!Config.value("muyu_status").toBool()){
         ui->muyu->hide();
         ui->pushButton_3->hide();
-
-
-
     }
-    adjustSize();
     qDebug() << time_table;
-    setWindowFlags(Qt::WindowType::FramelessWindowHint | Qt::WindowType::Tool | Qt::WindowType::WindowStaysOnTopHint);
-    setAttribute(Qt::WidgetAttribute::WA_TranslucentBackground);
-    muyuding = new QPropertyAnimation(ui->muyu, "geometry");
-    muyuding->setStartValue(QRect(ui->muyu->pos().x(),ui->muyu->pos().y(),ui->muyu->width(),ui->muyu->height()));
-    muyuding->setEndValue(QRect(727,17,21,21));
-    muyuding->setDuration(100);
-    muyuding->setEasingCurve(QEasingCurve::InOutQuad);
-    hideani = new QPropertyAnimation(this, "pos");
-    QScreen *scr = qApp->primaryScreen();
-    int scr_w = scr->size().width();
-    int scr_h = scr->size().height();
-    QPoint globalpos = QPoint((scr_w - width()) / 2*1.1, (scr_h - height()) / 300);
-    hideani->setStartValue(globalpos);
-    hideani->setEndValue(QPoint(globalpos.x(),globalpos.y()-this->height()+(this->height()/3*0.3)));
-    hideani->setDuration(500);
-    hideani->setEasingCurve(QEasingCurve::InOutQuad);
 
-    connect(muyuding,&QPropertyAnimation::finished,this,[=]{
-        ui->muyu->setGeometry(QRect(728,18,19,19));
-    });
-    // b2b =  new QPropertyAnimation(ui->time_stack, "geometry");
-    // b2b->setStartValue(QRect(ui->time_stack->pos().x(),ui->time_stack->pos().y(),ui->time_stack->width(),ui->time_stack->height()));
-    // b2b->setEndValue(QRect(ui->time_stack->pos().x(),ui->time_stack->pos().y(),35,ui->time_stack->height()));
-    // b2b->setDuration(700);
-    // b2b->setEasingCurve(QEasingCurve::InOutQuad);
-    // b2c =  new QPropertyAnimation(ui->pushButton, "geometry");
-    // b2c->setStartValue(QRect(ui->time_stack->pos().x(),ui->time_stack->pos().y(),ui->time_stack->width(),ui->time_stack->height()));
-    // b2c->setEndValue(QRect(ui->time_stack->pos().x(),ui->time_stack->pos().y(),35,ui->time_stack->height()));
-    // b2c->setDuration(700);
-    // b2c->setEasingCurve(QEasingCurve::InOutQuad);
-    connect(&rtt,&refechTableThread::repaint,this,&MainTableWidget::do_repaint,Qt::QueuedConnection);
-    connect(&rtt,&refechTableThread::pss,ui->pushButton,&QLabel::setStyleSheet,Qt::QueuedConnection);
-    connect(&rtt,&refechTableThread::pst,ui->pushButton,&QLabel::setText,Qt::QueuedConnection);
-    connect(&rtt,&refechTableThread::tss,ui->table_show,&QLabel::setStyleSheet,Qt::QueuedConnection);
-    connect(&rtt,&refechTableThread::tst,ui->table_show,&QLabel::setText,Qt::QueuedConnection);
-    rtt.start();
-    QGraphicsDropShadowEffect* shadow = new QGraphicsDropShadowEffect(this);
-    shadow->setOffset(0, 0);
-    shadow->setColor(Qt::black);
-    shadow->setBlurRadius(10);
-    ui->down_button->setGraphicsEffect(shadow);
-    ui->down_button->setParent(this);
-    ui->down_button->hide();
-    connect(&EditWindow,SIGNAL(refechTable_signal()),this,SLOT(refechTable_slot()));
+    initUi();
 
-    connect(ui->down_button,&ClickLabel::clicked,this,&MainTableWidget::on_label_2_clicked);
+    rtt = new refechTableThread();
+    connect(rtt,&refechTableThread::repaint,this,&MainTableWidget::do_repaint,Qt::QueuedConnection);
+    connect(rtt,&refechTableThread::pss,ui->pushButton,&QLabel::setStyleSheet,Qt::QueuedConnection);
+    connect(rtt,&refechTableThread::pst,ui->pushButton,&QLabel::setText,Qt::QueuedConnection);
+    connect(rtt,&refechTableThread::tss,ui->table_show,&QLabel::setStyleSheet,Qt::QueuedConnection);
+    connect(rtt,&refechTableThread::tst,ui->table_show,&QLabel::setText,Qt::QueuedConnection);
+    initSignal();
 
-
+    rtt->start();
     initSysTrayIcon();
+    QTranslator translator;
+    QLocale::Language lab = QLocale::system().language();
+    if(QLocale::Chinese == lab)
+    {
+        translator.load(":/lang/lang_cn.qm");
+        qApp->installTranslator(&translator);
+        ui->retranslateUi(this);
+    }else if(QLocale::English== lab){
+        translator.load(":/language/lang_en.qm");
+        qApp->installTranslator(&translator);
+        ui->retranslateUi(this);
+    }
 }
 
 MainTableWidget::~MainTableWidget()
 {
     delete ui;
 }
+void MainTableWidget::setWidgetBlur(QWidget* widget){
+    QGraphicsBlurEffect* blur = new QGraphicsBlurEffect(widget);
+    blur->setBlurRadius(3);
+    widget->setGraphicsEffect(blur);
 
+
+}
+void MainTableWidget::initUi(){
+    setWindowFlags(Qt::WindowType::FramelessWindowHint | Qt::WindowType::Tool | Qt::WindowType::WindowStaysOnTopHint);
+    setAttribute(Qt::WidgetAttribute::WA_TranslucentBackground);
+    muyuding = new QPropertyAnimation(ui->muyu, "geometry");
+    muyuding->setStartValue(QRect(ui->muyu->pos().x(),ui->muyu->pos().y(),ui->muyu->width(),ui->muyu->height()));
+    muyuding->setEndValue(QRect(770,18,21,21));
+    muyuding->setDuration(100);
+    muyuding->setEasingCurve(QEasingCurve::InOutQuad);
+    hideani = new QPropertyAnimation(this, "pos");
+    QScreen *scr = qApp->primaryScreen();
+    int scr_w = scr->size().width();
+    int scr_h = scr->size().height();
+    QPoint globalpos = QPoint((scr_w - width()) / 2*1.1, (scr_h - height()) / 9999999999999999999);
+    hideani->setStartValue(globalpos);
+    hideani->setEndValue(QPoint(globalpos.x(),globalpos.y()-this->height()+(this->height()*0.9)));
+    hideani->setDuration(500);
+    hideani->setEasingCurve(QEasingCurve::InOutQuad);
+
+    connect(muyuding,&QPropertyAnimation::finished,this,[=]{
+        ui->muyu->setGeometry(QRect(770,18,19,19));
+    });
+
+
+    QGraphicsDropShadowEffect* shadow = new QGraphicsDropShadowEffect(this);
+    shadow->setOffset(0, 0);
+    shadow->setColor(Qt::black);
+    shadow->setBlurRadius(10);
+
+    ui->down_button->setGraphicsEffect(shadow);
+    ui->down_button->setParent(this);
+    ui->down_button->hide();
+
+    setWidgetBlur(ui->table_show_2);
+    setWidgetBlur(ui->table_show_3);
+    setWidgetBlur(ui->pushButton_2);
+    setWidgetBlur(ui->pushButton_3);
+    setWidgetBlur(ui->pushButton_4);
+
+    todomovea = new QPropertyAnimation(ui->pushButton_5,"geometry");
+    todomovea->setStartValue(QRect(ui->pushButton_5->pos().x(),ui->pushButton_5->pos().y(),ui->pushButton_5->width(),ui->pushButton_5->height()));
+    todomovea->setEndValue(QRect(130,70,531,361));
+    todomovea->setDuration(500);
+    todomovea->setEasingCurve(QEasingCurve::InOutQuad);
+
+    todomoveb = new QPropertyAnimation(ui->todo,"pos");
+    todomoveb->setStartValue(ui->todo->pos());
+    todomoveb->setEndValue(QPoint(140,80));
+    todomoveb->setDuration(500);
+    todomoveb->setEasingCurve(QEasingCurve::InOutQuad);
+
+    muyumovea = new QPropertyAnimation(ui->pushButton_3,"pos");
+    muyumovea->setStartValue(ui->pushButton_3->pos());
+    muyumovea->setEndValue(QPoint(722,10));
+    muyumovea->setDuration(300);
+    muyumovea->setEasingCurve(QEasingCurve::InOutQuad);
+
+    muyumoveb = new QPropertyAnimation(ui->muyu,"pos");
+    muyumoveb->setStartValue(ui->muyu->pos());
+    muyumoveb->setEndValue(QPoint(730,18));
+    muyumoveb->setDuration(300);
+    muyumoveb->setEasingCurve(QEasingCurve::InOutQuad);
+}
+void MainTableWidget::initSignal(){
+
+    connect(&EditWindow,SIGNAL(refechTable_signal()),this,SLOT(refechTable_slot()));
+    connect(ui->down_button,&ClickLabel::clicked,this,&MainTableWidget::on_label_2_clicked);
+}
 void MainTableWidget::readTimeTable(){
-    if (TABLE_JSON_QDOBJECT.exists()){
+    QFileInfo fi(TABLE_JSON);
+    if (!fi.isFile()){
         QFile file(TABLE_JSON);
         file.open(QIODevice::ReadWrite | QIODevice::Text);
         QJsonObject tempjson;
@@ -94,8 +142,7 @@ void MainTableWidget::readTimeTable(){
         file_2.open(QIODevice::ReadWrite | QIODevice::Text);
         file_2.write(tempdoc.toJson());
         file_2.close();
-        QMessageBox::information(this,"提示","您未创建课程文件，系统已帮您创建，请手动编辑。");
-        qDebug() << !TABLE_JSON_QDOBJECT.exists();
+        QMessageBox::information(this,tr("提示"),tr("您未创建课程文件，系统已帮您创建，请手动编辑。"));
     }else{
         QFile file(TABLE_JSON);
         file.open(QIODevice::ReadWrite | QIODevice::Text);
@@ -116,10 +163,12 @@ void MainTableWidget::readTimeTable(){
     }
 }
 void MainTableWidget::readConfig(){
-    if (CONFIG_JSON_QDOBJECT.exists()){
+    QFileInfo fi(CONFIG_JSON);
+    if (!fi.isFile()){
         QFile file(CONFIG_JSON);
         file.open(QIODevice::ReadWrite | QIODevice::Text);
         file.close();
+        startGetStart();
     }else{
         QFile file(CONFIG_JSON);
         file.open(QIODevice::ReadWrite | QIODevice::Text);
@@ -156,7 +205,6 @@ void refechTableThread::run(){
     QJsonObject temp;
     QDateTime current_date_time = QDateTime::currentDateTime();
     for(int x = 0;x < today_table.count();){
-        emit repaint();
         QDateTime current_date_time = QDateTime::currentDateTime();
         QDateTime class_start_time = getTodayTime(today_table[x].toObject().value("start").toString());
 
@@ -176,9 +224,9 @@ void refechTableThread::run(){
             int min = diff_time / 60;
             int sec = diff_time % 60;
             display_string = QString("%1:%2:%3").arg(hour, 2, 10, QLatin1Char('0')).arg(min, 2, 10, QLatin1Char('0')).arg(sec, 2, 10, QLatin1Char('0'));
-            emit pss("background:rgba(0,0,0,0.5);border-radius:17px;color:#caa257;");
+            emit pss("color:#caa257;");
             emit pst(display_string);
-            showstr = "  当前课程：" + today_table[x].toObject().value("name").toString() + "  下节课程：" + today_table[x+1].toObject().value("name").toString();
+            showstr = tr("  当前课程：") + today_table[x].toObject().value("name").toString() + tr("  下节课程：") + today_table[x+1].toObject().value("name").toString();
             emit tst(showstr);
             Sleep(1000);
         }else if(getTodayTime(today_table[x-1].toObject().value("end").toString()).secsTo(getTodayTime(today_table[x].toObject().value("start").toString())) <= today_table[x-1].toObject().value("split").toInt() * 60 and
@@ -190,9 +238,9 @@ void refechTableThread::run(){
             int min = diff_time / 60;
             int sec = diff_time % 60;
             display_string = QString("%1:%2:%3").arg(hour, 2, 10, QLatin1Char('0')).arg(min, 2, 10, QLatin1Char('0')).arg(sec, 2, 10, QLatin1Char('0'));
-            emit pss("background:rgba(0,0,0,0.5);border-radius:17px;color:rgb(0,240,0);");
+            emit pss("color:rgb(0,240,0);");
             emit pst(display_string);
-            showstr = "  上节课程：" + today_table[x-1].toObject().value("name").toString() + "  下节课程：" + today_table[x].toObject().value("name").toString();
+            showstr = tr("  上节课程：") + today_table[x-1].toObject().value("name").toString() + tr("  下节课程：") + today_table[x].toObject().value("name").toString();
             emit tst(showstr);
             Sleep(1000);
         }else{
@@ -200,9 +248,9 @@ void refechTableThread::run(){
             continue;
         }
     }
-    emit pss("background:rgba(0,0,0,0.5);border-radius:17px;color:#caa257;");
+    emit pss("color:#caa257;");
     emit pst("--:--:--");
-    emit tst("今日的课程已上完");
+    emit tst(tr("今日的课程已上完"));
 }
 QDateTime refechTableThread::getTodayTime(QString str){
     QString timeString = str;
@@ -302,7 +350,12 @@ void MainTableWidget::on_label_clicked()
 {
     swithToYiYan();
 }
-
+void MainTableWidget::hk_slot(QString day){
+    qDebug() << "SLOT" << day << time_table.value(day).toArray() << time_table << TABLE_JSON;
+    rtt->quit();
+    today_table = time_table.value(day).toArray();
+    rtt->start();
+}
 
 void MainTableWidget::on_label_2_clicked()
 {
@@ -314,8 +367,43 @@ void MainTableWidget::on_label_2_clicked()
         hideani->setDirection(QAbstractAnimation::Backward);
         ishide=false;
         ui->down_button->hide();
+        if (TodoisOpeninBack){
+            qDebug("aaa");
+            TWTodoWidget* todo = new TWTodoWidget();
+            QHBoxLayout *layout = new QHBoxLayout();
+            layout->addWidget(todo);
+            todo->setParent(ui->pushButton_5);
+            ui->pushButton_5->setLayout(layout);
+            todomovea->setDirection(QAbstractAnimation::Forward);
+            todomoveb->setDirection(QAbstractAnimation::Forward);
+            muyumovea->setDirection(QAbstractAnimation::Forward);
+            muyumoveb->setDirection(QAbstractAnimation::Forward);
+            todomovea->start();
+            todomoveb->start();
+            muyumovea->start();
+            muyumoveb->start();
+            connect(muyumoveb,&QAbstractAnimation::finished,this,[=]{
+                muyuding = new QPropertyAnimation(ui->muyu, "geometry");
+                muyuding->setStartValue(QRect(ui->muyu->pos().x(),ui->muyu->pos().y(),ui->muyu->width(),ui->muyu->height()));
+                muyuding->setEndValue(QRect(730,18,21,21));
+                muyuding->setDuration(100);
+                muyuding->setEasingCurve(QEasingCurve::InOutQuad);
+                connect(muyuding,&QPropertyAnimation::finished,this,[=]{
+                    ui->muyu->setGeometry(QRect(730,18,19,19));
+                });
+            });
+            TodoisOpen = true;
+            TodoisOpeninBack = false;
+            hideani->start();
+            return;
+        }
+    }
+    if(TodoisOpen){
+        on_todo_clicked();
+        TodoisOpeninBack = true;
     }
     hideani->start();
+
 }
 
 void MainTableWidget::configZuanyan(){
@@ -402,7 +490,7 @@ void MainTableWidget::initSysTrayIcon()
     m_sysTrayIcon->setIcon(icon);
 
     //当鼠标移动到托盘上的图标时，会显示此处设置的内容
-    m_sysTrayIcon->setToolTip("课程表设置");
+    m_sysTrayIcon->setToolTip(tr("设置"));
 
     // //给QSystemTrayIcon添加槽函数
     // connect(m_sysTrayIcon, &QSystemTrayIcon::activated,
@@ -436,23 +524,56 @@ void MainTableWidget::initSysTrayIcon()
     m_sysTrayIcon->show();
 }
 void MainTableWidget::createActions(){
-    m_showedit = new QAction("编辑课程表",this);
+    m_showedit = new QAction(tr("编辑课程表"),this);
     connect(m_showedit,SIGNAL(triggered()),this,SLOT(on_showMainAction()));
-    m_exitApp = new QAction("退出",this);
+    m_showmain = new QAction(tr("打开主界面"),this);
+    connect(m_showmain,&QAction::triggered,this,&MainTableWidget::startMainWindow);
+    m_exitApp = new QAction(tr("退出"),this);
     connect(m_exitApp,SIGNAL(triggered()),this,SLOT(on_exitAppAction()));
     qDebug()<<Config;
     if (Config["muyu_status"].toBool()){
-        m_gongde = new QAction("功德：" + QString::number(Config.value("gd").toInteger()),this);
+        m_gongde = new QAction(tr("功德：") + QString::number(Config.value("gd").toInteger()),this);
     }else{
         m_gongde = new QAction("φ(*￣0￣)",this);
     }
 
+}
+void MainTableWidget::startMainWindow(){
+    MainWindow *mainwin = new MainWindow(this);
+    connect(mainwin,&MainWindow::hk,this,&MainTableWidget::hk_slot);
+    QScreen *scr = qApp->primaryScreen();
+    int scr_w = scr->size().width();
+    int scr_h = scr->size().height();
+    mainwin->move((scr_w - mainwin->width()) / 2, (scr_h - mainwin->height()) / 3);
+    mainwin->setModal(false);
+    mainwin->show();
+}
+void MainTableWidget::startGetStart(){
+    GetStartWidget *getstart = new GetStartWidget(this);
+    connect(getstart,&GetStartWidget::toSettings,this,&MainTableWidget::on_showConfig_modal);
+    ;;;;;;;;;;;;;;
+    ;;;
+    ;;;
+    ;;;;;;;;;;;;;;
+               ;;;
+               ;;;
+    ;;;;;;;;;;;;;;
+    QScreen *scr = qApp->primaryScreen();
+    int scr_w = scr->size().width();
+    int scr_h = scr->size().height();
+    getstart->move((scr_w - getstart->width()) / 2, (scr_h - getstart->height()) / 3);
+    getstart->setModal(false);
+    getstart->show();
+    while (getstart->isVisible()){
+        QCoreApplication::processEvents(QEventLoop::AllEvents,1145141919810);
+    }
 }
 void MainTableWidget::createMenu(){
 
     tray_menu = new QMenu(this);
     setStyleSheetFromFile(tray_menu,":/res/menu.qss");
     tray_menu->addAction(m_showedit);
+    tray_menu->addAction(m_showmain);
     tray_menu->addAction(m_gongde);
     tray_menu->addSeparator();
     tray_menu->addAction(m_exitApp);
@@ -461,14 +582,20 @@ void MainTableWidget::createMenu(){
 void MainTableWidget::on_showMainAction(){
     EditWindow.show();
 }
+void MainTableWidget::on_showConfig_modal(){
+    EditWindow.show();
+    while (EditWindow.isVisible()){
+        QCoreApplication::processEvents(QEventLoop::AllEvents,1145141919810);
+    }
+}
 void MainTableWidget::on_exitAppAction(){
     qApp->exit();
 }
 void MainTableWidget::refechTable_slot(){
-    rtt.quit();
+    rtt->quit();
     readTimeTable();
-    rtt.start();
-    m_sysTrayIcon->showMessage("提示","配置已成功应用！",QSystemTrayIcon::MessageIcon::Information,500);
+    rtt->start();
+    m_sysTrayIcon->showMessage(tr("提示"),tr("配置已成功应用！"),QSystemTrayIcon::MessageIcon::Information,500);
 
 }
 
@@ -477,7 +604,8 @@ void MainTableWidget::on_muyu_clicked()
     muyuding->start();
     AnimationLabelUp* gpp = new AnimationLabelUp(this);
     gpp->setText("功德+1");
-    gpp->move(740,-10);
+    gpp->setStyleSheet("color:#ffffff");
+    gpp->move(ui->muyu->pos().x()+10,ui->muyu->pos().y()-30);
     gpp->AniHide();
     if (!Config.contains("gd")){
         Config["gd"] = 0;
@@ -492,7 +620,7 @@ void MainTableWidget::on_muyu_clicked()
     config_file.close();
     qDebug() << Config;
     if (Config["muyu_status"].toBool()){
-        m_gongde = new QAction("功德：" + QString::number(Config.value("gd").toInteger()),this);
+        m_gongde = new QAction(tr("功德：") + QString::number(Config.value("gd").toInteger()),this);
         tray_menu->deleteLater();
         createMenu();
     }
@@ -511,3 +639,55 @@ void MainTableWidget::setStyleSheetFromFile(QWidget* widget,QString file){
         qDebug("Open failed");
     }
 }
+
+void MainTableWidget::on_todo_clicked()
+{
+    if (!TodoisOpen){
+        TWTodoWidget* todo = new TWTodoWidget();
+        QHBoxLayout *layout = new QHBoxLayout();
+        layout->addWidget(todo);
+        todo->setParent(ui->pushButton_5);
+        ui->pushButton_5->setLayout(layout);
+        todomovea->setDirection(QAbstractAnimation::Forward);
+        todomoveb->setDirection(QAbstractAnimation::Forward);
+        muyumovea->setDirection(QAbstractAnimation::Forward);
+        muyumoveb->setDirection(QAbstractAnimation::Forward);
+        todomovea->start();
+        todomoveb->start();
+        muyumovea->start();
+        muyumoveb->start();
+        connect(muyumoveb,&QAbstractAnimation::finished,this,[=]{
+            muyuding = new QPropertyAnimation(ui->muyu, "geometry");
+            muyuding->setStartValue(QRect(ui->muyu->pos().x(),ui->muyu->pos().y(),ui->muyu->width(),ui->muyu->height()));
+            muyuding->setEndValue(QRect(730,18,21,21));
+            muyuding->setDuration(100);
+            muyuding->setEasingCurve(QEasingCurve::InOutQuad);
+            connect(muyuding,&QPropertyAnimation::finished,this,[=]{
+                ui->muyu->setGeometry(QRect(730,18,19,19));
+            });
+        });
+
+        TodoisOpen=true;
+    }else{
+        todomovea->setDirection(QAbstractAnimation::Backward);
+        todomoveb->setDirection(QAbstractAnimation::Backward);
+        muyumovea->setDirection(QAbstractAnimation::Backward);
+        muyumoveb->setDirection(QAbstractAnimation::Backward);
+        todomovea->start();
+        todomoveb->start();
+        muyumovea->start();
+        muyumoveb->start();
+        connect(muyumoveb,&QAbstractAnimation::finished,this,[=]{
+            muyuding = new QPropertyAnimation(ui->muyu, "geometry");
+            muyuding->setStartValue(QRect(ui->muyu->pos().x(),ui->muyu->pos().y(),ui->muyu->width(),ui->muyu->height()));
+            muyuding->setEndValue(QRect(770,18,21,21));
+            muyuding->setDuration(100);
+            muyuding->setEasingCurve(QEasingCurve::InOutQuad);
+            connect(muyuding,&QPropertyAnimation::finished,this,[=]{
+                ui->muyu->setGeometry(QRect(770,18,19,19));
+            });
+        });
+        TodoisOpen=false;
+    }
+}
+

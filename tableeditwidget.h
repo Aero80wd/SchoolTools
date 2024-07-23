@@ -11,6 +11,9 @@
 #include<QTableWidgetItem>
 #include<QtGlobal>
 #include<QMessageBox>
+#include<QTranslator>
+#include <qdesktopservices.h>
+
 namespace Ui {
 class TableEditWidget;
 }

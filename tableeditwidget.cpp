@@ -6,7 +6,7 @@ TableEditWidget::TableEditWidget(QWidget *parent)
     , ui(new Ui::TableEditWidget)
 {
     ui->setupUi(this);
-    this->setWindowTitle("课程表设置");
+    this->setWindowTitle("设置");
     this->setWindowIcon(QIcon(":/res/a.png"));
     ui->tabWidget->removeTab(2);
     connect(ui->radioButton,SIGNAL(toggled(bool)),this,SLOT(toggleded()));
@@ -18,10 +18,24 @@ TableEditWidget::TableEditWidget(QWidget *parent)
         ui->tabWidget->removeTab(2);
     });
     connect(ui->label,&ClickLabel::DoubleClicked,this,[=]{
-        ui->tabWidget->insertTab(2,ui->tab_3,QString("彩蛋设置"));
+        ui->tabWidget->insertTab(2,ui->tab_3,QString(tr("彩蛋设置")));
     });
     readTableJson();
-
+    connect(ui->pushButton_3,&QPushButton::clicked,this,[=]{
+        QDesktopServices::openUrl(QUrl("https://github.com/Aero80wd/SchoolTools"));
+    });
+    QTranslator translator;
+    QLocale::Language lab = QLocale::system().language();
+    if(QLocale::Chinese == lab)
+    {
+        translator.load(":/lang/lang_cn.qm");
+        qApp->installTranslator(&translator);
+        ui->retranslateUi(this);
+    }else if(QLocale::English== lab){
+        translator.load(":/language/lang_en.qm");
+        qApp->installTranslator(&translator);
+        ui->retranslateUi(this);
+    }
 }
 
 TableEditWidget::~TableEditWidget()
@@ -189,7 +203,7 @@ void TableEditWidget::on_checkBox_2_clicked(bool checked)
     temp_doc.setObject(config);
     config_file.write(temp_doc.toJson(QJsonDocument::Indented));
     config_file.close();
-    QMessageBox::information(this,"提示","重启生效");
+    QMessageBox::information(this,tr("提示"),tr("重启生效"));
 
 }
 
@@ -203,6 +217,6 @@ void TableEditWidget::on_checkBox_clicked(bool checked)
     temp_doc.setObject(config);
     config_file.write(temp_doc.toJson(QJsonDocument::Indented));
     config_file.close();
-    QMessageBox::information(this,"提示","重启生效");
+    QMessageBox::information(this,tr("提示"),tr("重启生效"));
 }
 

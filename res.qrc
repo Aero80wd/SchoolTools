@@ -10,10 +10,18 @@
         <file>menu.qss</file>
         <file>checkbutton/checked.png</file>
         <file>checkbutton/unchecked.png</file>
+        <file>icon.png</file>
+        <file>hide.png</file>
+        <file>todo.png</file>
+        <file>github.png</file>
     </qresource>
     <qresource prefix="/radiobutton">
         <file>radiobutton/checked.png</file>
         <file>radiobutton/stable.png</file>
         <file>radiobutton/hover.png</file>
+    </qresource>
+    <qresource prefix="/lang">
+        <file>lang/lang_cn.qm</file>
+        <file>lang/lang_en.qm</file>
     </qresource>
 </RCC>

@@ -19,6 +19,8 @@
 #include <QSqlQuery>
 #include <QSqlError>
 #include <QSqlRecord>
+#include "qt_windows.h"
+#include<QTranslator>
 namespace Ui {
 class yiyanDialog;
 }
@@ -46,6 +48,7 @@ public:
     QPoint startPos;
     QSqlDatabase db;
     QPoint endPos;
+    void setWidgetBlur(QWidget* widget);
     bool ZuanYanisOpen = false;
     void setZuanYanOpen(bool v){
         ZuanYanisOpen = v;

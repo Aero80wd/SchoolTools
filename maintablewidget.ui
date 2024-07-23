@@ -6,8 +6,8 @@
    <rect>
     <x>0</x>
     <y>0</y>
-    <width>781</width>
-    <height>70</height>
+    <width>830</width>
+    <height>455</height>
    </rect>
   </property>
   <property name="windowTitle">
@@ -17,13 +17,14 @@
    <property name="geometry">
     <rect>
      <x>17</x>
-     <y>14</y>
+     <y>15</y>
      <width>25</width>
      <height>25</height>
     </rect>
    </property>
    <property name="styleSheet">
-    <string notr="true">border-image:url(&quot;:/res/a.png&quot;);</string>
+    <string notr="true">QPushButton{border-image:url(&quot;:/res/a.png&quot;);}
+QPushButton:hover{border-image:url(&quot;:/res/hide.png&quot;);}</string>
    </property>
    <property name="text">
     <string/>
@@ -60,9 +61,7 @@
     </font>
    </property>
    <property name="styleSheet">
-    <string notr="true">background:rgba(0,0,0,0.5);
-border-radius:17px;
-color:#1191d3;</string>
+    <string notr="true">background:rgba(0,0,0,0.3);border-radius:17px;color:#caa257;</string>
    </property>
    <property name="text">
     <string/>
@@ -86,9 +85,7 @@ color:#1191d3;</string>
     </font>
    </property>
    <property name="styleSheet">
-    <string notr="true">background:rgba(0,0,0,0.5);
-border-radius:17px;
-color:#caa257;</string>
+    <string notr="true">color:#caa257;</string>
    </property>
    <property name="text">
     <string/>
@@ -100,7 +97,7 @@ color:#caa257;</string>
   <widget class="QLabel" name="table_show">
    <property name="geometry">
     <rect>
-     <x>52</x>
+     <x>50</x>
      <y>10</y>
      <width>501</width>
      <height>35</height>
@@ -112,7 +109,7 @@ color:#caa257;</string>
     </font>
    </property>
    <property name="styleSheet">
-    <string notr="true">background:rgba(0,0,0,0.5);border-radius:17px;color:#caa257;</string>
+    <string notr="true">color:#caa257;</string>
    </property>
    <property name="text">
     <string/>
@@ -136,9 +133,7 @@ color:#caa257;</string>
     </font>
    </property>
    <property name="styleSheet">
-    <string notr="true">background:rgba(0,0,0,0.5);
-border-radius:17px;
-color:#caa257;</string>
+    <string notr="true">background:rgba(0,0,0,0.3);border-radius:17px;color:#caa257;</string>
    </property>
    <property name="text">
     <string/>
@@ -147,7 +142,7 @@ color:#caa257;</string>
   <widget class="RollingLabel" name="pushButton_3">
    <property name="geometry">
     <rect>
-     <x>720</x>
+     <x>762</x>
      <y>10</y>
      <width>35</width>
      <height>35</height>
@@ -159,9 +154,7 @@ color:#caa257;</string>
     </font>
    </property>
    <property name="styleSheet">
-    <string notr="true">background:rgba(0,0,0,0.5);
-border-radius:17px;
-color:#1191d3;</string>
+    <string notr="true">background:rgba(0,0,0,0.3);border-radius:17px;color:#caa257;</string>
    </property>
    <property name="text">
     <string/>
@@ -173,7 +166,7 @@ color:#1191d3;</string>
   <widget class="QPushButton" name="muyu">
    <property name="geometry">
     <rect>
-     <x>728</x>
+     <x>770</x>
      <y>18</y>
      <width>19</width>
      <height>19</height>
@@ -190,9 +183,9 @@ color:#1191d3;</string>
    <property name="geometry">
     <rect>
      <x>293</x>
-     <y>52</y>
+     <y>48</y>
      <width>191</width>
-     <height>7</height>
+     <height>5</height>
     </rect>
    </property>
    <property name="styleSheet">
@@ -204,6 +197,86 @@ border-radius: 5px;
     <string/>
    </property>
   </widget>
+  <widget class="QLabel" name="table_show_3">
+   <property name="geometry">
+    <rect>
+     <x>50</x>
+     <y>10</y>
+     <width>501</width>
+     <height>35</height>
+    </rect>
+   </property>
+   <property name="font">
+    <font>
+     <pointsize>14</pointsize>
+    </font>
+   </property>
+   <property name="styleSheet">
+    <string notr="true">background:rgba(0,0,0,0.3);border-radius:17px;color:#caa257;</string>
+   </property>
+   <property name="text">
+    <string/>
+   </property>
+   <property name="alignment">
+    <set>Qt::AlignCenter</set>
+   </property>
+  </widget>
+  <widget class="QLabel" name="pushButton_4">
+   <property name="geometry">
+    <rect>
+     <x>560</x>
+     <y>10</y>
+     <width>111</width>
+     <height>35</height>
+    </rect>
+   </property>
+   <property name="font">
+    <font>
+     <pointsize>14</pointsize>
+    </font>
+   </property>
+   <property name="styleSheet">
+    <string notr="true">background:rgba(0,0,0,0.3);border-radius:17px;color:#caa257;</string>
+   </property>
+   <property name="text">
+    <string/>
+   </property>
+   <property name="alignment">
+    <set>Qt::AlignCenter</set>
+   </property>
+  </widget>
+  <widget class="QPushButton" name="todo">
+   <property name="geometry">
+    <rect>
+     <x>730</x>
+     <y>18</y>
+     <width>19</width>
+     <height>19</height>
+    </rect>
+   </property>
+   <property name="styleSheet">
+    <string notr="true">border-image:url(&quot;:/res/todo.png&quot;);</string>
+   </property>
+   <property name="text">
+    <string/>
+   </property>
+  </widget>
+  <widget class="QWidget" name="pushButton_5" native="true">
+   <property name="geometry">
+    <rect>
+     <x>722</x>
+     <y>10</y>
+     <width>35</width>
+     <height>35</height>
+    </rect>
+   </property>
+   <property name="styleSheet">
+    <string notr="true">background:rgba(0,0,0,0.3);border-radius:17px;color:#caa257;</string>
+   </property>
+  </widget>
+  <zorder>pushButton_5</zorder>
+  <zorder>pushButton_4</zorder>
+  <zorder>table_show_3</zorder>
   <zorder>pushButton_2</zorder>
   <zorder>label</zorder>
   <zorder>pushButton</zorder>
@@ -213,17 +286,18 @@ border-radius: 5px;
   <zorder>pushButton_3</zorder>
   <zorder>muyu</zorder>
   <zorder>down_button</zorder>
+  <zorder>todo</zorder>
  </widget>
  <customwidgets>
-  <customwidget>
-   <class>RollingLabel</class>
-   <extends>QLabel</extends>
-   <header>rolling_label.h</header>
-  </customwidget>
   <customwidget>
    <class>ClickLabel</class>
    <extends>QLabel</extends>
    <header>clicklabel.h</header>
+  </customwidget>
+  <customwidget>
+   <class>RollingLabel</class>
+   <extends>QLabel</extends>
+   <header>rolling_label.h</header>
   </customwidget>
  </customwidgets>
  <resources/>

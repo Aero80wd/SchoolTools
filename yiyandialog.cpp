@@ -13,24 +13,65 @@ yiyanDialog::yiyanDialog(QWidget *parent)
     this->setWindowFlags(Qt::FramelessWindowHint | windowFlags());
     setAttribute(Qt::WA_TranslucentBackground);
     ui->widget->installEventFilter(this);
-    // QGraphicsOpacityEffect *label_opty = new QGraphicsOpacityEffect(this);
-    // label_opty->setOpacity(1);
-    // this->setGraphicsEffect(label_opty);
     ani_opty = new QPropertyAnimation(this,"windowOpacity");
     ani_opty->setDuration(500);
     ani_opty->setStartValue(0);
     ani_opty->setEndValue(1);
-    QGraphicsDropShadowEffect* shadow = new QGraphicsDropShadowEffect(this);
-    shadow->setOffset(0, 0);
-    shadow->setColor(Qt::black);
-    shadow->setBlurRadius(20);
-    this->setGraphicsEffect(shadow);
     readConfig();
+    setWidgetBlur(this);
+    QTranslator translator;
+    QLocale::Language lab = QLocale::system().language();
+    if(QLocale::Chinese == lab)
+    {
+        translator.load(":/lang/lang_cn.qm");
+        qApp->installTranslator(&translator);
+        ui->retranslateUi(this);
+    }else if(QLocale::English== lab){
+        translator.load(":/language/lang_en.qm");
+        qApp->installTranslator(&translator);
+        ui->retranslateUi(this);
+    }
 }
 
 yiyanDialog::~yiyanDialog()
 {
     delete ui;
+}
+enum AccentState {
+    ACCENT_DISABLED = 0,
+    ACCENT_ENABLE_GRADIENT = 1,
+    ACCENT_ENABLE_TRANSPARENTGRADIENT = 2,
+    ACCENT_ENABLE_BLURBEHIND = 3,
+    ACCENT_ENABLE_ACRYLICBLURBEHIND = 4,
+    ACCENT_INVALID_STATE = 5
+};
+
+struct AccentPolicy {
+    AccentState AccentState;
+    int AccentFlags;
+    int GradientColor;
+    int AnimationId;
+};
+struct WindowCompositionAttributeData {
+    int Attribute;
+    PVOID Data;
+    ULONG DataSize;
+};
+typedef BOOL(WINAPI*pSetWindowCompositionAttribute)(HWND, WindowCompositionAttributeData*);
+pSetWindowCompositionAttribute SetWindowCompositionAttribute = nullptr;
+void yiyanDialog::setWidgetBlur(QWidget* widget){
+    if (!SetWindowCompositionAttribute) {
+        HMODULE hModule = LoadLibrary(TEXT("user32.dll"));
+        if (hModule) {
+            SetWindowCompositionAttribute =
+                (pSetWindowCompositionAttribute)GetProcAddress(hModule, "SetWindowCompositionAttribute");
+        }
+    }
+    HWND hWnd = HWND(widget->winId());
+    int gradientColor = DWORD(0x50F2F2F2);
+    AccentPolicy policy = { ACCENT_ENABLE_ACRYLICBLURBEHIND, 0, gradientColor, 0 };
+    WindowCompositionAttributeData data = { 19, &policy, sizeof(AccentPolicy) };
+    SetWindowCompositionAttribute(hWnd, &data);
 }
 void yiyanDialog::paintEvent(QPaintEvent *event)
 {
