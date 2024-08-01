@@ -2,7 +2,7 @@
 ; SEE THE DOCUMENTATION FOR DETAILS ON CREATING INNO SETUP SCRIPT FILES!
 
 #define MyAppName "Ð£Ô°Ðü¸¡´°"
-#define MyAppVersion "3.0"
+#define MyAppVersion "3.5"
 #define MyAppPublisher "Aero8m"
 #define MyAppURL "https://aero80wd.github.io"
 #define MyAppExeName "SchoolTools.exe"

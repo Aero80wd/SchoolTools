@@ -13,7 +13,14 @@
 #include<QMessageBox>
 #include<QTranslator>
 #include <qdesktopservices.h>
-
+#include<QListWidgetItem>
+//拖拽事件
+#include <QDragEnterEvent>
+//放下事件
+#include <QDropEvent>
+#include<QMimeData>
+#include <private/qzipwriter_p.h>
+#include <private/qzipreader_p.h>
 namespace Ui {
 class TableEditWidget;
 }
@@ -32,6 +39,7 @@ public:
     QJsonObject timeTable;
     void closeEvent(QCloseEvent *event) override;
     void addItem(QString key);
+    void readPluginList();
     static bool timesort(QJsonObject &obj1,QJsonObject &obj2);
     QTime getTodayTime(QString str){
         QString timeString = str;
@@ -41,6 +49,7 @@ public:
         return QTime(hour, minute);
     }
     ~TableEditWidget();
+    bool eventFilter(QObject *watched,QEvent* e) override;
 public slots:
     void toggleded();
 
@@ -51,6 +60,12 @@ private slots:
     void on_checkBox_2_clicked(bool checked);
 
     void on_checkBox_clicked(bool checked);
+
+    void on_chkHide_clicked(bool checked);
+
+
+
+    void on_pluginList_currentItemChanged(QListWidgetItem *current, QListWidgetItem *previous);
 
 signals:
     void refechTable_signal();

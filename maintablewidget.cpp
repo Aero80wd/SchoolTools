@@ -486,11 +486,11 @@ void MainTableWidget::initSysTrayIcon()
     m_sysTrayIcon = new QSystemTrayIcon(this);
 
     //设置托盘图标
-    QIcon icon = QIcon(":/res/a.png");    //资源文件添加的图标
+    QIcon icon = QIcon(":/res/icon.png");    //资源文件添加的图标
     m_sysTrayIcon->setIcon(icon);
 
     //当鼠标移动到托盘上的图标时，会显示此处设置的内容
-    m_sysTrayIcon->setToolTip(tr("设置"));
+    m_sysTrayIcon->setToolTip(tr("校园悬浮窗"));
 
     // //给QSystemTrayIcon添加槽函数
     // connect(m_sysTrayIcon, &QSystemTrayIcon::activated,

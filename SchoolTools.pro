@@ -1,4 +1,4 @@
-QT       += core gui network sql
+QT       += core gui network sql gui-private webenginewidgets
 
 greaterThan(QT_MAJOR_VERSION, 4): QT += widgets
 
@@ -20,6 +20,7 @@ SOURCES += \
     rolling_label.cpp \
     tableeditwidget.cpp \
     tablewidget_updown.cpp \
+    toolbox.cpp \
     twtodowidget.cpp \
     yiyandialog.cpp
 
@@ -34,13 +35,16 @@ HEADERS += animationlabelup.h \
     rolling_label.h \
     tableeditwidget.h \
     tablewidget_updown.h \
+    toolbox.h \
     twtodowidget.h \
-    yiyandialog.h
+    yiyandialog.h \
+    API.h
 
 FORMS +=getstartwidget.ui \
     maintablewidget.ui \
     mainwindow.ui \
     tableeditwidget.ui \
+    toolbox.ui \
     twtodowidget.ui \
     yiyandialog.ui
 TRANSLATIONS += lang/lang_cn.ts \

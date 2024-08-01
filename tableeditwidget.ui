@@ -11,7 +11,7 @@
    </rect>
   </property>
   <property name="windowTitle">
-   <string>Form</string>
+   <string>设置</string>
   </property>
   <layout class="QGridLayout" name="gridLayout" rowstretch="2,20">
    <property name="leftMargin">
@@ -65,7 +65,7 @@
      <property name="styleSheet">
       <string notr="true">QTabBar::tab{
 background:#ffffff;
-width:200%;
+width:100%;
 border-radius:3px;
 border:1px solid #1191d3;
 
@@ -83,7 +83,7 @@ alignment:center;
 }</string>
      </property>
      <property name="currentIndex">
-      <number>2</number>
+      <number>0</number>
      </property>
      <widget class="QWidget" name="tab">
       <attribute name="title">
@@ -498,6 +498,142 @@ background:#1191d3;
        </item>
       </layout>
      </widget>
+     <widget class="QWidget" name="tab_4">
+      <attribute name="title">
+       <string>工具栏设置</string>
+      </attribute>
+      <layout class="QVBoxLayout" name="verticalLayout_5" stretch="0,1,14514,0">
+       <property name="spacing">
+        <number>10</number>
+       </property>
+       <property name="leftMargin">
+        <number>10</number>
+       </property>
+       <property name="topMargin">
+        <number>10</number>
+       </property>
+       <property name="rightMargin">
+        <number>10</number>
+       </property>
+       <property name="bottomMargin">
+        <number>10</number>
+       </property>
+       <item>
+        <widget class="QCheckBox" name="chkHide">
+         <property name="maximumSize">
+          <size>
+           <width>16777215</width>
+           <height>30</height>
+          </size>
+         </property>
+         <property name="font">
+          <font>
+           <pointsize>12</pointsize>
+          </font>
+         </property>
+         <property name="styleSheet">
+          <string notr="true">QCheckBox{
+border:none;
+}
+
+QCheckBox::indicator{/*选择框尺寸*/
+    border: 0px solid #b1b1b1;
+	width: 50px;
+	height: 50px;
+}
+QCheckBox::indicator:unchecked{
+image:url(&quot;:/res/checkbutton/unchecked.png&quot;);
+}
+QCheckBox::indicator:checked{
+image:url(&quot;:/res/checkbutton/checked.png&quot;);
+}
+QCheckBox:hover{
+color:#1191d3;
+}</string>
+         </property>
+         <property name="text">
+          <string>隐藏工具栏</string>
+         </property>
+        </widget>
+       </item>
+       <item>
+        <widget class="QLabel" name="label_7">
+         <property name="font">
+          <font>
+           <pointsize>18</pointsize>
+          </font>
+         </property>
+         <property name="text">
+          <string>插件管理</string>
+         </property>
+        </widget>
+       </item>
+       <item>
+        <layout class="QHBoxLayout" name="horizontalLayout_10" stretch="0,1">
+         <item>
+          <widget class="QListWidget" name="pluginList">
+           <property name="font">
+            <font>
+             <pointsize>12</pointsize>
+            </font>
+           </property>
+          </widget>
+         </item>
+         <item>
+          <widget class="QTableWidget" name="pluginInfo">
+           <property name="styleSheet">
+            <string notr="true">QTableWidget{
+background:#ffffff;
+border-radius:10px;
+}
+QTableWidget::item{
+border:none;
+border-radius:3px;
+}
+QTableWidget::item:selected{
+background:#1191d3;
+}
+QTableWidget::item:hover{
+color:#000000;
+background:rgb(217, 217, 217);
+}
+QHeaderView::section{
+border:1px solid white;
+border-radius:3px;
+text-align:center;
+background:#1191d3;
+padding:3px;
+color:#ffffff;
+
+}
+QScrollBar::handle:vertical{
+background:#1191d3;
+
+}</string>
+           </property>
+           <column>
+            <property name="text">
+             <string>Key</string>
+            </property>
+           </column>
+           <column>
+            <property name="text">
+             <string>Value</string>
+            </property>
+           </column>
+          </widget>
+         </item>
+        </layout>
+       </item>
+       <item>
+        <widget class="QLabel" name="status_bar">
+         <property name="text">
+          <string/>
+         </property>
+        </widget>
+       </item>
+      </layout>
+     </widget>
      <widget class="QWidget" name="tab_2">
       <attribute name="title">
        <string>关于</string>
@@ -550,7 +686,7 @@ background:#1191d3;
               </font>
              </property>
              <property name="text">
-              <string>Version 3.0</string>
+              <string>Version 3.5</string>
              </property>
             </widget>
            </item>

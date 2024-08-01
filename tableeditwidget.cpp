@@ -6,19 +6,18 @@ TableEditWidget::TableEditWidget(QWidget *parent)
     , ui(new Ui::TableEditWidget)
 {
     ui->setupUi(this);
-    this->setWindowTitle("设置");
     this->setWindowIcon(QIcon(":/res/a.png"));
-    ui->tabWidget->removeTab(2);
+    ui->tabWidget->removeTab(3);
     connect(ui->radioButton,SIGNAL(toggled(bool)),this,SLOT(toggleded()));
     connect(ui->radioButton_2,SIGNAL(toggled(bool)),this,SLOT(toggleded()));
     connect(ui->radioButton_3,SIGNAL(toggled(bool)),this,SLOT(toggleded()));
     connect(ui->radioButton_4,SIGNAL(toggled(bool)),this,SLOT(toggleded()));
     connect(ui->radioButton_5,SIGNAL(toggled(bool)),this,SLOT(toggleded()));
     connect(ui->pushButton_2,&QPushButton::clicked,this,[=]{
-        ui->tabWidget->removeTab(2);
+        ui->tabWidget->removeTab(3);
     });
     connect(ui->label,&ClickLabel::DoubleClicked,this,[=]{
-        ui->tabWidget->insertTab(2,ui->tab_3,QString(tr("彩蛋设置")));
+        ui->tabWidget->insertTab(3,ui->tab_3,QString(tr("彩蛋设置")));
     });
     readTableJson();
     connect(ui->pushButton_3,&QPushButton::clicked,this,[=]{
@@ -36,6 +35,10 @@ TableEditWidget::TableEditWidget(QWidget *parent)
         qApp->installTranslator(&translator);
         ui->retranslateUi(this);
     }
+    readPluginList();
+    ui->pluginInfo->horizontalHeader()->setSectionResizeMode(QHeaderView::Stretch);
+    ui->pluginList->installEventFilter(this);
+    ui->pluginList->setAcceptDrops(true);
 }
 
 TableEditWidget::~TableEditWidget()
@@ -62,6 +65,8 @@ void TableEditWidget::setConfig(QJsonObject obj){
     config=obj;
     ui->checkBox_2->setChecked(config.value("zuan_status").toBool());
     ui->checkBox->setChecked(config.value("muyu_status").toBool());
+    ui->chkHide->setChecked(config.value("toolbox_status").toBool());
+
 }
 void TableEditWidget::readTableJson(){
     QFile file(QDir::currentPath() + "/tables.json");
@@ -80,6 +85,36 @@ void TableEditWidget::readTableJson(){
     timeTable = jsondoc.object();
 
 
+}
+void TableEditWidget::readPluginList(){
+    QDir plugin_dir(QDir::currentPath() + "/plugins");
+    if (!plugin_dir.exists()){
+        plugin_dir.mkdir(QDir::currentPath() + "/plugins");
+        qDebug("return");
+        return;
+    }
+    QFileInfoList fileList = plugin_dir.entryInfoList();
+    ui->pluginList->clear();
+    for (auto x : fileList){
+        QString JsonPath = x.filePath() + "/pluginConfig.json";
+        if (x.filePath()[x.filePath().size() -1] == '.'){
+            continue;
+        }
+        qDebug() << x.filePath();
+        QFile file(x.filePath() + "/pluginConfig.json");
+        file.open(QIODevice::ReadOnly | QIODevice::Text);
+        QString value = file.readAll();
+        file.close();
+        QJsonParseError parseJsonErr;
+        QJsonDocument document = QJsonDocument::fromJson(value.toUtf8(), &parseJsonErr);
+        QJsonObject PluginObject = document.object();
+        QListWidgetItem *item = new QListWidgetItem();
+        item->setText(PluginObject["name"].toString());
+        item->setData(Qt::UserRole,x.filePath() + "/pluginConfig.json");
+        ui->pluginList->addItem(item);
+
+
+    }
 }
 void TableEditWidget::refechTableWidget(QJsonArray today_table){
 
@@ -164,7 +199,52 @@ void TableEditWidget::addItem(QString key){
     toggleded();
 
 }
+bool TableEditWidget::eventFilter(QObject *watched,QEvent*event)
+{
+    if (event->type() == QEvent::Drop){
+        qDebug() << "drop";
+        ui->status_bar->setText("");
+        QDropEvent *drop_event = (QDropEvent*) event;
+        const QMimeData *mimeData = drop_event->mimeData();
 
+        if(!mimeData->hasUrls())
+        {
+            return true;
+        }
+
+        QList<QUrl> urlList = mimeData->urls();
+
+        //如果同时拖入了多个资源，只选择一个
+        QString fileName = urlList.at(0).toLocalFile();
+        if(fileName.isEmpty())
+        {
+            return true;
+        }
+        QZipReader reader(fileName);
+        reader.extractAll(QDir::currentPath() + "/plugins");
+        QFile file(QDir::currentPath() + "/plugins");
+        file.open(QIODevice::WriteOnly);
+        file.write(reader.fileData(QDir::currentPath() + "/plugins/" + QTime::currentTime().toString()));
+        file.close();
+        reader.close();
+        readPluginList();
+        QMessageBox::information(this,tr("提示"),tr("插件安装完成，重启生效"));
+    }
+    if (event->type() == QEvent::DragEnter){
+        QDragEnterEvent *drag_event = (QDragEnterEvent*) event;
+        if(drag_event->mimeData()->hasUrls())
+        {
+            ui->status_bar->setText("拖放以安装插件");
+            drag_event->acceptProposedAction();
+        }
+        else
+        {
+            drag_event->ignore();
+        }
+        return true;
+    }
+    return QWidget::eventFilter(watched,event);
+}
 void TableEditWidget::on_pushButton_clicked()
 {
     if (ui->radioButton->isChecked()){
@@ -218,5 +298,47 @@ void TableEditWidget::on_checkBox_clicked(bool checked)
     config_file.write(temp_doc.toJson(QJsonDocument::Indented));
     config_file.close();
     QMessageBox::information(this,tr("提示"),tr("重启生效"));
+}
+
+
+void TableEditWidget::on_chkHide_clicked(bool checked)
+{
+    config["toolbox_status"] = checked;
+    QFile config_file(QDir::currentPath() + "/config.json");
+    config_file.open(QFile::WriteOnly);
+    QJsonDocument temp_doc;
+    temp_doc.setObject(config);
+    config_file.write(temp_doc.toJson(QJsonDocument::Indented));
+    config_file.close();
+    QMessageBox::information(this,tr("提示"),tr("重启生效"));
+}
+
+
+
+
+
+void TableEditWidget::on_pluginList_currentItemChanged(QListWidgetItem *current, QListWidgetItem *previous)
+{
+    qDebug() << "reading......";
+    QString config_path = current->data(Qt::UserRole).toString();
+    QFile file(config_path);
+    file.open(QIODevice::ReadOnly | QIODevice::Text);
+    QString value = file.readAll();
+    file.close();
+    QJsonParseError parseJsonErr;
+    QJsonDocument document = QJsonDocument::fromJson(value.toUtf8(), &parseJsonErr);
+    QJsonObject PluginObject = document.object();
+    qDebug() << PluginObject;
+    ui->pluginInfo->clearContents();
+    ui->pluginInfo->setEditTriggers(QAbstractItemView::NoEditTriggers);
+    ui->pluginInfo->setRowCount(4);
+    ui->pluginInfo->setItem(0,0,new QTableWidgetItem("名称"));
+    ui->pluginInfo->setItem(0,1,new QTableWidgetItem(PluginObject["name"].toString()));
+    ui->pluginInfo->setItem(1,0,new QTableWidgetItem("版本"));
+    ui->pluginInfo->setItem(1,1,new QTableWidgetItem(PluginObject["pluginVersion"].toString()));
+    ui->pluginInfo->setItem(2,0,new QTableWidgetItem("作者"));
+    ui->pluginInfo->setItem(2,1,new QTableWidgetItem(PluginObject["pluginAuthor"].toString()));
+    ui->pluginInfo->setItem(3,0,new QTableWidgetItem("简介"));
+    ui->pluginInfo->setItem(3,1,new QTableWidgetItem(PluginObject["pluginIntroduce"].toString()));
 }
 

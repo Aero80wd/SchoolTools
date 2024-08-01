@@ -11,7 +11,7 @@
    </rect>
   </property>
   <property name="windowTitle">
-   <string>Form</string>
+   <string>主界面</string>
   </property>
   <property name="styleSheet">
    <string notr="true">background:#ffffff;</string>
@@ -95,7 +95,7 @@
        <height>0</height>
       </size>
      </property>
-     <layout class="QGridLayout" name="gridLayout_2" rowstretch="5,3,0" columnstretch="3,2" rowminimumheight="0,0,0">
+     <layout class="QGridLayout" name="gridLayout_2" rowstretch="5,3" columnstretch="3,2" rowminimumheight="0,0">
       <item row="0" column="0">
        <widget class="QWidget" name="widget_3" native="true">
         <property name="styleSheet">
