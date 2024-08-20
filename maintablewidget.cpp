@@ -8,19 +8,17 @@ MainTableWidget::MainTableWidget(QWidget *parent)
     , ui(new Ui::MainTableWidget)
 {
     ui->setupUi(this);
-    qDebug() << TABLE_JSON;
+    EditWindow = new TableEditWidget();
     readConfig();
     readTimeTable();
 
-    EditWindow.setConfig(Config);
+    EditWindow->setConfig(Config);
     if (!Config.value("muyu_status").toBool()){
         ui->muyu->hide();
         ui->pushButton_3->hide();
     }
-    qDebug() << time_table;
 
     initUi();
-
     rtt = new refechTableThread();
     connect(rtt,&refechTableThread::repaint,this,&MainTableWidget::do_repaint,Qt::QueuedConnection);
     connect(rtt,&refechTableThread::pss,ui->pushButton,&QLabel::setStyleSheet,Qt::QueuedConnection);
@@ -88,12 +86,11 @@ void MainTableWidget::initUi(){
     ui->down_button->setParent(this);
     ui->down_button->hide();
 
-    setWidgetBlur(ui->table_show_2);
-    setWidgetBlur(ui->table_show_3);
-    setWidgetBlur(ui->pushButton_2);
-    setWidgetBlur(ui->pushButton_3);
-    setWidgetBlur(ui->pushButton_4);
-
+    // setWidgetBlur(ui->table_show_2);
+    // setWidgetBlur(ui->table_show_3);
+    // setWidgetBlur(ui->pushButton_2);
+    // setWidgetBlur(ui->pushButton_3);
+    // setWidgetBlur(ui->pushButton_4);
     todomovea = new QPropertyAnimation(ui->pushButton_5,"geometry");
     todomovea->setStartValue(QRect(ui->pushButton_5->pos().x(),ui->pushButton_5->pos().y(),ui->pushButton_5->width(),ui->pushButton_5->height()));
     todomovea->setEndValue(QRect(130,70,531,361));
@@ -120,7 +117,7 @@ void MainTableWidget::initUi(){
 }
 void MainTableWidget::initSignal(){
 
-    connect(&EditWindow,SIGNAL(refechTable_signal()),this,SLOT(refechTable_slot()));
+    connect(EditWindow,SIGNAL(refechTable_signal()),this,SLOT(refechTable_slot()));
     connect(ui->down_button,&ClickLabel::clicked,this,&MainTableWidget::on_label_2_clicked);
 }
 void MainTableWidget::readTimeTable(){
@@ -154,7 +151,7 @@ void MainTableWidget::readTimeTable(){
         QJsonParseError jsonError;
         QJsonDocument jsondoc = QJsonDocument::fromJson(file_str.toUtf8(),&jsonError);
         if (jsonError.error != QJsonParseError::NoError && !jsondoc.isNull()) {
-            qDebug() << "Json格式错误！" << jsonError.error;
+            showLog("Config.json is Error!",LogStatus::ERR);
             return;
         }
         time_table = jsondoc.object();
@@ -179,7 +176,7 @@ void MainTableWidget::readConfig(){
         QJsonParseError jsonError;
         QJsonDocument jsondoc = QJsonDocument::fromJson(file_str.toUtf8(),&jsonError);
         if (jsonError.error != QJsonParseError::NoError && !jsondoc.isNull()) {
-            qDebug() << "Json格式错误！" << jsonError.error;
+            showLog("Config.json is Error!",LogStatus::ERR);
             return;
         }
         Config = jsondoc.object();
@@ -314,7 +311,6 @@ void MainTableWidget::refechYiYan(){
         if (json_error.error == QJsonParseError::NoError) {
             if (doucment.isObject()) {
                 const QJsonObject obj = doucment.object();
-                qDebug() << obj;
                 if (obj.contains("data")) {
                     QJsonObject object_data = obj.value("data").toObject();
                     ui->pushButton_2->setText(object_data.value("content").toString());
@@ -341,7 +337,6 @@ QString MainTableWidget::getToken(){
     if (json_error.error == QJsonParseError::NoError) {
         if (doucment.isObject()) {
             const QJsonObject obj = doucment.object();
-            qDebug() << obj;
             return obj.value("data").toString();
         }
     }
@@ -351,7 +346,6 @@ void MainTableWidget::on_label_clicked()
     swithToYiYan();
 }
 void MainTableWidget::hk_slot(QString day){
-    qDebug() << "SLOT" << day << time_table.value(day).toArray() << time_table << TABLE_JSON;
     rtt->quit();
     today_table = time_table.value(day).toArray();
     rtt->start();
@@ -411,7 +405,7 @@ void MainTableWidget::configZuanyan(){
         QFile file(ZUAN_DB);
         if (!file.open(QIODevice::WriteOnly))
         {
-            qDebug()<<"打开待下载文件失败！";
+
         }
         int timeout = 1000 * 60;
 
@@ -423,7 +417,7 @@ void MainTableWidget::configZuanyan(){
         QTimer timer;
         QEventLoop eventLoop;
         connect(reply, &QNetworkReply::downloadProgress, [=, &file, &timer](qint64 bytesReceived,qint64 bytesTotal){
-            qDebug()<<"当前下载的文件大小："<<bytesReceived<<"   总文件大小："<<bytesTotal;
+
             if (timer.isActive())
                 timer.start(timeout);
             file.write(reply->readAll());
@@ -439,18 +433,17 @@ void MainTableWidget::configZuanyan(){
 
         if (reply->error() != QNetworkReply::NoError)
         {
-            qDebug()<<"请求失败！失败原因："<<reply->error();
+
             file.close();
             delete reply;
         }
         if(timer.isActive())
         {
-            qDebug()<<"请求超时！";
+
             timer.stop();
             file.close();
             delete reply;
         }
-        qDebug()<<"下载3D文件成功！";
         file.close();
         delete reply;
 
@@ -462,11 +455,11 @@ void MainTableWidget::refechZuanyan(){
     db.setDatabaseName(ZUAN_DB);
     if (db.open())
     {
-        qDebug() << "Database opened successfully！";
+        showLog("Database is open",LogStatus::INFO);
     }
     else
     {
-        qDebug() << "无法打开数据库：" << db.lastError().text();
+        showLog("Database is open failed",LogStatus::ERR);
     }
     QString query_string = "SELECT * FROM `main` ORDER BY RANDOM() limit 1";
     QSqlQuery query;
@@ -524,18 +517,17 @@ void MainTableWidget::initSysTrayIcon()
     m_sysTrayIcon->show();
 }
 void MainTableWidget::createActions(){
-    m_showedit = new QAction(tr("编辑课程表"),this);
+    m_showedit = new QAction(tr("设置"),this);
     connect(m_showedit,SIGNAL(triggered()),this,SLOT(on_showMainAction()));
     m_showmain = new QAction(tr("打开主界面"),this);
     connect(m_showmain,&QAction::triggered,this,&MainTableWidget::startMainWindow);
     m_exitApp = new QAction(tr("退出"),this);
     connect(m_exitApp,SIGNAL(triggered()),this,SLOT(on_exitAppAction()));
-    qDebug()<<Config;
     if (Config["muyu_status"].toBool()){
         m_gongde = new QAction(tr("功德：") + QString::number(Config.value("gd").toInteger()),this);
-    }else{
+    }/*else{
         m_gongde = new QAction("φ(*￣0￣)",this);
-    }
+    }*/
 
 }
 void MainTableWidget::startMainWindow(){
@@ -574,17 +566,20 @@ void MainTableWidget::createMenu(){
     setStyleSheetFromFile(tray_menu,":/res/menu.qss");
     tray_menu->addAction(m_showedit);
     tray_menu->addAction(m_showmain);
-    tray_menu->addAction(m_gongde);
+    if (Config["muyu_status"].toBool()){
+        tray_menu->addAction(m_gongde);
+    }
     tray_menu->addSeparator();
     tray_menu->addAction(m_exitApp);
     m_sysTrayIcon->setContextMenu(tray_menu);
 }
 void MainTableWidget::on_showMainAction(){
-    EditWindow.show();
+
+    EditWindow->show();
 }
 void MainTableWidget::on_showConfig_modal(){
-    EditWindow.show();
-    while (EditWindow.isVisible()){
+    EditWindow->show();
+    while (EditWindow->isVisible()){
         QCoreApplication::processEvents(QEventLoop::AllEvents,1145141919810);
     }
 }
@@ -618,7 +613,6 @@ void MainTableWidget::on_muyu_clicked()
     temp_doc.setObject(Config);
     config_file.write(temp_doc.toJson(QJsonDocument::Indented));
     config_file.close();
-    qDebug() << Config;
     if (Config["muyu_status"].toBool()){
         m_gongde = new QAction(tr("功德：") + QString::number(Config.value("gd").toInteger()),this);
         tray_menu->deleteLater();
@@ -629,14 +623,14 @@ void MainTableWidget::setStyleSheetFromFile(QWidget* widget,QString file){
     QFile styleFile(file);
     if(styleFile.open(QIODevice::ReadOnly))
     {
-        qDebug("open success");
+        showLog("StyleSheet is Loaded",LogStatus::INFO);
         QString setStyleSheet(styleFile.readAll());
         widget->setStyleSheet(setStyleSheet);
         styleFile.close();
     }
     else
     {
-        qDebug("Open failed");
+        showLog("StyleSheet is Load failed",LogStatus::ERR);
     }
 }
 

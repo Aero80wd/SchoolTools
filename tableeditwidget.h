@@ -21,6 +21,10 @@
 #include<QMimeData>
 #include <private/qzipwriter_p.h>
 #include <private/qzipreader_p.h>
+#include<QFileIconProvider>
+#include<QTimer>
+#include"windows.h"
+#include"AppLog.h"
 namespace Ui {
 class TableEditWidget;
 }
@@ -35,6 +39,7 @@ public:
     void readTableJson();
     void refechTableWidget(QJsonArray today_table);
     QJsonObject config;
+    QString APP_VERSION = "3.5f1";
     void setConfig(QJsonObject obj);
     QJsonObject timeTable;
     void closeEvent(QCloseEvent *event) override;
@@ -50,6 +55,8 @@ public:
     }
     ~TableEditWidget();
     bool eventFilter(QObject *watched,QEvent* e) override;
+    bool isDeleteing = false;
+    int clickcnt = 0;
 public slots:
     void toggleded();
 
@@ -67,8 +74,11 @@ private slots:
 
     void on_pluginList_currentItemChanged(QListWidgetItem *current, QListWidgetItem *previous);
 
+    void on_pluginList_itemDoubleClicked(QListWidgetItem *item);
+
 signals:
     void refechTable_signal();
+    void refechToolBar_signal();
 private:
     Ui::TableEditWidget *ui;
 };

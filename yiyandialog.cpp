@@ -92,8 +92,13 @@ bool yiyanDialog::eventFilter(QObject* watched,QEvent* event){
         QMouseEvent* mouse_event = static_cast<QMouseEvent*>(event);
 
             endPos = mouse_event->pos() - startPos;
-            qDebug() << pos() + endPos;
             move(pos() + endPos - QPoint(width()/2,0));
+            back_show = new QPropertyAnimation(this,"pos");
+            back_show->setStartValue(pos() - QPoint(0,100));
+            back_show->setEndValue(pos());
+
+            back_show->setEasingCurve(QEasingCurve::InOutSine);
+            back_show->setDuration(500);
             return true;
 
     }
@@ -106,10 +111,9 @@ bool yiyanDialog::eventFilter(QObject* watched,QEvent* event){
     }
     if (event->type() == QEvent::Show){
         refechYiYan();
-        back_show = new QPropertyAnimation(this,"geometry");
-        qDebug() << this->pos();
-        back_show->setStartValue(QRect(this->pos().x()-this->width()/2,this->pos().y()-this->height()/2,this->width()*1.2,this->height()*1.2));
-        back_show->setEndValue(QRect(this->pos().x(),this->pos().y(),this->width(),this->height()));
+        back_show = new QPropertyAnimation(this,"pos");
+        back_show->setStartValue(pos() - QPoint(0,100));
+        back_show->setEndValue(pos());
 
         back_show->setEasingCurve(QEasingCurve::InOutSine);
         back_show->setDuration(500);
@@ -117,20 +121,13 @@ bool yiyanDialog::eventFilter(QObject* watched,QEvent* event){
         ani_opty->setDirection(QAbstractAnimation::Forward);
         ani_opty->start();
         back_show->start();
-
         return true;
     }
 
     return QDialog::eventFilter(watched,event);
 }
 void yiyanDialog::reject(){
-    back_show = new QPropertyAnimation(this,"geometry");
-    qDebug() << this->pos();
-    back_show->setStartValue(QRect(this->pos().x()-this->width()/2,this->pos().y()-this->height()/2,this->width()*1.2,this->height()*1.2));
-    back_show->setEndValue(QRect(this->pos().x(),this->pos().y(),this->width(),this->height()));
 
-    back_show->setEasingCurve(QEasingCurve::InOutSine);
-    back_show->setDuration(500);
     back_show->setDirection(QAbstractAnimation::Backward);
     connect(back_show,&QPropertyAnimation::finished,this,[=]{
         close();
@@ -183,7 +180,6 @@ void yiyanDialog::refechYiYan(){
         if (json_error.error == QJsonParseError::NoError) {
             if (doucment.isObject()) {
                 const QJsonObject obj = doucment.object();
-                qDebug() << obj;
                 if (obj.contains("data")) {
                     QJsonObject object_data = obj.value("data").toObject();
                     ui->label_3->setText(object_data.value("content").toString());
@@ -223,7 +219,6 @@ QString yiyanDialog::getToken(){
     if (json_error.error == QJsonParseError::NoError) {
         if (doucment.isObject()) {
             const QJsonObject obj = doucment.object();
-            qDebug() << obj;
             return obj.value("data").toString();
         }
     }
@@ -234,11 +229,11 @@ void yiyanDialog::refechZuanyan(){
     db.setDatabaseName(QDir::currentPath() + "/zuan.db");
     if (db.open())
     {
-        qDebug() << "Database opened successfully！";
+        showLog("DataBase is Open",LogStatus::INFO);
     }
     else
     {
-        qDebug() << "无法打开数据库：" << db.lastError().text();
+        showLog("DataBase is Open Failed",LogStatus::ERR);
     }
     QString query_string = "SELECT * FROM `main` ORDER BY RANDOM() limit 1";
     QSqlQuery query;

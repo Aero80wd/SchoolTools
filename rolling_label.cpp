@@ -79,7 +79,6 @@ void RollingLabel::upateLabelRollingState()
         blank_wp = fm.width(blank );//空格的像素宽度
 #endif
 
-        qDebug()<< "OK!";
 
         //开启定时器，定时器定时触发滚动效果
         timerId = startTimer(speedt);
@@ -87,7 +86,6 @@ void RollingLabel::upateLabelRollingState()
     }
     else//关闭文本框滚动
     {
-        qDebug()<< "no OK!";
         flag = 0; //关闭
         if(timerId >= 0){
             killTimer(timerId);

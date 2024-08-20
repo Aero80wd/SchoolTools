@@ -35,7 +35,6 @@ void MainWindow::getYunShi(){
     QJsonParseError json_error;
     QJsonDocument doucment = QJsonDocument::fromJson(responseData, &json_error);
     if (json_error.error == QJsonParseError::NoError) {
-        qDebug() << "parseing";
         if (doucment.isObject()) {
             const QJsonObject obj = doucment.object();
             if (obj.contains("yilist")) {
@@ -51,8 +50,6 @@ void MainWindow::getYunShi(){
             initReply->deleteLater();
         }
     }
-    qDebug() << yilist;
-    qDebug() << jilist;
     if (yilist.empty() or jilist.empty()){
         return;
     }
@@ -98,7 +95,10 @@ void MainWindow::on_butAdd_clicked()
                     "QInputDialog{background-color:rgb(255,255,255); }";
     dialog.setStyleSheet(style);
     dialog.exec();
-    newTodo(dialog.textValue(),true);
+    if (!dialog.textValue().isEmpty()){
+        newTodo(dialog.textValue(),true);
+    }
+
 
 }
 void MainWindow::newTodo(QString name,bool n){
@@ -134,11 +134,8 @@ void MainWindow::newTodo(QString name,bool n){
         box->setDisabled(true);
 
         QJsonArray temparray;
-        qDebug() << todos.size();
-        qDebug() << ui->listWidget->row(item);
         for (auto x:todos){
-            qDebug() << x;
-            qDebug() << textLabel->text();
+
             if (x == textLabel->text()){
                 qDebug("Continue");
                 continue;
@@ -147,7 +144,7 @@ void MainWindow::newTodo(QString name,bool n){
         }
         curLabel->setText(QString("<s>%1</s>").arg(curLabel->text()));
         todos = temparray;
-        qDebug() << temparray;
+
         Config["todos"] = temparray;
         QFile config_file(QDir::currentPath() + "/config.json");
         config_file.open(QFile::WriteOnly);
@@ -155,7 +152,7 @@ void MainWindow::newTodo(QString name,bool n){
         temp_doc.setObject(Config);
         config_file.write(temp_doc.toJson(QJsonDocument::Indented));
         config_file.close();
-        qDebug() << todos;
+
     });
     QListWidgetItem* item = new QListWidgetItem;
 
@@ -181,7 +178,7 @@ void MainWindow::readTodos(){
         QJsonParseError jsonError;
         QJsonDocument jsondoc = QJsonDocument::fromJson(file_str.toUtf8(),&jsonError);
         if (jsonError.error != QJsonParseError::NoError && !jsondoc.isNull()) {
-            qDebug() << "Json格式错误！" << jsonError.error;
+            showLog("Config.json is Error!",LogStatus::ERR);
             return;
         }
         todos = jsondoc.object()["todos"].toArray();

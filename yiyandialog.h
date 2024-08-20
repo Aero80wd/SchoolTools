@@ -21,6 +21,7 @@
 #include <QSqlRecord>
 #include "qt_windows.h"
 #include<QTranslator>
+#include"AppLog.h"
 namespace Ui {
 class yiyanDialog;
 }

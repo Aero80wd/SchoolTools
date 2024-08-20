@@ -16,8 +16,14 @@ TableEditWidget::TableEditWidget(QWidget *parent)
     connect(ui->pushButton_2,&QPushButton::clicked,this,[=]{
         ui->tabWidget->removeTab(3);
     });
-    connect(ui->label,&ClickLabel::DoubleClicked,this,[=]{
-        ui->tabWidget->insertTab(3,ui->tab_3,QString(tr("彩蛋设置")));
+    connect(ui->label,&ClickLabel::clicked,this,[=]{
+        if (clickcnt >=10){
+            clickcnt=0;
+            ui->tabWidget->insertTab(3,ui->tab_3,QString(tr("彩蛋设置")));
+        }else{
+            clickcnt++;
+        }
+
     });
     readTableJson();
     connect(ui->pushButton_3,&QPushButton::clicked,this,[=]{
@@ -39,6 +45,10 @@ TableEditWidget::TableEditWidget(QWidget *parent)
     ui->pluginInfo->horizontalHeader()->setSectionResizeMode(QHeaderView::Stretch);
     ui->pluginList->installEventFilter(this);
     ui->pluginList->setAcceptDrops(true);
+    ui->tableWidget->horizontalHeader()->setSectionResizeMode(QHeaderView::Stretch);
+    this->installEventFilter(this);
+    ui->label_4->setText("Version " + APP_VERSION);
+
 }
 
 TableEditWidget::~TableEditWidget()
@@ -79,7 +89,7 @@ void TableEditWidget::readTableJson(){
     QJsonParseError jsonError;
     QJsonDocument jsondoc = QJsonDocument::fromJson(file_str.toUtf8(),&jsonError);
     if (jsonError.error != QJsonParseError::NoError && !jsondoc.isNull()) {
-        qDebug() << "Json格式错误！" << jsonError.error;
+        showLog("table.json is Error!",LogStatus::ERR);
         return;
     }
     timeTable = jsondoc.object();
@@ -90,7 +100,6 @@ void TableEditWidget::readPluginList(){
     QDir plugin_dir(QDir::currentPath() + "/plugins");
     if (!plugin_dir.exists()){
         plugin_dir.mkdir(QDir::currentPath() + "/plugins");
-        qDebug("return");
         return;
     }
     QFileInfoList fileList = plugin_dir.entryInfoList();
@@ -100,7 +109,6 @@ void TableEditWidget::readPluginList(){
         if (x.filePath()[x.filePath().size() -1] == '.'){
             continue;
         }
-        qDebug() << x.filePath();
         QFile file(x.filePath() + "/pluginConfig.json");
         file.open(QIODevice::ReadOnly | QIODevice::Text);
         QString value = file.readAll();
@@ -111,6 +119,7 @@ void TableEditWidget::readPluginList(){
         QListWidgetItem *item = new QListWidgetItem();
         item->setText(PluginObject["name"].toString());
         item->setData(Qt::UserRole,x.filePath() + "/pluginConfig.json");
+        item->setData(Qt::UserRole+1,x.filePath());
         ui->pluginList->addItem(item);
 
 
@@ -134,9 +143,7 @@ void TableEditWidget::refechTableWidget(QJsonArray today_table){
     }
 }
 void TableEditWidget::toggleded(){
-    qDebug() << "switch";
     if (ui->radioButton->isChecked()){
-        qDebug() << timeTable.value("Mon").toArray();
         refechTableWidget(timeTable.value("Mon").toArray());
     }else
     if (ui->radioButton_2->isChecked()){
@@ -150,8 +157,6 @@ void TableEditWidget::toggleded(){
     }else
     if (ui->radioButton_5->isChecked()){
         refechTableWidget(timeTable.value("Fri").toArray());
-    }else{
-        qDebug() << "no";
     }
 }
 void TableEditWidget::addItem(QString key){
@@ -188,7 +193,6 @@ void TableEditWidget::addItem(QString key){
             editarray[i] = temp;
         }
     }
-    qDebug() << "sorted:" << editarray;
     timeTable[key] = editarray;
     QFile config_file(QDir::currentPath() + "/tables.json");
     config_file.open(QFile::WriteOnly);
@@ -199,10 +203,19 @@ void TableEditWidget::addItem(QString key){
     toggleded();
 
 }
+
+
+
 bool TableEditWidget::eventFilter(QObject *watched,QEvent*event)
 {
+    if (event->type() == QEvent::Resize)
+    {
+        ui->tabWidget->setStyleSheet(QString("QTabBar::tab{background:#ffffff;width:%1;border-radius:3px;border:1px solid #1191d3;padding:5px;}QTabBar::tab:hover{background:rgb(217, 217, 217);}QTabBar::tab:selected{color:#ffffff;background:#1191d3;}QTabWidget::tab-bar{alignment:center;}").arg(ui->tabWidget->width()/3*0.9)); //1
+        QCoreApplication::processEvents(QEventLoop::AllEvents,1145141919810);
+        return true;
+    }
     if (event->type() == QEvent::Drop){
-        qDebug() << "drop";
+        showLog("PluginFile is Drop",LogStatus::INFO);
         ui->status_bar->setText("");
         QDropEvent *drop_event = (QDropEvent*) event;
         const QMimeData *mimeData = drop_event->mimeData();
@@ -220,22 +233,78 @@ bool TableEditWidget::eventFilter(QObject *watched,QEvent*event)
         {
             return true;
         }
-        QZipReader reader(fileName);
-        reader.extractAll(QDir::currentPath() + "/plugins");
-        QFile file(QDir::currentPath() + "/plugins");
-        file.open(QIODevice::WriteOnly);
-        file.write(reader.fileData(QDir::currentPath() + "/plugins/" + QTime::currentTime().toString()));
-        file.close();
-        reader.close();
-        readPluginList();
-        QMessageBox::information(this,tr("提示"),tr("插件安装完成，重启生效"));
+
+        if (fileName.split(".").last() == "zip"){
+            QZipReader reader(fileName);
+            reader.extractAll(QDir::currentPath() + "/plugins");
+            QFile file(QDir::currentPath() + "/plugins");
+            file.open(QIODevice::WriteOnly);
+            file.write(reader.fileData(QDir::currentPath() + "/plugins/" + QTime::currentTime().toString()));
+            file.close();
+            reader.close();
+            readPluginList();
+            QMessageBox::information(this,tr("提示"),tr("插件安装完成！"));
+            emit refechToolBar_signal();
+            return true;
+        }else if (fileName.split(".").last() == "lnk"){
+            QFileInfo info(fileName);
+            if (info.exists() && info.isSymLink()){
+                QJsonObject pluginObj;
+                pluginObj["name"] = info.baseName();
+                pluginObj["type"] = "link";
+                pluginObj["linkPath"] = fileName;
+                pluginObj["pluginVersion"] = "0.0";
+                pluginObj["pluginAuthor"] = "";
+                pluginObj["pluginIntroduce"] = info.baseName();
+                pluginObj["icon"] = "icon.png";
+                QDir pluginDir(QDir::currentPath() + "/plugins/" + info.baseName());
+                pluginDir.mkdir(QDir::currentPath() + "/plugins/" + info.baseName());
+                QFile file(QDir::currentPath() + "/plugins/" + info.baseName() + "/pluginConfig.json");
+                file.open(QIODevice::ReadWrite);
+                QJsonDocument pluginDoc;
+                pluginDoc.setObject(pluginObj);
+                file.write(pluginDoc.toJson());
+                file.close();
+                QFileInfo fileinfo(info.symLinkTarget());
+                QFileIconProvider fileicon;
+                QIcon icon=fileicon.icon(fileinfo);
+                QPixmap pixmap = icon.pixmap(256,256);
+                pixmap.save(QDir::currentPath() + "/plugins/" + info.baseName() + "/icon.png");
+                readPluginList();
+                emit refechToolBar_signal();
+                QMessageBox::information(this,tr("提示"),tr("图标添加完成！"));
+            }
+            return true;
+        }else{
+            QMessageBox::critical(this,tr("错误"),tr("此文件不是插件或快捷方式！"));
+            return true;
+        }
+
     }
-    if (event->type() == QEvent::DragEnter){
+    if (event->type() == QEvent::DragEnter)
+    {
         QDragEnterEvent *drag_event = (QDragEnterEvent*) event;
         if(drag_event->mimeData()->hasUrls())
         {
-            ui->status_bar->setText("拖放以安装插件");
-            drag_event->acceptProposedAction();
+            QList<QUrl> urlList = drag_event->mimeData()->urls();
+
+            //如果同时拖入了多个资源，只选择一个
+            QString fileName = urlList.at(0).toLocalFile();
+            if (fileName.split(".").last() == "zip")
+            {
+                ui->status_bar->setText("拖放以安装插件");
+                drag_event->acceptProposedAction();
+            }
+            else if (fileName.split(".").last() == "lnk")
+            {
+                ui->status_bar->setText("拖放以添加至工具栏");
+                drag_event->acceptProposedAction();
+            }
+            else
+            {
+                ui->status_bar->setText("此文件不是插件或快捷方式！");
+                drag_event->ignore();
+            }
         }
         else
         {
@@ -261,8 +330,6 @@ void TableEditWidget::on_pushButton_clicked()
     }else
     if (ui->radioButton_5->isChecked()){
         addItem("Fri");
-    }else{
-        qDebug() << "no";
     }
 }
 
@@ -319,7 +386,10 @@ void TableEditWidget::on_chkHide_clicked(bool checked)
 
 void TableEditWidget::on_pluginList_currentItemChanged(QListWidgetItem *current, QListWidgetItem *previous)
 {
-    qDebug() << "reading......";
+    showLog("Reading Plugin List",LogStatus::INFO);
+    if (current == nullptr){
+        return;
+    }
     QString config_path = current->data(Qt::UserRole).toString();
     QFile file(config_path);
     file.open(QIODevice::ReadOnly | QIODevice::Text);
@@ -328,7 +398,6 @@ void TableEditWidget::on_pluginList_currentItemChanged(QListWidgetItem *current,
     QJsonParseError parseJsonErr;
     QJsonDocument document = QJsonDocument::fromJson(value.toUtf8(), &parseJsonErr);
     QJsonObject PluginObject = document.object();
-    qDebug() << PluginObject;
     ui->pluginInfo->clearContents();
     ui->pluginInfo->setEditTriggers(QAbstractItemView::NoEditTriggers);
     ui->pluginInfo->setRowCount(4);
@@ -340,5 +409,23 @@ void TableEditWidget::on_pluginList_currentItemChanged(QListWidgetItem *current,
     ui->pluginInfo->setItem(2,1,new QTableWidgetItem(PluginObject["pluginAuthor"].toString()));
     ui->pluginInfo->setItem(3,0,new QTableWidgetItem("简介"));
     ui->pluginInfo->setItem(3,1,new QTableWidgetItem(PluginObject["pluginIntroduce"].toString()));
+
+}
+
+
+void TableEditWidget::on_pluginList_itemDoubleClicked(QListWidgetItem *item)
+{
+    QMessageBox MyBox(QMessageBox::Warning,"警告","将会删除此插件，是否继续？",QMessageBox::Yes | QMessageBox::No,this);
+    int clickedBut = MyBox.exec();
+    if (clickedBut == QMessageBox::Yes){
+        QDir dir(item->data(Qt::UserRole+1).toString());
+        dir.removeRecursively();
+
+        readPluginList();
+        QMessageBox::information(this,"提示","删除完成");
+        emit refechToolBar_signal();
+    }
+
+
 }
 

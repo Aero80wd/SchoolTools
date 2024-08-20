@@ -95,9 +95,12 @@ bool GetStartWidget::eventFilter(QObject* watched,QEvent* event){
     }
     if (event->type() == QEvent::MouseMove){
         QMouseEvent* mouse_event = static_cast<QMouseEvent*>(event);
+        back_show->setStartValue(pos() - QPoint(0,100));
+        back_show->setEndValue(pos());
 
+        back_show->setEasingCurve(QEasingCurve::InOutSine);
+        back_show->setDuration(500);
         endPos = mouse_event->pos() - startPos;
-        qDebug() << pos() + endPos;
         move(pos() + endPos - QPoint(width()/2,0));
         return true;
 
@@ -110,17 +113,21 @@ bool GetStartWidget::eventFilter(QObject* watched,QEvent* event){
 
     }
     if (event->type() == QEvent::Show){
-        back_show = new QPropertyAnimation(this,"geometry");
-        qDebug() << this->pos();
-        back_show->setStartValue(QRect(this->pos().x()-this->width()*1.2/2,this->pos().y()-this->height()*1.2/2,this->width()*1.2,this->height()*1.2));
-        back_show->setEndValue(QRect(this->pos().x(),this->pos().y(),this->width(),this->height()));
+        if (!showed){
+            back_show = new QPropertyAnimation(this,"pos");
 
-        back_show->setEasingCurve(QEasingCurve::InOutSine);
-        back_show->setDuration(500);
-        back_show->setDirection(QAbstractAnimation::Forward);
-        ani_opty->setDirection(QAbstractAnimation::Forward);
-        ani_opty->start();
-        back_show->start();
+            back_show->setStartValue(pos() - QPoint(0,100));
+            back_show->setEndValue(pos());
+
+            back_show->setEasingCurve(QEasingCurve::InOutSine);
+            back_show->setDuration(500);
+            back_show->setDirection(QAbstractAnimation::Forward);
+            ani_opty->setDirection(QAbstractAnimation::Forward);
+            ani_opty->start();
+            back_show->start();
+            showed = true;
+        }
+
 
         return true;
     }
@@ -128,13 +135,6 @@ bool GetStartWidget::eventFilter(QObject* watched,QEvent* event){
     return QDialog::eventFilter(watched,event);
 }
 void GetStartWidget::close(){
-    back_show = new QPropertyAnimation(this,"geometry");
-    qDebug() << this->pos();
-    back_show->setStartValue(QRect(this->pos().x()-this->width()/2,this->pos().y()-this->height()/2,this->width()*1.2,this->height()*1.2));
-    back_show->setEndValue(QRect(this->pos().x(),this->pos().y(),this->width(),this->height()));
-
-    back_show->setEasingCurve(QEasingCurve::InOutSine);
-    back_show->setDuration(500);
     back_show->setDirection(QAbstractAnimation::Backward);
     connect(back_show,&QPropertyAnimation::finished,this,[=]{
         QDialog::close();

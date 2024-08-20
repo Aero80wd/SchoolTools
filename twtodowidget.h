@@ -10,6 +10,7 @@
 #include<QDir>
 #include<QInputDialog>
 #include<QTranslator>
+#include"AppLog.h"
 namespace Ui {
 class TWTodoWidget;
 }

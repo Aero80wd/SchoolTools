@@ -22,6 +22,7 @@
 #include<QNetworkAccessManager>
 #include<QNetworkProxy>
 #include<QTranslator>
+#include"AppLog.h"
 namespace Ui {
 class MainWindow;
 }
