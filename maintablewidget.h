@@ -34,6 +34,7 @@
 #include "twtodowidget.h"
 #include <windows.h>
 #include<QTranslator>
+#include"AppLog.h"
 QT_BEGIN_NAMESPACE
 
 namespace Ui {
@@ -74,7 +75,7 @@ public:
     void createActions();
     void createMenu();
     void setStyleSheetFromFile(QWidget* widget,QString file);
-    TableEditWidget EditWindow;
+    TableEditWidget *EditWindow;
     QMenu *tray_menu;
     QAction *m_showedit;
     QAction *m_gongde;

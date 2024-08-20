@@ -28,6 +28,18 @@
    </property>
    <item row="0" column="0">
     <widget class="QWidget" name="widget_2" native="true">
+     <property name="minimumSize">
+      <size>
+       <width>0</width>
+       <height>40</height>
+      </size>
+     </property>
+     <property name="maximumSize">
+      <size>
+       <width>16777215</width>
+       <height>40</height>
+      </size>
+     </property>
      <property name="styleSheet">
       <string notr="true">background:#1191d3;</string>
      </property>
@@ -121,9 +133,15 @@ alignment:center;
            <number>25</number>
           </property>
           <item>
-           <layout class="QHBoxLayout" name="horizontalLayout" stretch="10,0,0,0,2">
+           <layout class="QHBoxLayout" name="horizontalLayout" stretch="10,2,2,2,2">
             <item>
              <widget class="QLineEdit" name="lineEdit">
+              <property name="minimumSize">
+               <size>
+                <width>0</width>
+                <height>25</height>
+               </size>
+              </property>
               <property name="styleSheet">
                <string notr="true">QLineEdit{
 
@@ -154,6 +172,12 @@ border-bottom: 1px solid rgb(255, 58, 58);
             </item>
             <item>
              <widget class="QTimeEdit" name="timeEdit">
+              <property name="minimumSize">
+               <size>
+                <width>0</width>
+                <height>25</height>
+               </size>
+              </property>
               <property name="toolTip">
                <string>输入上课时间</string>
               </property>
@@ -176,12 +200,14 @@ border-bottom: 1px solid rgb(255, 58, 58);
 QDateTimeEdit::down-button{
 width:7px;
 background:#F0F0F0;
-border-image: url(&quot;:/res/down.png&quot;);
+image: url(&quot;:/res/down.png&quot;);
+border-radius: 3px; /* 边框圆角 */
 }
 QDateTimeEdit::up-button{
 width:7px;
+border-radius: 3px; /* 边框圆角 */
 background:#F0F0F0;
-border-image: url(&quot;:/res/up.png&quot;);
+image: url(&quot;:/res/up.png&quot;);
 }
 QDateTimeEdit::down-button:hover{
 background:#1191d3;
@@ -194,6 +220,12 @@ background:#1191d3;
             </item>
             <item>
              <widget class="QTimeEdit" name="timeEdit_2">
+              <property name="minimumSize">
+               <size>
+                <width>0</width>
+                <height>25</height>
+               </size>
+              </property>
               <property name="toolTip">
                <string>输入下课时间</string>
               </property>
@@ -216,12 +248,14 @@ border-bottom: 1px solid rgb(255, 58, 58);
 QDateTimeEdit::down-button{
 width:7px;
 background:#F0F0F0;
-border-image: url(&quot;:/res/down.png&quot;);
+image: url(&quot;:/res/down.png&quot;);
+border-radius: 3px; /* 边框圆角 */
 }
 QDateTimeEdit::up-button{
 width:7px;
+border-radius: 3px; /* 边框圆角 */
 background:#F0F0F0;
-border-image: url(&quot;:/res/up.png&quot;);
+image: url(&quot;:/res/up.png&quot;);
 }
 QDateTimeEdit::down-button:hover{
 background:#1191d3;
@@ -234,6 +268,12 @@ background:#1191d3;
             </item>
             <item>
              <widget class="QSpinBox" name="spinBox">
+              <property name="minimumSize">
+               <size>
+                <width>0</width>
+                <height>25</height>
+               </size>
+              </property>
               <property name="toolTip">
                <string>输入离上课的课间时间</string>
               </property>
@@ -256,12 +296,14 @@ border-bottom: 1px solid rgb(255, 58, 58);
 QSpinBox::down-button{
 width:7px;
 background:#F0F0F0;
-border-image: url(&quot;:/res/down.png&quot;);
+border-radius: 3px; /* 边框圆角 */
+image: url(&quot;:/res/down.png&quot;);
 }
 QSpinBox::up-button{
 width:7px;
 background:#F0F0F0;
-border-image: url(&quot;:/res/up.png&quot;);
+image: url(&quot;:/res/up.png&quot;);
+border-radius: 3px; /* 边框圆角 */
 }
 QSpinBox::down-button:hover{
 background:#1191d3;
@@ -274,19 +316,22 @@ background:#1191d3;
             </item>
             <item>
              <widget class="QPushButton" name="pushButton">
+              <property name="minimumSize">
+               <size>
+                <width>0</width>
+                <height>25</height>
+               </size>
+              </property>
               <property name="styleSheet">
                <string notr="true">QPushButton{
-
-border-bottom: 1px solid #1191d3;; /* 边框宽度为1px，颜色为#A0A0A0 */
 	border-radius: 3px; /* 边框圆角 */
-	
-	background-color: #FAFAFA; /* 背景颜色 */
-	color: #000000; /* 文本颜色 */
+	color:#ffffff;
+	background-color: #1191d3; /* 背景颜色 */
 	padding:3px;
 
 }
 QPushButton:hover{
-border-bottom: 1px solid rgb(255, 58, 58);
+background:rgb(11, 96, 139);
 }
 </string>
               </property>
@@ -686,7 +731,7 @@ background:#1191d3;
               </font>
              </property>
              <property name="text">
-              <string>Version 3.5</string>
+              <string>APP_VERSION</string>
              </property>
             </widget>
            </item>

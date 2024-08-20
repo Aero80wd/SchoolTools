@@ -51,7 +51,6 @@ void TWTodoWidget::newTodo(QString name,bool n){
     hlayout->setStretch(1,100);
     itemWidget->setLayout(hlayout);
     connect(okbox,&QCheckBox::clicked,this,[=]{
-        qDebug("Clicked");
         QListWidgetItem *item = ui->listWidget->currentItem();
         QWidget *widget = ui->listWidget->itemWidget(item);
         QLabel* curLabel = textLabel;
@@ -59,20 +58,17 @@ void TWTodoWidget::newTodo(QString name,bool n){
         box->setDisabled(true);
 
         QJsonArray temparray;
-        qDebug() << todos.size();
-        qDebug() << ui->listWidget->row(item);
+
         for (auto x:todos){
-            qDebug() << x;
-            qDebug() << textLabel->text();
+
             if (x == textLabel->text()){
-                qDebug("Continue");
                 continue;
             }
             temparray.append(x);
         }
         curLabel->setText(QString("<s>%1</s>").arg(curLabel->text()));
         todos = temparray;
-        qDebug() << temparray;
+
         Config["todos"] = temparray;
         QFile config_file(QDir::currentPath() + "/config.json");
         config_file.open(QFile::WriteOnly);
@@ -80,7 +76,7 @@ void TWTodoWidget::newTodo(QString name,bool n){
         temp_doc.setObject(Config);
         config_file.write(temp_doc.toJson(QJsonDocument::Indented));
         config_file.close();
-        qDebug() << todos;
+
     });
     QListWidgetItem* item = new QListWidgetItem;
 
@@ -91,13 +87,13 @@ void TWTodoWidget::newTodo(QString name,bool n){
     item->setSizeHint(itemWidget->size());
 }
 void TWTodoWidget::readTodos(){
-    qDebug() << "reading todos......";
+    showLog("Reading Todos",LogStatus::INFO);
     QFileInfo fi(QDir::currentPath() + "/config.json");
     if (!fi.isFile()){
         QFile file(QDir::currentPath() + "/config.json");
         file.open(QIODevice::ReadWrite | QIODevice::Text);
         file.close();
-        qDebug() << "is not a file";
+
     }else{
         QFile file(QDir::currentPath() + "/config.json");
         file.open(QIODevice::ReadWrite | QIODevice::Text);
@@ -108,7 +104,7 @@ void TWTodoWidget::readTodos(){
         QJsonParseError jsonError;
         QJsonDocument jsondoc = QJsonDocument::fromJson(file_str.toUtf8(),&jsonError);
         if (jsonError.error != QJsonParseError::NoError && !jsondoc.isNull()) {
-            qDebug() << "Json格式错误！" << jsonError.error;
+            showLog("Config.json is Error!",LogStatus::ERR);
             return;
         }
         todos = jsondoc.object()["todos"].toArray();
@@ -141,6 +137,9 @@ void TWTodoWidget::on_butAdd_clicked()
                     "QInputDialog{background-color:rgb(255,255,255); }";
     dialog.setStyleSheet(style);
     dialog.exec();
-    newTodo(dialog.textValue(),true);
+    if (!dialog.textValue().isEmpty()){
+        newTodo(dialog.textValue(),true);
+    }
+
 }
 

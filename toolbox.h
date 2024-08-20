@@ -14,8 +14,10 @@
 #include<QJsonParseError>
 #include<QtWebEngineWidgets>
 #include"clicklabel.h"
-
-
+#include <dwmapi.h>
+#pragma comment(lib,"Dwmapi.lib")
+#include<QColorDialog>
+#include"AppLog.h"
 namespace Ui {
 class ToolBox;
 }
@@ -27,9 +29,10 @@ class ToolBox : public QWidget
 public:
     explicit ToolBox(QWidget *parent = nullptr);
     ~ToolBox();
-    void LoadPlugins();
-    void setWidgetBlur(QWidget* widget);
 
+    void setWidgetBlur(QWidget* widget);
+public slots:
+    void LoadPlugins();
 private:
     Ui::ToolBox *ui;
 };

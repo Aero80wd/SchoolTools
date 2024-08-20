@@ -8,6 +8,7 @@
 #include<QPropertyAnimation>
 #include "qt_windows.h"
 #include<QTranslator>
+#include"AppLog.h"
 namespace Ui {
 class GetStartWidget;
 }
@@ -27,6 +28,7 @@ public:
     void setWidgetBlur(QWidget* widget);
     QPoint startPos;
     bool tracking = false;
+    bool showed = false;
     QPoint endPos;
 private:
     Ui::GetStartWidget *ui;

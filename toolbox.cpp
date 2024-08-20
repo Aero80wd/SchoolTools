@@ -39,6 +39,23 @@ struct WindowCompositionAttributeData {
 };
 typedef BOOL(WINAPI*pSetWindowCompositionAttribute114)(HWND, WindowCompositionAttributeData*);
 pSetWindowCompositionAttribute114 SetWindowCompositionAttribute114 = nullptr;
+
+COLORREF GetWindowsThemeColor()
+{
+    DWORD crColorization;
+    BOOL fOpaqueBlend;
+    COLORREF theme_color{};
+    HRESULT result = DwmGetColorizationColor(&crColorization, &fOpaqueBlend);
+    if (result == S_OK)
+    {
+        BYTE r, g, b;
+        r = int((crColorization >> 16) * 1.06) % 256;
+        g = int((crColorization >> 8) * 1.06) % 256;
+        b = int(crColorization * 1.06) % 256;
+        theme_color = RGB(r, g, b);
+    }
+    return theme_color;
+}
 void ToolBox::setWidgetBlur(QWidget* widget){
     if (!SetWindowCompositionAttribute114) {
         HMODULE hModule = LoadLibrary(TEXT("user32.dll"));
@@ -48,19 +65,19 @@ void ToolBox::setWidgetBlur(QWidget* widget){
         }
     }
     HWND hWnd = HWND(widget->winId());
-    int gradientColor = DWORD(0x00A8A8A8);
+    int gradientColor = DWORD(GetWindowsThemeColor());
     AccentPolicy policy = { ACCENT_ENABLE_ACRYLICBLURBEHIND , 0, gradientColor, 0 };
     WindowCompositionAttributeData data = { 19, &policy, sizeof(AccentPolicy) };
     SetWindowCompositionAttribute114(hWnd, &data);
 }
 
-
-
 void ToolBox::LoadPlugins(){
+    for (auto x:findChildren<ClickLabel*>()){
+        delete x;
+    }
     QDir plugin_dir(QDir::currentPath() + "/plugins");
     if (!plugin_dir.exists()){
         plugin_dir.mkdir(QDir::currentPath() + "/plugins");
-        qDebug("return");
         return;
     }
     QFileInfoList fileList = plugin_dir.entryInfoList();
@@ -69,7 +86,6 @@ void ToolBox::LoadPlugins(){
         if (x.filePath()[x.filePath().size() -1] == '.'){
             continue;
         }
-        qDebug() << x.filePath();
         QFile file(x.filePath() + "/pluginConfig.json");
         file.open(QIODevice::ReadOnly | QIODevice::Text);
         QString value = file.readAll();
@@ -80,25 +96,31 @@ void ToolBox::LoadPlugins(){
         QJsonObject PluginObject = document.object();
         ClickLabel *PluginBut = new ClickLabel(this);
         ui->verticalLayout->addWidget(PluginBut);
-        PluginBut->setStyleSheet(QString("image: url(\"%1\")").arg(x.filePath() + "/" + PluginObject["icon"].toString()));
+
         PluginBut->setMinimumSize(QSize(70,70));
         PluginBut->setAniOpen(true);
         PluginBut->setCursor(Qt::PointingHandCursor);
         adjustSize();
+
+        PluginBut->setStyleSheet(QString("image: url(\"%1\");").arg(x.filePath() + "/" + PluginObject["icon"].toString()));
         if (PluginObject["type"].toString() == "win32"){
+
             connect(PluginBut,&ClickLabel::clicked,this,[=]{
-                _wsystem(QString("start %1/%2").arg(x.filePath()).arg(PluginObject["execPath"].toString()).toStdWString().c_str());
+                ShellExecute(NULL,L"open",QString("%1/%2").arg(x.filePath()).arg(PluginObject["execPath"].toString()).toStdWString().c_str(),NULL,NULL,SW_SHOW);
             });
         }
         if (PluginObject["type"].toString() == "url"){
+
             connect(PluginBut,&ClickLabel::clicked,this,[=]{
                 QWebEngineView *web_window = new QWebEngineView();
                 web_window->setWindowTitle(PluginObject["name"].toString());
                 web_window->setUrl(QUrl(PluginObject["url"].toString()));
+                web_window->page()->profile()->setHttpUserAgent("Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/127.0.0.0 Safari/537.36 Edg/127.0.0.0");
                 web_window->show();
             });
         }
         if (PluginObject["type"].toString() == "html"){
+
             connect(PluginBut,&ClickLabel::clicked,this,[=]{
                 QWebEngineView *web_window = new QWebEngineView();
                 web_window->setWindowTitle(PluginObject["name"].toString());
@@ -107,5 +129,15 @@ void ToolBox::LoadPlugins(){
                 web_window->show();
             });
         }
+        if (PluginObject["type"].toString() == "link"){
+
+            connect(PluginBut,&ClickLabel::clicked,this,[=]{
+                QFileInfo info(PluginObject["linkPath"].toString());
+                if (info.exists() && info.isSymLink()){
+                    ShellExecute(NULL,L"open",info.symLinkTarget().toStdWString().c_str(),NULL,NULL,SW_SHOW);
+                }
+            });
+        }
     }
+
 }

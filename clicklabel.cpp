@@ -4,12 +4,10 @@ ClickLabel::ClickLabel(QWidget* parent) {
 
 }
 void ClickLabel::mouseClickEvent(QMouseEvent* e){
-    qDebug("signal clicked()");
     setWindowFlags(Qt::Widget);
     emit clicked();
 }
 void ClickLabel::mouseDoubleClickEvent(QMouseEvent* e){
-    qDebug("signal DoubleClicked()");
     setWindowFlags(Qt::Widget);
     emit DoubleClicked();
 }
