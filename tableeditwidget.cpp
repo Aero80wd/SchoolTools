@@ -6,20 +6,19 @@ TableEditWidget::TableEditWidget(QWidget *parent)
     , ui(new Ui::TableEditWidget)
 {
     ui->setupUi(this);
-    this->setWindowIcon(QIcon(":/res/a.png"));
-    ui->tabWidget->removeTab(3);
+    ui->tabWidget->removeTab(4);
     connect(ui->radioButton,SIGNAL(toggled(bool)),this,SLOT(toggleded()));
     connect(ui->radioButton_2,SIGNAL(toggled(bool)),this,SLOT(toggleded()));
     connect(ui->radioButton_3,SIGNAL(toggled(bool)),this,SLOT(toggleded()));
     connect(ui->radioButton_4,SIGNAL(toggled(bool)),this,SLOT(toggleded()));
     connect(ui->radioButton_5,SIGNAL(toggled(bool)),this,SLOT(toggleded()));
     connect(ui->pushButton_2,&QPushButton::clicked,this,[=]{
-        ui->tabWidget->removeTab(3);
+        ui->tabWidget->removeTab(4);
     });
     connect(ui->label,&ClickLabel::clicked,this,[=]{
         if (clickcnt >=10){
             clickcnt=0;
-            ui->tabWidget->insertTab(3,ui->tab_3,QString(tr("彩蛋设置")));
+            ui->tabWidget->insertTab(4,ui->tab_3,QString(tr("彩蛋设置")));
         }else{
             clickcnt++;
         }
@@ -29,6 +28,8 @@ TableEditWidget::TableEditWidget(QWidget *parent)
     connect(ui->pushButton_3,&QPushButton::clicked,this,[=]{
         QDesktopServices::openUrl(QUrl("https://github.com/Aero80wd/SchoolTools"));
     });
+    connect(ui->timer_hide,&QCheckBox::clicked,this,&TableEditWidget::on_timer_hide_clicked);
+    connect(ui->save_text_config,&QPushButton::clicked,this,&TableEditWidget::on_timerInfo_changed);
     QTranslator translator;
     QLocale::Language lab = QLocale::system().language();
     if(QLocale::Chinese == lab)
@@ -76,8 +77,36 @@ void TableEditWidget::setConfig(QJsonObject obj){
     ui->checkBox_2->setChecked(config.value("zuan_status").toBool());
     ui->checkBox->setChecked(config.value("muyu_status").toBool());
     ui->chkHide->setChecked(config.value("toolbox_status").toBool());
-
+    ui->timer_hide->setChecked(config.value("timer_status").toBool());
+    ui->timer_time->setDateTime(QDateTime::fromString(config["end_time"].toString(),"yyyy-MM-dd hh:mm:ss"));
+    ui->edit_name->setText(config["label_tag"].toString());
+    ui->edit_name_eng->setText(config["english_tag"].toString());
 }
+void TableEditWidget::on_timer_hide_clicked(bool checked){
+    config["timer_status"] = checked;
+    QFile config_file(QDir::currentPath() + "/config.json");
+    config_file.open(QFile::WriteOnly);
+    QJsonDocument temp_doc;
+    temp_doc.setObject(config);
+    config_file.write(temp_doc.toJson(QJsonDocument::Indented));
+    config_file.close();
+    QMessageBox::information(this,tr("提示"),tr("重启生效"));
+}
+void TableEditWidget::on_timerInfo_changed(){
+    config["end_time"] = ui->timer_time->dateTime().toString("yyyy-MM-dd hh:mm:ss");
+    config["label_tag"] = ui->edit_name->text();
+    config["english"] = QString("There are () $\nleft until %1").arg(ui->edit_name_eng->text());
+    config["english_end"] = QString("There is not a $\nleft until %1").arg(ui->edit_name_eng->text());
+    config["english_tag"] = ui->edit_name_eng->text();
+    QFile config_file(QDir::currentPath() + "/config.json");
+    config_file.open(QFile::WriteOnly);
+    QJsonDocument temp_doc;
+    temp_doc.setObject(config);
+    config_file.write(temp_doc.toJson(QJsonDocument::Indented));
+    config_file.close();
+    QMessageBox::information(this,tr("提示"),tr("重启生效"));
+}
+
 void TableEditWidget::readTableJson(){
     QFile file(QDir::currentPath() + "/tables.json");
     file.open(QIODevice::ReadWrite | QIODevice::Text);
@@ -210,7 +239,7 @@ bool TableEditWidget::eventFilter(QObject *watched,QEvent*event)
 {
     if (event->type() == QEvent::Resize)
     {
-        ui->tabWidget->setStyleSheet(QString("QTabBar::tab{background:#ffffff;width:%1;border-radius:3px;border:1px solid #1191d3;padding:5px;}QTabBar::tab:hover{background:rgb(217, 217, 217);}QTabBar::tab:selected{color:#ffffff;background:#1191d3;}QTabWidget::tab-bar{alignment:center;}").arg(ui->tabWidget->width()/3*0.9)); //1
+        ui->tabWidget->setStyleSheet(QString("QTabBar::tab{background:#ffffff;width:%1;border-radius:3px;border:1px solid #1191d3;padding:5px;}QTabBar::tab:hover{background:rgb(217, 217, 217);}QTabBar::tab:selected{color:#ffffff;background:#1191d3;}QTabWidget::tab-bar{alignment:center;}").arg(ui->tabWidget->width()/4*0.9)); //1
         QCoreApplication::processEvents(QEventLoop::AllEvents,1145141919810);
         return true;
     }
@@ -226,91 +255,85 @@ bool TableEditWidget::eventFilter(QObject *watched,QEvent*event)
         }
 
         QList<QUrl> urlList = mimeData->urls();
-
-        //如果同时拖入了多个资源，只选择一个
-        QString fileName = urlList.at(0).toLocalFile();
-        if(fileName.isEmpty())
-        {
-            return true;
-        }
-
-        if (fileName.split(".").last() == "zip"){
-            QZipReader reader(fileName);
-            reader.extractAll(QDir::currentPath() + "/plugins");
-            QFile file(QDir::currentPath() + "/plugins");
-            file.open(QIODevice::WriteOnly);
-            file.write(reader.fileData(QDir::currentPath() + "/plugins/" + QTime::currentTime().toString()));
-            file.close();
-            reader.close();
-            readPluginList();
-            QMessageBox::information(this,tr("提示"),tr("插件安装完成！"));
-            emit refechToolBar_signal();
-            return true;
-        }else if (fileName.split(".").last() == "lnk"){
-            QFileInfo info(fileName);
-            if (info.exists() && info.isSymLink()){
-                QJsonObject pluginObj;
-                pluginObj["name"] = info.baseName();
-                pluginObj["type"] = "link";
-                pluginObj["linkPath"] = fileName;
-                pluginObj["pluginVersion"] = "0.0";
-                pluginObj["pluginAuthor"] = "";
-                pluginObj["pluginIntroduce"] = info.baseName();
-                pluginObj["icon"] = "icon.png";
-                QDir pluginDir(QDir::currentPath() + "/plugins/" + info.baseName());
-                pluginDir.mkdir(QDir::currentPath() + "/plugins/" + info.baseName());
-                QFile file(QDir::currentPath() + "/plugins/" + info.baseName() + "/pluginConfig.json");
-                file.open(QIODevice::ReadWrite);
-                QJsonDocument pluginDoc;
-                pluginDoc.setObject(pluginObj);
-                file.write(pluginDoc.toJson());
-                file.close();
-                QFileInfo fileinfo(info.symLinkTarget());
-                QFileIconProvider fileicon;
-                QIcon icon=fileicon.icon(fileinfo);
-                QPixmap pixmap = icon.pixmap(256,256);
-                pixmap.save(QDir::currentPath() + "/plugins/" + info.baseName() + "/icon.png");
-                readPluginList();
-                emit refechToolBar_signal();
-                QMessageBox::information(this,tr("提示"),tr("图标添加完成！"));
+        for (int x = 0;x<urlList.length();x++){
+            QString fileName = urlList.at(x).toLocalFile();
+            if(fileName.isEmpty())
+            {
+                return true;
             }
-            return true;
-        }else{
-            QMessageBox::critical(this,tr("错误"),tr("此文件不是插件或快捷方式！"));
-            return true;
+
+            if (fileName.split(".").last() == "zip"){
+                QZipReader reader(fileName);
+                reader.extractAll(QDir::currentPath() + "/plugins");
+                QFile file(QDir::currentPath() + "/plugins");
+                file.open(QIODevice::WriteOnly);
+                file.write(reader.fileData(QDir::currentPath() + "/plugins/" + QTime::currentTime().toString()));
+                file.close();
+                reader.close();
+                readPluginList();
+                QMessageBox::information(this,tr("提示"),tr("插件安装完成！"));
+                emit refechToolBar_signal();
+            }else if (fileName.split(".").last() == "lnk"){
+                QFileInfo info(fileName);
+                if (info.exists() && info.isSymLink()){
+                    QJsonObject pluginObj;
+                    pluginObj["name"] = info.baseName();
+                    pluginObj["type"] = "link";
+                    pluginObj["linkPath"] = fileName;
+                    pluginObj["pluginVersion"] = "0.0";
+                    pluginObj["pluginAuthor"] = "";
+                    pluginObj["pluginIntroduce"] = info.baseName();
+                    pluginObj["icon"] = "icon.png";
+                    QDir pluginDir(QDir::currentPath() + "/plugins/" + info.baseName());
+                    pluginDir.mkdir(QDir::currentPath() + "/plugins/" + info.baseName());
+                    QFile file(QDir::currentPath() + "/plugins/" + info.baseName() + "/pluginConfig.json");
+                    file.open(QIODevice::ReadWrite);
+                    QJsonDocument pluginDoc;
+                    pluginDoc.setObject(pluginObj);
+                    file.write(pluginDoc.toJson());
+                    file.close();
+                    QFileInfo fileinfo(info.symLinkTarget());
+                    QFileIconProvider fileicon;
+                    QIcon icon=fileicon.icon(fileinfo);
+                    QPixmap pixmap = icon.pixmap(256,256);
+                    pixmap.save(QDir::currentPath() + "/plugins/" + info.baseName() + "/icon.png");
+                    readPluginList();
+                    emit refechToolBar_signal();
+
+                }
+            }else{
+                QMessageBox::critical(this,tr("错误"),tr("此文件不是插件或快捷方式！"));
+                return true;
+            }
         }
+        QMessageBox::information(this,tr("提示"),tr("图标添加完成！"));
+        return true;
 
     }
-    if (event->type() == QEvent::DragEnter)
-    {
-        QDragEnterEvent *drag_event = (QDragEnterEvent*) event;
-        if(drag_event->mimeData()->hasUrls())
-        {
+    if (event->type() == QEvent::DragEnter) {
+        QDragEnterEvent *drag_event = (QDragEnterEvent *) event;
+        if (drag_event->mimeData()->hasUrls()) {
             QList<QUrl> urlList = drag_event->mimeData()->urls();
+            bool isPlugin = false;
+            for (int x = 0; x < urlList.length(); x++) {
+                QString fileName = urlList.at(x).toLocalFile();
+                if (fileName.split(".").last() == "zip" or fileName.split(".").last() == "lnk") {
+                    isPlugin = true;
+                } else {
+                    isPlugin = false;
+                    break;
+                }
 
-            //如果同时拖入了多个资源，只选择一个
-            QString fileName = urlList.at(0).toLocalFile();
-            if (fileName.split(".").last() == "zip")
-            {
-                ui->status_bar->setText("拖放以安装插件");
-                drag_event->acceptProposedAction();
             }
-            else if (fileName.split(".").last() == "lnk")
-            {
+            if (isPlugin) {
                 ui->status_bar->setText("拖放以添加至工具栏");
                 drag_event->acceptProposedAction();
-            }
-            else
-            {
+            } else {
                 ui->status_bar->setText("此文件不是插件或快捷方式！");
                 drag_event->ignore();
             }
+            return true;
         }
-        else
-        {
-            drag_event->ignore();
-        }
-        return true;
     }
     return QWidget::eventFilter(watched,event);
 }

@@ -39,7 +39,7 @@ public:
     void readTableJson();
     void refechTableWidget(QJsonArray today_table);
     QJsonObject config;
-    QString APP_VERSION = "3.5f1";
+    QString APP_VERSION = "4.0";
     void setConfig(QJsonObject obj);
     QJsonObject timeTable;
     void closeEvent(QCloseEvent *event) override;
@@ -76,6 +76,9 @@ private slots:
 
     void on_pluginList_itemDoubleClicked(QListWidgetItem *item);
 
+    void on_timer_hide_clicked(bool checked);
+
+    void on_timerInfo_changed();
 signals:
     void refechTable_signal();
     void refechToolBar_signal();

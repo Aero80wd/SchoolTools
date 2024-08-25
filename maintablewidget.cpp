@@ -543,13 +543,7 @@ void MainTableWidget::startMainWindow(){
 void MainTableWidget::startGetStart(){
     GetStartWidget *getstart = new GetStartWidget(this);
     connect(getstart,&GetStartWidget::toSettings,this,&MainTableWidget::on_showConfig_modal);
-    ;;;;;;;;;;;;;;
-    ;;;
-    ;;;
-    ;;;;;;;;;;;;;;
-               ;;;
-               ;;;
-    ;;;;;;;;;;;;;;
+
     QScreen *scr = qApp->primaryScreen();
     int scr_w = scr->size().width();
     int scr_h = scr->size().height();

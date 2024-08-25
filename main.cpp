@@ -1,10 +1,12 @@
 #include "maintablewidget.h"
 #include "toolbox.h"
+#include"daytimerwidget.h"
 #include <QApplication>
 #include <QLocale>
 #include <QTranslator>
 #include<QDir>
 #include<QDateTime>
+#include<QProcess>
 #include"AppLog.h"
 bool ToolBoxisOpen(){
     QFile file(QDir::currentPath() + "/config.json");
@@ -46,6 +48,9 @@ int main(int argc, char *argv[])
     if (ToolBoxisOpen()){
         tb->show();
     }
+    DayTimerWidget *dtw = new DayTimerWidget();
+    dtw->move((scr_w - dtw->width())*1.55,(scr_h - dtw->height()) * 0.95);
+    dtw->show();
     QObject::connect(w->EditWindow,&TableEditWidget::refechToolBar_signal,tb,&ToolBox::LoadPlugins);
     return a.exec();
 }

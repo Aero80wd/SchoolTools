@@ -53,6 +53,9 @@ set(PROJECT_SOURCES
         yiyandialog.ui
         AppLog.cpp
         AppLog.h
+        daytimerwidget.cpp
+        daytimerwidget.h
+        daytimerwidget.ui
 )
 set(useWin32 FALSE)
 qt_add_executable(SchoolTools WIN32

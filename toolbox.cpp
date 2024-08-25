@@ -11,6 +11,7 @@ ToolBox::ToolBox(QWidget *parent)
     setWidgetBlur(this);
     this->setAcceptDrops(true);
     this->installEventFilter(this);
+
 }
 
 ToolBox::~ToolBox()
@@ -97,7 +98,7 @@ void ToolBox::LoadPlugins(){
         ClickLabel *PluginBut = new ClickLabel(this);
         ui->verticalLayout->addWidget(PluginBut);
 
-        PluginBut->setMinimumSize(QSize(70,70));
+        PluginBut->setMinimumSize(QSize(50,50));
         PluginBut->setAniOpen(true);
         PluginBut->setCursor(Qt::PointingHandCursor);
         adjustSize();
@@ -138,6 +139,6 @@ void ToolBox::LoadPlugins(){
                 }
             });
         }
-    }
 
+    }
 }

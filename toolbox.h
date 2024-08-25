@@ -33,6 +33,8 @@ public:
     void setWidgetBlur(QWidget* widget);
 public slots:
     void LoadPlugins();
+signals:
+    void reMove();
 private:
     Ui::ToolBox *ui;
 };

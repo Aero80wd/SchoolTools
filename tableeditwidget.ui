@@ -13,7 +13,7 @@
   <property name="windowTitle">
    <string>设置</string>
   </property>
-  <layout class="QGridLayout" name="gridLayout" rowstretch="2,20">
+  <layout class="QGridLayout" name="gridLayout" rowstretch="2,0">
    <property name="leftMargin">
     <number>0</number>
    </property>
@@ -65,7 +65,7 @@
          <string>设置</string>
         </property>
         <property name="alignment">
-         <set>Qt::AlignCenter</set>
+         <set>Qt::AlignmentFlag::AlignCenter</set>
         </property>
        </widget>
       </item>
@@ -679,6 +679,232 @@ background:#1191d3;
        </item>
       </layout>
      </widget>
+     <widget class="QWidget" name="tab_5">
+      <attribute name="title">
+       <string>倒计时设置</string>
+      </attribute>
+      <layout class="QVBoxLayout" name="verticalLayout_6">
+       <item>
+        <widget class="QCheckBox" name="timer_hide">
+         <property name="maximumSize">
+          <size>
+           <width>16777215</width>
+           <height>30</height>
+          </size>
+         </property>
+         <property name="font">
+          <font>
+           <pointsize>12</pointsize>
+          </font>
+         </property>
+         <property name="styleSheet">
+          <string notr="true">QCheckBox{
+border:none;
+}
+
+QCheckBox::indicator{/*选择框尺寸*/
+    border: 0px solid #b1b1b1;
+	width: 50px;
+	height: 50px;
+}
+QCheckBox::indicator:unchecked{
+image:url(&quot;:/res/checkbutton/unchecked.png&quot;);
+}
+QCheckBox::indicator:checked{
+image:url(&quot;:/res/checkbutton/checked.png&quot;);
+}
+QCheckBox:hover{
+color:#1191d3;
+}</string>
+         </property>
+         <property name="text">
+          <string>不显示倒计时</string>
+         </property>
+        </widget>
+       </item>
+       <item>
+        <layout class="QHBoxLayout" name="horizontalLayout_11">
+         <item>
+          <widget class="QLabel" name="label_8">
+           <property name="text">
+            <string>倒计时名称</string>
+           </property>
+          </widget>
+         </item>
+         <item>
+          <widget class="QLineEdit" name="edit_name">
+           <property name="minimumSize">
+            <size>
+             <width>0</width>
+             <height>25</height>
+            </size>
+           </property>
+           <property name="styleSheet">
+            <string notr="true">QLineEdit{
+
+border-bottom: 1px solid #1191d3;; /* 边框宽度为1px，颜色为#A0A0A0 */
+	border-radius: 3px; /* 边框圆角 */
+	padding-left: 5px; /* 文本距离左边界有5px */
+	background-color: #FAFAFA; /* 背景颜色 */
+	color: #000000; /* 文本颜色 */
+	selection-background-color: #1191d3; /* 选中文本的背景颜色 */
+	selection-color: #F2F2F2; /* 选中文本的颜色 */
+	font-family: &quot;Microsoft YaHei&quot;; /* 文本字体族 */
+	font-size: 10pt; /* 文本字体大小 */
+}
+QLineEdit:hover,QLineEdit:editble{
+border-bottom: 1px solid rgb(255, 58, 58);
+}</string>
+           </property>
+          </widget>
+         </item>
+        </layout>
+       </item>
+       <item>
+        <layout class="QHBoxLayout" name="horizontalLayout_12">
+         <item>
+          <widget class="QLabel" name="label_10">
+           <property name="text">
+            <string>倒计时英文名</string>
+           </property>
+          </widget>
+         </item>
+         <item>
+          <widget class="QLineEdit" name="edit_name_eng">
+           <property name="minimumSize">
+            <size>
+             <width>0</width>
+             <height>25</height>
+            </size>
+           </property>
+           <property name="styleSheet">
+            <string notr="true">QLineEdit{
+
+border-bottom: 1px solid #1191d3;; /* 边框宽度为1px，颜色为#A0A0A0 */
+	border-radius: 3px; /* 边框圆角 */
+	padding-left: 5px; /* 文本距离左边界有5px */
+	background-color: #FAFAFA; /* 背景颜色 */
+	color: #000000; /* 文本颜色 */
+	selection-background-color: #1191d3; /* 选中文本的背景颜色 */
+	selection-color: #F2F2F2; /* 选中文本的颜色 */
+	font-family: &quot;Microsoft YaHei&quot;; /* 文本字体族 */
+	font-size: 10pt; /* 文本字体大小 */
+}
+QLineEdit:hover,QLineEdit:editble{
+border-bottom: 1px solid rgb(255, 58, 58);
+}</string>
+           </property>
+          </widget>
+         </item>
+        </layout>
+       </item>
+       <item>
+        <layout class="QHBoxLayout" name="horizontalLayout_13" stretch="0,1">
+         <item>
+          <widget class="QLabel" name="label_11">
+           <property name="text">
+            <string>倒计时时间</string>
+           </property>
+          </widget>
+         </item>
+         <item>
+          <widget class="QDateTimeEdit" name="timer_time">
+           <property name="minimumSize">
+            <size>
+             <width>0</width>
+             <height>25</height>
+            </size>
+           </property>
+           <property name="styleSheet">
+            <string notr="true">QDateTimeEdit{
+
+border-bottom: 1px solid #1191d3;; /* 边框宽度为1px，颜色为#A0A0A0 */
+	border-radius: 3px; /* 边框圆角 */
+	padding-left: 5px; /* 文本距离左边界有5px */
+	background-color: #FAFAFA; /* 背景颜色 */
+	color: #000000; /* 文本颜色 */
+	selection-background-color: #1191d3; /* 选中文本的背景颜色 */
+	selection-color: #F2F2F2; /* 选中文本的颜色 */
+	font-family: &quot;Microsoft YaHei&quot;; /* 文本字体族 */
+	font-size: 10pt; /* 文本字体大小 */
+}
+QDateTimeEdit:hover{
+border-bottom: 1px solid rgb(255, 58, 58);
+}
+QDateTimeEdit::down-button{
+width:7px;
+background:#F0F0F0;
+image: url(&quot;:/res/down.png&quot;);
+border-radius: 3px; /* 边框圆角 */
+}
+QDateTimeEdit::up-button{
+width:7px;
+border-radius: 3px; /* 边框圆角 */
+background:#F0F0F0;
+image: url(&quot;:/res/up.png&quot;);
+}
+QDateTimeEdit::down-button:hover{
+background:#1191d3;
+}
+QDateTimeEdit::up-button:hover{
+background:#1191d3;
+}</string>
+           </property>
+           <property name="dateTime">
+            <datetime>
+             <hour>11</hour>
+             <minute>11</minute>
+             <second>0</second>
+             <year>2000</year>
+             <month>1</month>
+             <day>11</day>
+            </datetime>
+           </property>
+          </widget>
+         </item>
+        </layout>
+       </item>
+       <item>
+        <spacer name="verticalSpacer_4">
+         <property name="orientation">
+          <enum>Qt::Orientation::Vertical</enum>
+         </property>
+         <property name="sizeHint" stdset="0">
+          <size>
+           <width>20</width>
+           <height>40</height>
+          </size>
+         </property>
+        </spacer>
+       </item>
+       <item>
+        <widget class="QPushButton" name="save_text_config">
+         <property name="minimumSize">
+          <size>
+           <width>0</width>
+           <height>30</height>
+          </size>
+         </property>
+         <property name="styleSheet">
+          <string notr="true">QPushButton{
+	border-radius: 3px; /* 边框圆角 */
+	color:#ffffff;
+	background-color: #1191d3; /* 背景颜色 */
+	padding:3px;
+
+}
+QPushButton:hover{
+background:rgb(11, 96, 139);
+}
+</string>
+         </property>
+         <property name="text">
+          <string>保存</string>
+         </property>
+        </widget>
+       </item>
+      </layout>
+     </widget>
      <widget class="QWidget" name="tab_2">
       <attribute name="title">
        <string>关于</string>
@@ -687,7 +913,7 @@ background:#1191d3;
        <item>
         <spacer name="verticalSpacer_2">
          <property name="orientation">
-          <enum>Qt::Vertical</enum>
+          <enum>Qt::Orientation::Vertical</enum>
          </property>
          <property name="sizeHint" stdset="0">
           <size>
@@ -756,7 +982,7 @@ background:#1191d3;
          <item>
           <spacer name="horizontalSpacer">
            <property name="orientation">
-            <enum>Qt::Horizontal</enum>
+            <enum>Qt::Orientation::Horizontal</enum>
            </property>
            <property name="sizeHint" stdset="0">
             <size>
@@ -777,7 +1003,7 @@ background:#1191d3;
             <string>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;项目地址：&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</string>
            </property>
            <property name="alignment">
-            <set>Qt::AlignCenter</set>
+            <set>Qt::AlignmentFlag::AlignCenter</set>
            </property>
           </widget>
          </item>
@@ -814,7 +1040,7 @@ background:rgb(11, 96, 139);
          <item>
           <spacer name="horizontalSpacer_2">
            <property name="orientation">
-            <enum>Qt::Horizontal</enum>
+            <enum>Qt::Orientation::Horizontal</enum>
            </property>
            <property name="sizeHint" stdset="0">
             <size>
@@ -829,7 +1055,7 @@ background:rgb(11, 96, 139);
        <item>
         <spacer name="verticalSpacer">
          <property name="orientation">
-          <enum>Qt::Vertical</enum>
+          <enum>Qt::Orientation::Vertical</enum>
          </property>
          <property name="sizeHint" stdset="0">
           <size>
@@ -943,7 +1169,7 @@ color:#1191d3;
          <item>
           <spacer name="verticalSpacer_3">
            <property name="orientation">
-            <enum>Qt::Vertical</enum>
+            <enum>Qt::Orientation::Vertical</enum>
            </property>
            <property name="sizeHint" stdset="0">
             <size>
