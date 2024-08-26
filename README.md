@@ -38,9 +38,11 @@
 
 
 ## 安装
-1. 下载<a href="https://github.com/Aero80wd/SchoolTools/releases">Release</a>内的安装包，根据安装包提示进行安装。
+1. 下载<a href="https://gitee.com/Aero80wd/SchoolTools/releases">Release</a>内的安装包，根据安装包提示进行安装。
 2. 打开程序后根据提示进行设置。
 3. 开始使用。
+> **注意**
+> 如运行出现缺失DLL，请下载安装[VS2019运行库](https://aka.ms/vs/17/release/vc_redist.x64.exe)。
 
 ## 关于插件
 ### 安装
