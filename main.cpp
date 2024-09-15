@@ -1,13 +1,14 @@
-#include "maintablewidget.h"
-#include "toolbox.h"
-#include"daytimerwidget.h"
+#include "headers/maintablewidget.h"
+#include "headers/toolbox.h"
+#include"headers/daytimerwidget.h"
 #include <QApplication>
 #include <QLocale>
 #include <QTranslator>
 #include<QDir>
 #include<QDateTime>
 #include<QProcess>
-#include"AppLog.h"
+#include<QFontDatabase>
+#include"headers/AppLog.h"
 bool ToolBoxisOpen(){
     QFile file(QDir::currentPath() + "/config.json");
     file.open(QIODevice::ReadWrite | QIODevice::Text);
@@ -23,16 +24,48 @@ bool ToolBoxisOpen(){
     }
     QJsonObject Config = jsondoc.object();
     if (Config.contains("toolbox_status")){
-        showLog("ToolBox is Not Show",LogStatus::INFO);
-        return !Config["toolbox_status"].toBool();
+        if (Config["toolbox_status"].toBool()){
+            showLog("ToolBox is Not Show",LogStatus::INFO);
+            return false;
+        }else{
+            showLog("ToolBox is Show",LogStatus::INFO);
+            return true;
+        }
+
     }
     showLog("ToolBox is Show",LogStatus::INFO);
+    return true;
+}
+bool TimerisOpen(){
+    QFile file(QDir::currentPath() + "/config.json");
+    file.open(QIODevice::ReadWrite | QIODevice::Text);
+
+    QTextStream stream(&file);
+    QString file_str = stream.readAll();
+    file.close();
+    QJsonParseError jsonError;
+    QJsonDocument jsondoc = QJsonDocument::fromJson(file_str.toUtf8(),&jsonError);
+    if (jsonError.error != QJsonParseError::NoError && !jsondoc.isNull()) {
+        showLog("Config.json is Error!",LogStatus::ERR);
+        return true;
+    }
+    QJsonObject Config = jsondoc.object();
+    if (!Config.contains("disable_timer")){
+
+        if (!Config["disable_timer"].toBool()){
+            showLog("Timer is Not Show",LogStatus::INFO);
+            return false;
+        }else{
+            showLog("Timer is Show",LogStatus::INFO);
+            return true;
+        }
+    }
+    showLog("Timer is Show",LogStatus::INFO);
     return true;
 }
 int main(int argc, char *argv[])
 {
     QApplication a(argc, argv);
-
     a.setApplicationDisplayName("校园悬浮窗");
     QApplication::setQuitOnLastWindowClosed(false);
     showLog("MainWindow is Show",LogStatus::INFO);
@@ -50,7 +83,9 @@ int main(int argc, char *argv[])
     }
     DayTimerWidget *dtw = new DayTimerWidget();
     dtw->move((scr_w - dtw->width())*1.55,(scr_h - dtw->height()) * 0.95);
-    dtw->show();
+    if (TimerisOpen()) {
+        dtw->show();
+    }
     QObject::connect(w->EditWindow,&TableEditWidget::refechToolBar_signal,tb,&ToolBox::LoadPlugins);
     return a.exec();
 }

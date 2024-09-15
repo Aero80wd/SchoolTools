@@ -6,8 +6,8 @@
 
 IDI_ICON1 ICON "icon.ico"
 VS_VERSION_INFO VERSIONINFO
-    FILEVERSION 3,5,5,0
-    PRODUCTVERSION 3,5,5,0
+    FILEVERSION 4,1,0,0
+    PRODUCTVERSION 4,1,0,0
     FILEFLAGSMASK 0x3fL
 #ifdef _DEBUG
     FILEFLAGS VS_FF_DEBUG
@@ -24,11 +24,11 @@ VS_VERSION_INFO VERSIONINFO
             BEGIN
                 VALUE "CompanyName", "Ð£Ô°Ðü¸¡´°\0"
                 VALUE "FileDescription", "Ð£Ô°Ðü¸¡´° - Ö÷³ÌÐò\0"
-                VALUE "FileVersion", "3.5fix1\0"
+                VALUE "FileVersion", "4.1\0"
                 VALUE "LegalCopyright", "OpenSource\0"
                 VALUE "OriginalFilename", "SchoolTools.exe\0"
                 VALUE "ProductName", "Ð£Ô°Ðü¸¡´°"
-                VALUE "ProductVersion", "3.5fix1\0"
+                VALUE "ProductVersion", "4.1\0"
             END
         END
         BLOCK "VarFileInfo"

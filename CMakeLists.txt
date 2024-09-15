@@ -3,6 +3,7 @@ cmake_minimum_required(VERSION 3.5)
 project(SchoolTools VERSION 3.5 LANGUAGES CXX)
 
 file(GLOB_RECURSE QRC_SOURCE_FILES ${CMAKE_CURRENT_SOURCE_DIR}/*.qrc)
+list(APPEND CMAKE_AUTOUIC_SEARCH_PATHS "ui")
 set(CMAKE_AUTOUIC ON)
 set(CMAKE_AUTOMOC ON)
 set(CMAKE_AUTORCC ON)
@@ -16,48 +17,42 @@ qt6_add_resources(QRC_FILES ${QRC_SOURCE_FILES})
 
 SOURCE_GROUP("Resource Files" FILES ${QRC_SOURCE_FILES})
 set(PROJECT_SOURCES
-        animationlabelup.cpp
-        anishow_label.cpp
-        clicklabel.cpp
-        getstartwidget.cpp
+        cpp/animationlabelup.cpp
+        cpp/clicklabel.cpp
+        cpp/getstartwidget.cpp
         main.cpp
-        maintablewidget.cpp
-        mainwindow.cpp
-        qcustomtimer.cpp
-        rolling_label.cpp
-        tableeditwidget.cpp
-        tablewidget_updown.cpp
-        toolbox.cpp
-        twtodowidget.cpp
-        yiyandialog.cpp
-        API.h
-        animationlabelup.h
-        anishow_label.h
-        clicklabel.h
-        getstartwidget.h
-        maintablewidget.h
-        mainwindow.h
-        qcustomtimer.h
-        rolling_label.h
-        tableeditwidget.h
-        tablewidget_updown.h
-        toolbox.h
-        twtodowidget.h
-        yiyandialog.h
-        getstartwidget.ui
-        maintablewidget.ui
-        mainwindow.ui
-        tableeditwidget.ui
-        toolbox.ui
-        twtodowidget.ui
-        yiyandialog.ui
-        AppLog.cpp
-        AppLog.h
-        daytimerwidget.cpp
-        daytimerwidget.h
-        daytimerwidget.ui
+        cpp/maintablewidget.cpp
+        cpp/mainwindow.cpp
+        cpp/rolling_label.cpp
+        cpp/tableeditwidget.cpp
+        cpp/toolbox.cpp
+        cpp/twtodowidget.cpp
+        cpp/yiyandialog.cpp
+        headers/API.h
+        headers/animationlabelup.h
+        headers/clicklabel.h
+        headers/getstartwidget.h
+        headers/maintablewidget.h
+        headers/mainwindow.h
+        headers/rolling_label.h
+        headers/tableeditwidget.h
+        headers/toolbox.h
+        headers/twtodowidget.h
+        headers/yiyandialog.h
+        ui/getstartwidget.ui
+        ui/maintablewidget.ui
+        ui/mainwindow.ui
+        ui/tableeditwidget.ui
+        ui/toolbox.ui
+        ui/twtodowidget.ui
+        ui/yiyandialog.ui
+        cpp/AppLog.cpp
+        headers/AppLog.h
+        cpp/daytimerwidget.cpp
+        headers/daytimerwidget.h
+        ui/daytimerwidget.ui
 )
-set(useWin32 FALSE)
+set(useWin32 TRUE)
 qt_add_executable(SchoolTools WIN32
         MANUAL_FINALIZATION
         ${PROJECT_SOURCES}

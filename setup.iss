@@ -2,7 +2,7 @@
 ; SEE THE DOCUMENTATION FOR DETAILS ON CREATING INNO SETUP SCRIPT FILES!
 
 #define MyAppName "Ð£Ô°Ðü¸¡´°"
-#define MyAppVersion "3.5fix1"
+#define MyAppVersion "4.1"
 #define MyAppPublisher "Aero8m"
 #define MyAppURL "https://aero80wd.github.io"
 #define MyAppExeName "SchoolTools.exe"
@@ -22,9 +22,9 @@ DefaultDirName={localappdata}\Programs\SchoolTools
 DisableProgramGroupPage=yes
 ; Uncomment the following line to run in non administrative install mode (install for current user only.)
 ;PrivilegesRequired=lowest
-OutputDir=C:\Users\JH182\Documents\TodayCurriculum\setup
+OutputDir=C:\Users\JH182\Documents\SchoolTools\setup
 OutputBaseFilename=SchoolTools-setup
-SetupIconFile=C:\Users\JH182\Documents\TodayCurriculum\icon.ico
+SetupIconFile=C:\Users\JH182\Documents\SchoolTools\icon.ico
 Compression=lzma
 SolidCompression=yes
 WizardStyle=modern
