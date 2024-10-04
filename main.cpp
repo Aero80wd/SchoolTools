@@ -9,6 +9,8 @@
 #include<QProcess>
 #include<QFontDatabase>
 #include"headers/AppLog.h"
+#include"headers/NetworkRequests.h"
+#include"headers/syncingdialog.h"
 bool ToolBoxisOpen(){
     QFile file(QDir::currentPath() + "/config.json");
     file.open(QIODevice::ReadWrite | QIODevice::Text);
@@ -50,9 +52,9 @@ bool TimerisOpen(){
         return true;
     }
     QJsonObject Config = jsondoc.object();
-    if (!Config.contains("disable_timer")){
+    if (Config.contains("disable_timer")){
 
-        if (!Config["disable_timer"].toBool()){
+        if (Config["disable_timer"].toBool()){
             showLog("Timer is Not Show",LogStatus::INFO);
             return false;
         }else{
@@ -63,26 +65,57 @@ bool TimerisOpen(){
     showLog("Timer is Show",LogStatus::INFO);
     return true;
 }
+bool SyncisOpen(){
+    QFile file(QDir::currentPath() + "/config.json");
+    file.open(QIODevice::ReadWrite | QIODevice::Text);
+
+    QTextStream stream(&file);
+    QString file_str = stream.readAll();
+    file.close();
+    QJsonParseError jsonError;
+    QJsonDocument jsondoc = QJsonDocument::fromJson(file_str.toUtf8(),&jsonError);
+    if (jsonError.error != QJsonParseError::NoError && !jsondoc.isNull()) {
+        showLog("Config.json is Error!",LogStatus::ERR);
+        return true;
+    }
+    QJsonObject Config = jsondoc.object();
+    if (Config.contains("sync_open")){
+        if (!Config["sync_open"].toBool()){
+            showLog("Sync is Not Open",LogStatus::INFO);
+            return false;
+        }else{
+            showLog("Sync is open",LogStatus::INFO);
+            return true;
+        }
+    }
+    showLog("Sync is not open",LogStatus::INFO);
+    return false;
+}
 int main(int argc, char *argv[])
 {
     QApplication a(argc, argv);
     a.setApplicationDisplayName("校园悬浮窗");
     QApplication::setQuitOnLastWindowClosed(false);
     showLog("MainWindow is Show",LogStatus::INFO);
+    SyncingDialog *syncDialog = new SyncingDialog();
+    if (SyncisOpen())
+    {
+        syncDialog->syncRemoteJson();
+    }
     MainTableWidget *w = new MainTableWidget();
     w->show();
 
     QScreen *scr = a.primaryScreen();
     int scr_w = scr->size().width();
     int scr_h = scr->size().height();
-    w->move((scr_w - w->width()) / 2*1.1, (scr_h - w->height()) / 9999999999999999999);
+    w->move((scr_w - w->width()) / 2, (scr_h - w->height()) / 9999999999999999999);
     ToolBox *tb = new ToolBox();
     tb->move((scr_w - tb->width()) * 0.9975, (scr_h - tb->height()) / 2*0.9);
     if (ToolBoxisOpen()){
         tb->show();
     }
     DayTimerWidget *dtw = new DayTimerWidget();
-    dtw->move((scr_w - dtw->width())*1.55,(scr_h - dtw->height()) * 0.95);
+    dtw->move((scr_w - dtw->width())*1.3,(scr_h - dtw->height()) * 0.95);
     if (TimerisOpen()) {
         dtw->show();
     }

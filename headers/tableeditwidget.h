@@ -25,6 +25,11 @@
 #include<QTimer>
 #include"windows.h"
 #include"AppLog.h"
+#include <QUrl>
+#include <QNetworkReply>
+#include <QNetworkRequest>
+#include <QNetworkAccessManager>
+
 namespace Ui {
 class TableEditWidget;
 }
@@ -39,7 +44,7 @@ public:
     void readTableJson();
     void refechTableWidget(QJsonArray today_table);
     QJsonObject config;
-    QString APP_VERSION = "4.1";
+    QString APP_VERSION = "5.0";
     void setConfig(QJsonObject obj);
     QJsonObject timeTable;
     void closeEvent(QCloseEvent *event) override;
@@ -59,7 +64,7 @@ public:
     int clickcnt = 0;
 public slots:
     void toggleded();
-
+    void saveSyncSettings();
 private slots:
     void on_pushButton_clicked();
     void on_tableWidget_itemChanged(QTableWidgetItem *item);

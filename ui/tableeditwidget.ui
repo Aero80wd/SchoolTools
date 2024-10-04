@@ -312,6 +312,9 @@ QSpinBox::up-button:hover{
 background:#1191d3;
 }</string>
               </property>
+              <property name="maximum">
+               <number>114514</number>
+              </property>
              </widget>
             </item>
             <item>
@@ -350,16 +353,16 @@ background:rgb(11, 96, 139);
                <string notr="true">QRadioButton::indicator{
 	width:15px;
 	height:15px;
-	border-image:url(&quot;:/radiobutton/radiobutton/stable.png&quot;);
+	border-image:url(&quot;:/res/radiobutton/stable.png&quot;);
 }
 QRadioButton::indicator:unchecked:hover{
-	border-image:url(&quot;:/radiobutton/radiobutton/hover.png&quot;);
+	border-image:url(&quot;:/res/radiobutton/hover.png&quot;);
 }
 QRadioButton::indicator:checked{
-	border-image:url(&quot;:/radiobutton/radiobutton/checked.png&quot;);
+	border-image:url(&quot;:/res/radiobutton/checked.png&quot;);
 }
 QRadioButton::indicator:unchecked{
-	border-image:url(&quot;:/radiobutton/radiobutton/stable.png&quot;);
+	border-image:url(&quot;:/res/radiobutton/stable.png&quot;);
 }</string>
               </property>
               <property name="text">
@@ -376,16 +379,16 @@ QRadioButton::indicator:unchecked{
                <string notr="true">QRadioButton::indicator{
 	width:15px;
 	height:15px;
-	border-image:url(&quot;:/radiobutton/radiobutton/stable.png&quot;);
+	border-image:url(&quot;:/res/radiobutton/stable.png&quot;);
 }
 QRadioButton::indicator:unchecked:hover{
-	border-image:url(&quot;:/radiobutton/radiobutton/hover.png&quot;);
+	border-image:url(&quot;:/res/radiobutton/hover.png&quot;);
 }
 QRadioButton::indicator:checked{
-	border-image:url(&quot;:/radiobutton/radiobutton/checked.png&quot;);
+	border-image:url(&quot;:/res/radiobutton/checked.png&quot;);
 }
 QRadioButton::indicator:unchecked{
-	border-image:url(&quot;:/radiobutton/radiobutton/stable.png&quot;);
+	border-image:url(&quot;:/res/radiobutton/stable.png&quot;);
 }</string>
               </property>
               <property name="text">
@@ -399,16 +402,16 @@ QRadioButton::indicator:unchecked{
                <string notr="true">QRadioButton::indicator{
 	width:15px;
 	height:15px;
-	border-image:url(&quot;:/radiobutton/radiobutton/stable.png&quot;);
+	border-image:url(&quot;:/res/radiobutton/stable.png&quot;);
 }
 QRadioButton::indicator:unchecked:hover{
-	border-image:url(&quot;:/radiobutton/radiobutton/hover.png&quot;);
+	border-image:url(&quot;:/res/radiobutton/hover.png&quot;);
 }
 QRadioButton::indicator:checked{
-	border-image:url(&quot;:/radiobutton/radiobutton/checked.png&quot;);
+	border-image:url(&quot;:/res/radiobutton/checked.png&quot;);
 }
 QRadioButton::indicator:unchecked{
-	border-image:url(&quot;:/radiobutton/radiobutton/stable.png&quot;);
+	border-image:url(&quot;:/res/radiobutton/stable.png&quot;);
 }</string>
               </property>
               <property name="text">
@@ -422,16 +425,16 @@ QRadioButton::indicator:unchecked{
                <string notr="true">QRadioButton::indicator{
 	width:15px;
 	height:15px;
-	border-image:url(&quot;:/radiobutton/radiobutton/stable.png&quot;);
+	border-image:url(&quot;:/res/radiobutton/stable.png&quot;);
 }
 QRadioButton::indicator:unchecked:hover{
-	border-image:url(&quot;:/radiobutton/radiobutton/hover.png&quot;);
+	border-image:url(&quot;:/res/radiobutton/hover.png&quot;);
 }
 QRadioButton::indicator:checked{
-	border-image:url(&quot;:/radiobutton/radiobutton/checked.png&quot;);
+	border-image:url(&quot;:/res/radiobutton/checked.png&quot;);
 }
 QRadioButton::indicator:unchecked{
-	border-image:url(&quot;:/radiobutton/radiobutton/stable.png&quot;);
+	border-image:url(&quot;:/res/radiobutton/stable.png&quot;);
 }</string>
               </property>
               <property name="text">
@@ -445,16 +448,16 @@ QRadioButton::indicator:unchecked{
                <string notr="true">QRadioButton::indicator{
 	width:15px;
 	height:15px;
-	border-image:url(&quot;:/radiobutton/radiobutton/stable.png&quot;);
+	border-image:url(&quot;:/res/radiobutton/stable.png&quot;);
 }
 QRadioButton::indicator:unchecked:hover{
-	border-image:url(&quot;:/radiobutton/radiobutton/hover.png&quot;);
+	border-image:url(&quot;:/res/radiobutton/hover.png&quot;);
 }
 QRadioButton::indicator:checked{
-	border-image:url(&quot;:/radiobutton/radiobutton/checked.png&quot;);
+	border-image:url(&quot;:/res/radiobutton/checked.png&quot;);
 }
 QRadioButton::indicator:unchecked{
-	border-image:url(&quot;:/radiobutton/radiobutton/stable.png&quot;);
+	border-image:url(&quot;:/res/radiobutton/stable.png&quot;);
 }</string>
               </property>
               <property name="text">
@@ -905,6 +908,215 @@ background:rgb(11, 96, 139);
        </item>
       </layout>
      </widget>
+     <widget class="QWidget" name="tab_6">
+      <attribute name="title">
+       <string>同步设置</string>
+      </attribute>
+      <layout class="QVBoxLayout" name="verticalLayout_7">
+       <item>
+        <widget class="QCheckBox" name="syncopen">
+         <property name="font">
+          <font>
+           <pointsize>12</pointsize>
+          </font>
+         </property>
+         <property name="styleSheet">
+          <string notr="true">QCheckBox{
+border:none;
+}
+
+QCheckBox::indicator{/*选择框尺寸*/
+    border: 0px solid #b1b1b1;
+	width: 50px;
+	height: 50px;
+}
+QCheckBox::indicator:unchecked{
+image:url(&quot;:/res/checkbutton/unchecked.png&quot;);
+}
+QCheckBox::indicator:checked{
+image:url(&quot;:/res/checkbutton/checked.png&quot;);
+}
+QCheckBox:hover{
+color:#1191d3;
+}</string>
+         </property>
+         <property name="text">
+          <string>开启同步</string>
+         </property>
+        </widget>
+       </item>
+       <item>
+        <layout class="QHBoxLayout" name="horizontalLayout_14">
+         <item>
+          <widget class="QLabel" name="label_12">
+           <property name="text">
+            <string>同步服务器</string>
+           </property>
+          </widget>
+         </item>
+         <item>
+          <widget class="QLineEdit" name="sync_server">
+           <property name="minimumSize">
+            <size>
+             <width>0</width>
+             <height>25</height>
+            </size>
+           </property>
+           <property name="styleSheet">
+            <string notr="true">QLineEdit{
+
+border-bottom: 1px solid #1191d3;; /* 边框宽度为1px，颜色为#A0A0A0 */
+	border-radius: 3px; /* 边框圆角 */
+	padding-left: 5px; /* 文本距离左边界有5px */
+	background-color: #FAFAFA; /* 背景颜色 */
+	color: #000000; /* 文本颜色 */
+	selection-background-color: #1191d3; /* 选中文本的背景颜色 */
+	selection-color: #F2F2F2; /* 选中文本的颜色 */
+	font-family: &quot;Microsoft YaHei&quot;; /* 文本字体族 */
+	font-size: 10pt; /* 文本字体大小 */
+}
+QLineEdit:hover,QLineEdit:editble{
+border-bottom: 1px solid rgb(255, 58, 58);
+}</string>
+           </property>
+          </widget>
+         </item>
+         <item>
+          <widget class="QLabel" name="label_13">
+           <property name="text">
+            <string>服务器端口</string>
+           </property>
+          </widget>
+         </item>
+         <item>
+          <widget class="QSpinBox" name="sync_port">
+           <property name="minimumSize">
+            <size>
+             <width>70</width>
+             <height>25</height>
+            </size>
+           </property>
+           <property name="styleSheet">
+            <string notr="true">QSpinBox{
+
+border-bottom: 1px solid #1191d3;; /* 边框宽度为1px，颜色为#A0A0A0 */
+	border-radius: 3px; /* 边框圆角 */
+	padding-left: 5px; /* 文本距离左边界有5px */
+	background-color: #FAFAFA; /* 背景颜色 */
+	color: #000000; /* 文本颜色 */
+	selection-background-color: #1191d3; /* 选中文本的背景颜色 */
+	selection-color: #F2F2F2; /* 选中文本的颜色 */
+	font-family: &quot;Microsoft YaHei&quot;; /* 文本字体族 */
+	font-size: 10pt; /* 文本字体大小 */
+}
+QSpinBox:hover{
+border-bottom: 1px solid rgb(255, 58, 58);
+}
+QSpinBox::down-button{
+width:7px;
+background:#F0F0F0;
+border-radius: 3px; /* 边框圆角 */
+image: url(&quot;:/res/down.png&quot;);
+}
+QSpinBox::up-button{
+width:7px;
+background:#F0F0F0;
+image: url(&quot;:/res/up.png&quot;);
+border-radius: 3px; /* 边框圆角 */
+}
+QSpinBox::down-button:hover{
+background:#1191d3;
+}
+QSpinBox::up-button:hover{
+background:#1191d3;
+}</string>
+           </property>
+           <property name="maximum">
+            <number>10000000</number>
+           </property>
+          </widget>
+         </item>
+        </layout>
+       </item>
+       <item>
+        <layout class="QHBoxLayout" name="horizontalLayout_15">
+         <item>
+          <widget class="QLabel" name="label_14">
+           <property name="text">
+            <string>班级名称（无则自动创建）</string>
+           </property>
+          </widget>
+         </item>
+         <item>
+          <widget class="QLineEdit" name="sync_class">
+           <property name="minimumSize">
+            <size>
+             <width>0</width>
+             <height>25</height>
+            </size>
+           </property>
+           <property name="styleSheet">
+            <string notr="true">QLineEdit{
+
+border-bottom: 1px solid #1191d3;; /* 边框宽度为1px，颜色为#A0A0A0 */
+	border-radius: 3px; /* 边框圆角 */
+	padding-left: 5px; /* 文本距离左边界有5px */
+	background-color: #FAFAFA; /* 背景颜色 */
+	color: #000000; /* 文本颜色 */
+	selection-background-color: #1191d3; /* 选中文本的背景颜色 */
+	selection-color: #F2F2F2; /* 选中文本的颜色 */
+	font-family: &quot;Microsoft YaHei&quot;; /* 文本字体族 */
+	font-size: 10pt; /* 文本字体大小 */
+}
+QLineEdit:hover,QLineEdit:editble{
+border-bottom: 1px solid rgb(255, 58, 58);
+}</string>
+           </property>
+          </widget>
+         </item>
+        </layout>
+       </item>
+       <item>
+        <widget class="QTextEdit" name="sync_log">
+         <property name="maximumSize">
+          <size>
+           <width>16777215</width>
+           <height>160</height>
+          </size>
+         </property>
+         <property name="readOnly">
+          <bool>true</bool>
+         </property>
+        </widget>
+       </item>
+       <item>
+        <widget class="QPushButton" name="save_syncset">
+         <property name="minimumSize">
+          <size>
+           <width>0</width>
+           <height>30</height>
+          </size>
+         </property>
+         <property name="styleSheet">
+          <string notr="true">QPushButton{
+	border-radius: 3px; /* 边框圆角 */
+	color:#ffffff;
+	background-color: #1191d3; /* 背景颜色 */
+	padding:3px;
+
+}
+QPushButton:hover{
+background:rgb(11, 96, 139);
+}
+</string>
+         </property>
+         <property name="text">
+          <string>保存</string>
+         </property>
+        </widget>
+       </item>
+      </layout>
+     </widget>
      <widget class="QWidget" name="tab_2">
       <attribute name="title">
        <string>关于</string>
@@ -1032,7 +1244,7 @@ background:rgb(11, 96, 139);
             <string>Github</string>
            </property>
            <property name="icon">
-            <iconset resource="res.qrc">
+            <iconset resource="../res.qrc">
              <normaloff>:/res/github.png</normaloff>:/res/github.png</iconset>
            </property>
           </widget>
@@ -1222,7 +1434,7 @@ border-bottom: 1px solid rgb(255, 58, 58);
   </customwidget>
  </customwidgets>
  <resources>
-  <include location="res.qrc"/>
+  <include location="../res.qrc"/>
  </resources>
  <connections/>
 </ui>

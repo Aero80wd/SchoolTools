@@ -13,18 +13,10 @@ MainTableWidget::MainTableWidget(QWidget *parent)
     readTimeTable();
 
     EditWindow->setConfig(Config);
-    if (!Config.value("muyu_status").toBool()){
-        ui->muyu->hide();
-        ui->pushButton_3->hide();
-    }
 
     initUi();
     rtt = new refechTableThread();
-    connect(rtt,&refechTableThread::repaint,this,&MainTableWidget::do_repaint,Qt::QueuedConnection);
-    connect(rtt,&refechTableThread::pss,ui->pushButton,&QLabel::setStyleSheet,Qt::QueuedConnection);
-    connect(rtt,&refechTableThread::pst,ui->pushButton,&QLabel::setText,Qt::QueuedConnection);
-    connect(rtt,&refechTableThread::tss,ui->table_show,&QLabel::setStyleSheet,Qt::QueuedConnection);
-    connect(rtt,&refechTableThread::tst,ui->table_show,&QLabel::setText,Qt::QueuedConnection);
+
     initSignal();
 
     rtt->start();
@@ -41,85 +33,125 @@ MainTableWidget::MainTableWidget(QWidget *parent)
         qApp->installTranslator(&translator);
         ui->retranslateUi(this);
     }
+
 }
 
 MainTableWidget::~MainTableWidget()
 {
     delete ui;
 }
+void MainTableWidget::showStatus(QString str)
+{
+    showLog("ShowStatused!",INFO);
+    ui->label_3->setText(str);
+    status_msg_animation->setDirection(QAbstractAnimation::Forward);
+    status_msg_animation->start();
+    QTimer::singleShot(5000,this,[&]()
+    {
+        status_msg_animation->setDirection(QAbstractAnimation::Backward);
+        status_msg_animation->start();
+    });
+}
+enum AccentStateForMainTableWidget {
+    ACCENT_DISABLED = 0,
+    ACCENT_ENABLE_GRADIENT = 1,
+    ACCENT_ENABLE_TRANSPARENTGRADIENT = 2,
+    ACCENT_ENABLE_BLURBEHIND = 3,
+    ACCENT_ENABLE_ACRYLICBLURBEHIND = 4,
+    ACCENT_INVALID_STATE = 5
+};
 
+struct AccentPolicyForMainTableWidget {
+    AccentStateForMainTableWidget AccentState;
+    int AccentFlags;
+    int GradientColor;
+    int AnimationId;
+};
+struct WindowCompositionAttributeDataForMainTableWidget {
+    int Attribute;
+    PVOID Data;
+    ULONG DataSize;
+};
+typedef BOOL(WINAPI*pSetWindowCompositionAttributeForMainTableWidget)(HWND, WindowCompositionAttributeDataForMainTableWidget*);
+pSetWindowCompositionAttributeForMainTableWidget SetWindowCompositionAttributeForMainTableWidget = nullptr;
 void MainTableWidget::setWidgetBlur(QWidget* widget){
-    QGraphicsBlurEffect* ef = new QGraphicsBlurEffect;
-    ef->setBlurRadius(8);
-    ef->setBlurHints(QGraphicsBlurEffect::AnimationHint);
-    this->setGraphicsEffect(ef);
+    if (!SetWindowCompositionAttributeForMainTableWidget) {
+        HMODULE hModule = LoadLibrary(TEXT("user32.dll"));
+        if (hModule) {
+            SetWindowCompositionAttributeForMainTableWidget =
+                (pSetWindowCompositionAttributeForMainTableWidget)GetProcAddress(hModule, "SetWindowCompositionAttribute");
+        }
+    }
+    HWND hWnd = HWND(widget->winId());
+    AccentPolicyForMainTableWidget policy = { ACCENT_ENABLE_ACRYLICBLURBEHIND, 0, int(0x66FFFFFF), 0 };
+    WindowCompositionAttributeDataForMainTableWidget data = { 19, &policy, sizeof(AccentPolicyForMainTableWidget) };
+    SetWindowCompositionAttributeForMainTableWidget(hWnd, &data);
 }
 void MainTableWidget::initUi(){
     setWindowFlags(Qt::WindowType::FramelessWindowHint | Qt::WindowType::Tool | Qt::WindowType::WindowStaysOnTopHint);
     setAttribute(Qt::WidgetAttribute::WA_TranslucentBackground);
-    muyuding = new QPropertyAnimation(ui->muyu, "geometry");
-    muyuding->setStartValue(QRect(ui->muyu->pos().x(),ui->muyu->pos().y(),ui->muyu->width(),ui->muyu->height()));
-    muyuding->setEndValue(QRect(770,18,21,21));
-    muyuding->setDuration(100);
-    muyuding->setEasingCurve(QEasingCurve::InOutQuad);
-    hideani = new QPropertyAnimation(this, "pos");
-    QScreen *scr = qApp->primaryScreen();
-    int scr_w = scr->size().width();
-    int scr_h = scr->size().height();
-    QPoint globalpos = QPoint((scr_w - width()) / 2*1.1, (scr_h - height()) / 9999999999999999999);
-    hideani->setStartValue(globalpos);
-    hideani->setEndValue(QPoint(globalpos.x(),globalpos.y()-this->height()+(this->height()*0.9)));
-    hideani->setDuration(500);
-    hideani->setEasingCurve(QEasingCurve::InOutQuad);
-
-    connect(muyuding,&QPropertyAnimation::finished,this,[=]{
-        ui->muyu->setGeometry(QRect(770,18,19,19));
-    });
-
-
     QGraphicsDropShadowEffect* shadow = new QGraphicsDropShadowEffect(this);
     shadow->setOffset(0, 0);
     shadow->setColor(Qt::black);
     shadow->setBlurRadius(10);
-
-    ui->down_button->setGraphicsEffect(shadow);
-    ui->down_button->setParent(this);
-    ui->down_button->hide();
-
+    setWidgetBlur(this);
+    status_msg_animation = new QPropertyAnimation(ui->status_show,"pos");
+    status_msg_animation->setDuration(500);
+    status_msg_animation->setEasingCurve(QEasingCurve::InOutSine);
+    status_msg_animation->setStartValue(QPoint(0,-49));
+    status_msg_animation->setEndValue(QPoint(0,0));
+    class_show_widget_layout = new QHBoxLayout();
+    class_show_widget_layout->setContentsMargins(0,0,0,0);
+    class_show_widget_layout->setSpacing(0);
+    ui->class_show_widget->setLayout(class_show_widget_layout);
 //    setWidgetBlur(ui->table_show_2);
 //    setWidgetBlur(ui->table_show_3);
 //    setWidgetBlur(ui->pushButton_2);
 //    setWidgetBlur(ui->pushButton_3);
 //    setWidgetBlur(ui->pushButton_4);
 //    setWidgetBlur(ui->pushButton_5);
-    todomovea = new QPropertyAnimation(ui->pushButton_5,"geometry");
-    todomovea->setStartValue(QRect(ui->pushButton_5->pos().x(),ui->pushButton_5->pos().y(),ui->pushButton_5->width(),ui->pushButton_5->height()));
-    todomovea->setEndValue(QRect(130,70,531,361));
-    todomovea->setDuration(500);
-    todomovea->setEasingCurve(QEasingCurve::InOutQuad);
 
-    todomoveb = new QPropertyAnimation(ui->todo,"pos");
-    todomoveb->setStartValue(ui->todo->pos());
-    todomoveb->setEndValue(QPoint(140,80));
-    todomoveb->setDuration(500);
-    todomoveb->setEasingCurve(QEasingCurve::InOutQuad);
 
-    muyumovea = new QPropertyAnimation(ui->pushButton_3,"pos");
-    muyumovea->setStartValue(ui->pushButton_3->pos());
-    muyumovea->setEndValue(QPoint(722,10));
-    muyumovea->setDuration(300);
-    muyumovea->setEasingCurve(QEasingCurve::InOutQuad);
-
-    muyumoveb = new QPropertyAnimation(ui->muyu,"pos");
-    muyumoveb->setStartValue(ui->muyu->pos());
-    muyumoveb->setEndValue(QPoint(730,18));
-    muyumoveb->setDuration(300);
-    muyumoveb->setEasingCurve(QEasingCurve::InOutQuad);
 }
 void MainTableWidget::initSignal(){
 
     connect(EditWindow,SIGNAL(refechTable_signal()),this,SLOT(refechTable_slot()));
-    connect(ui->down_button,&ClickLabel::clicked,this,&MainTableWidget::on_label_2_clicked);
+    connect(rtt,&refechTableThread::repaint,this,&MainTableWidget::do_repaint,Qt::QueuedConnection);
+    connect(rtt,&refechTableThread::tst,ui->class_time,&QLabel::setText,Qt::QueuedConnection);
+    connect(rtt,&refechTableThread::showStatusMessage,this,&MainTableWidget::showStatus,Qt::QueuedConnection);
+    connect(rtt,&refechTableThread::changeStackedIndex,this,[=](int idx)
+    {
+        ui->stackedWidget->setCurrentIndex(idx);
+    },Qt::QueuedConnection);
+    connect(rtt,&refechTableThread::addClass,this,[=](QString text)
+    {
+        QLabel *class_label = new QLabel(ui->class_show_widget);
+        class_show_widget_layout->addWidget(class_label);
+        class_label->setText(text);
+        class_label->setFixedSize(49,49);
+        QFont font("Microsoft YaHei UI",16);
+        class_label->setFont(font);
+        class_label->setAlignment(Qt::AlignCenter);
+
+    },Qt::QueuedConnection);
+    connect(rtt,&refechTableThread::setClassStyleSheet,this,[=](int idx,QString styleSheet)
+    {
+        QList<QLabel*> class_list = ui->class_show_widget->findChildren<QLabel*>();
+        class_list[idx]->setStyleSheet(styleSheet);
+        qDebug() << class_list[idx]->text();
+        qDebug() << class_list[idx]->styleSheet();
+    },Qt::QueuedConnection);
+    connect(rtt,&refechTableThread::toDone,this,[=]
+    {
+        resize(531,height());
+        ui->stackedWidget->resize(531,height());
+        ui->status_show->resize(531,height());
+        QScreen *scr = qApp->primaryScreen();
+        int scr_w = scr->size().width();
+        int scr_h = scr->size().height();
+        move((scr_w - width()) / 2, (scr_h - height()) / 9999999999999999999);
+
+    },Qt::QueuedConnection);
 }
 void MainTableWidget::readTimeTable(){
     QFileInfo fi(TABLE_JSON);
@@ -190,18 +222,14 @@ void MainTableWidget::readConfig(){
             return;
         }
         Config = jsondoc.object();
-        if (Config.contains("zuan_status")){
-            if (Config.value("zuan_status").toBool()){
-                ZuanYanisOpen = true;
-                configZuanyan();
-            }
-        }
     }
 }
 void MainTableWidget::initTodayTable(){
     QDateTime current_date_time = QDateTime::currentDateTime();
     today_table = time_table.value(current_date_time.toString("ddd")).toArray();
-
+    resize(154+20+today_table.count()*49,height());
+    ui->stackedWidget->resize(154+20+today_table.count()*49,height());
+    ui->status_show->resize(154+20+today_table.count()*49,height());
 }
 void MainTableWidget::do_repaint(){
     return;
@@ -210,7 +238,17 @@ void refechTableThread::run(){
     QString display_string = "";
     QString showstr;
     QJsonObject temp;
+    bool shangkelema = false;
     QDateTime current_date_time = QDateTime::currentDateTime();
+    if (today_table.count() <= 0)
+    {
+        emit changeStackedIndex(0);
+    }
+    for (int i=0;i<today_table.count();i++)
+    {
+        emit addClass(QString(today_table[i].toObject()["name"].toString().at(0)));
+    }
+    emit changeStackedIndex(1);
     for(int x = 0;x < today_table.count();){
         QDateTime current_date_time = QDateTime::currentDateTime();
         QDateTime class_start_time = getTodayTime(today_table[x].toObject().value("start").toString());
@@ -221,43 +259,59 @@ void refechTableThread::run(){
         // qDebug() << getTodayTime(today_table[x-1].toObject().value("end").toString()).secsTo(getTodayTime(today_table[x].toObject().value("start").toString()));
 
         if (current_date_time.secsTo(class_start_time) <= 0 and current_date_time.secsTo(class_end_time) <= 0){
+            shangkelema = true;
+            emit showStatusMessage("下课时间到");
             x++;
             continue;
         }else if(current_date_time.secsTo(class_start_time) <= 0 and current_date_time.secsTo(class_start_time) <= 0){
 
             int diff_time = current_date_time.secsTo(class_end_time);
+            if (!shangkelema)
+            {
+                if (x>0)
+                {
+                    emit setClassStyleSheet(x-1,"");
+                }
+                emit setClassStyleSheet(x,"border-width: 0px 0px 4px 0px; border-color:#1191d3; border-style: solid;");
+                emit showStatusMessage("上课时间到");
+                shangkelema = true;
+            }
             int  hour = diff_time / 3600;
             diff_time = diff_time % 3600;
             int min = diff_time / 60;
             int sec = diff_time % 60;
             display_string = QString("%1:%2:%3").arg(hour, 2, 10, QLatin1Char('0')).arg(min, 2, 10, QLatin1Char('0')).arg(sec, 2, 10, QLatin1Char('0'));
-            emit pss("color:#caa257;");
-            emit pst(display_string);
-            showstr = tr("  当前课程：") + today_table[x].toObject().value("name").toString() + tr("  下节课程：") + today_table[x+1].toObject().value("name").toString();
-            emit tst(showstr);
+            emit tst(display_string);
             Sleep(1000);
         }else if(getTodayTime(today_table[x-1].toObject().value("end").toString()).secsTo(getTodayTime(today_table[x].toObject().value("start").toString())) <= today_table[x-1].toObject().value("split").toInt() * 60 and
                    x != 0){
+
             QDateTime current_date_time = QDateTime::currentDateTime();
             int diff_time = current_date_time.secsTo(getTodayTime(today_table[x].toObject().value("start").toString()));
+            if (shangkelema)
+            {
+                if (x>0)
+                {
+                    emit setClassStyleSheet(x-1,"");
+                }
+                emit setClassStyleSheet(x,"border-width: 0px 0px 4px 0px; border-color:rgb(0,226,142); border-style: solid;");
+                shangkelema = false;
+            }
             int  hour = diff_time / 3600;
             diff_time = diff_time % 3600;
             int min = diff_time / 60;
             int sec = diff_time % 60;
             display_string = QString("%1:%2:%3").arg(hour, 2, 10, QLatin1Char('0')).arg(min, 2, 10, QLatin1Char('0')).arg(sec, 2, 10, QLatin1Char('0'));
-            emit pss("color:rgb(0,240,0);");
-            emit pst(display_string);
-            showstr = tr("  上节课程：") + today_table[x-1].toObject().value("name").toString() + tr("  下节课程：") + today_table[x].toObject().value("name").toString();
-            emit tst(showstr);
+            emit tst(display_string);
             Sleep(1000);
         }else{
+
             x++;
             continue;
         }
     }
-    emit pss("color:#caa257;");
-    emit pst("--:--:--");
-    emit tst(tr("今日的课程已上完"));
+    emit changeStackedIndex(0);
+    emit toDone();
 }
 QDateTime refechTableThread::getTodayTime(QString str){
     QString timeString = str;
@@ -269,9 +323,6 @@ QDateTime refechTableThread::getTodayTime(QString str){
     dateTime.setDate(QDate::currentDate());
     dateTime.setTime(QTime(hour, minute));
     return dateTime;
-}
-void MainTableWidget::setTable_SLOT(QString str){
-    ui->label->setText(str);
 }
 
 void MainTableWidget::swithToYiYan(){
@@ -288,46 +339,7 @@ void MainTableWidget::swithToYiYan(){
 
 
 
-void MainTableWidget::refechYiYan(){
-    if (ZuanYanisOpen){
-        refechZuanyan();
-    }
-    else{
-        QNetworkAccessManager *smsManager = new QNetworkAccessManager(this);
-        QString url = "https://v2.jinrishici.com/sentence";
-        QNetworkRequest *Request = new QNetworkRequest(QUrl(url));
-        if (!Config.contains("yiyan_token")){
-            Config.insert("yiyan_token",getToken());
-            QFile config_file(CONFIG_JSON);
-            config_file.open(QFile::WriteOnly);
-            QJsonDocument temp_doc;
-            temp_doc.setObject(Config);
-            config_file.write(temp_doc.toJson(QJsonDocument::Indented));
-            config_file.close();
-        }
-        Request->setRawHeader("X-User-Token",Config.value("yiyan_token").toString().toUtf8());
-        QByteArray responseData;
-        QEventLoop eventLoop;
-        connect(smsManager , SIGNAL(finished(QNetworkReply*)), &eventLoop, SLOT(quit()));
-        QNetworkReply* initReply = smsManager ->get(*Request );
-        eventLoop.exec();       //block until finish
-        responseData = initReply->readAll();
 
-        //解析json
-        QString imageData;//接收到服务器的base64数据是string类型
-        QString txt;
-        QJsonParseError json_error;
-        QJsonDocument doucment = QJsonDocument::fromJson(responseData, &json_error);
-        if (json_error.error == QJsonParseError::NoError) {
-            if (doucment.isObject()) {
-                const QJsonObject obj = doucment.object();
-                if (obj.contains("data")) {
-                    QJsonObject object_data = obj.value("data").toObject();
-                    ui->pushButton_2->setText(object_data.value("content").toString());
-                }
-            }
-        }}
-}
 QString MainTableWidget::getToken(){
     QNetworkAccessManager *smsManager = new QNetworkAccessManager(this);
     QString url = "https://v2.jinrishici.com/token";
@@ -361,126 +373,8 @@ void MainTableWidget::hk_slot(QString day){
     rtt->start();
 }
 
-void MainTableWidget::on_label_2_clicked()
-{
-    if (!ishide){
-        hideani->setDirection(QAbstractAnimation::Forward);
-        ishide = true;
-        ui->down_button->show();
-    }else{
-        hideani->setDirection(QAbstractAnimation::Backward);
-        ishide=false;
-        ui->down_button->hide();
-        if (TodoisOpeninBack){
-            qDebug("aaa");
-            TWTodoWidget* todo = new TWTodoWidget();
-            QHBoxLayout *layout = new QHBoxLayout();
-            layout->addWidget(todo);
-            todo->setParent(ui->pushButton_5);
-            ui->pushButton_5->setLayout(layout);
-            todomovea->setDirection(QAbstractAnimation::Forward);
-            todomoveb->setDirection(QAbstractAnimation::Forward);
-            muyumovea->setDirection(QAbstractAnimation::Forward);
-            muyumoveb->setDirection(QAbstractAnimation::Forward);
-            todomovea->start();
-            todomoveb->start();
-            muyumovea->start();
-            muyumoveb->start();
-            connect(muyumoveb,&QAbstractAnimation::finished,this,[=]{
-                muyuding = new QPropertyAnimation(ui->muyu, "geometry");
-                muyuding->setStartValue(QRect(ui->muyu->pos().x(),ui->muyu->pos().y(),ui->muyu->width(),ui->muyu->height()));
-                muyuding->setEndValue(QRect(730,18,21,21));
-                muyuding->setDuration(100);
-                muyuding->setEasingCurve(QEasingCurve::InOutQuad);
-                connect(muyuding,&QPropertyAnimation::finished,this,[=]{
-                    ui->muyu->setGeometry(QRect(730,18,19,19));
-                });
-            });
-            TodoisOpen = true;
-            TodoisOpeninBack = false;
-            hideani->start();
-            return;
-        }
-    }
-    if(TodoisOpen){
-        on_todo_clicked();
-        TodoisOpeninBack = true;
-    }
-    hideani->start();
-
-}
-
-void MainTableWidget::configZuanyan(){
-    if (ZUAN_DB_QDOBJECT.exists()){
-        QFile file(ZUAN_DB);
-        if (!file.open(QIODevice::WriteOnly))
-        {
-
-        }
-        int timeout = 1000 * 60;
-
-        QNetworkAccessManager networkManager;
-        QNetworkRequest request;
-        request.setUrl(QUrl("https://aero80wd.github.io/zuan.db"));
-        QNetworkReply *reply = networkManager.get(request);
-
-        QTimer timer;
-        QEventLoop eventLoop;
-        connect(reply, &QNetworkReply::downloadProgress, [=, &file, &timer](qint64 bytesReceived,qint64 bytesTotal){
-
-            if (timer.isActive())
-                timer.start(timeout);
-            file.write(reply->readAll());
-        });
-        connect(reply, &QNetworkReply::finished, &timer, &QTimer::stop);
-        connect(reply, &QNetworkReply::finished, &eventLoop, &QEventLoop::quit);
-
-        connect(&timer, &QTimer::timeout, &eventLoop, &QEventLoop::quit);
-        timer.start(timeout);
-
-        eventLoop.exec();//QEventLoop::ExcludeUserInputEvents
 
 
-        if (reply->error() != QNetworkReply::NoError)
-        {
-
-            file.close();
-            delete reply;
-        }
-        if(timer.isActive())
-        {
-
-            timer.stop();
-            file.close();
-            delete reply;
-        }
-        file.close();
-        delete reply;
-
-    }
-
-}
-void MainTableWidget::refechZuanyan(){
-    db = QSqlDatabase::addDatabase("QSQLITE");
-    db.setDatabaseName(ZUAN_DB);
-    if (db.open())
-    {
-        showLog("Database is open",LogStatus::INFO);
-    }
-    else
-    {
-        showLog("Database is open failed",LogStatus::ERR);
-    }
-    QString query_string = "SELECT * FROM `main` ORDER BY RANDOM() limit 1";
-    QSqlQuery query;
-    query.prepare(query_string);
-    query.exec();
-    QString zuan_text;
-    while (query.next()){
-        zuan_text = query.value("text").toString();
-    }
-    ui->pushButton_2->setText(zuan_text);
-}
 void MainTableWidget::initSysTrayIcon()
 {
 
@@ -594,35 +488,19 @@ void MainTableWidget::refechTable_slot(){
     rtt->quit();
     readTimeTable();
     rtt->start();
+    QScreen *scr = qApp->primaryScreen();
+    int scr_w = scr->size().width();
+    int scr_h = scr->size().height();
+    move((scr_w - width()) / 2, (scr_h - height()) / 9999999999999999999);
+    for (QWidget*widget : ui->class_show_widget->findChildren<QWidget*>())
+    {
+        delete widget;
+    }
     m_sysTrayIcon->showMessage(tr("提示"),tr("配置已成功应用！"),QSystemTrayIcon::MessageIcon::Information,500);
 
 }
 
-void MainTableWidget::on_muyu_clicked()
-{
-    muyuding->start();
-    AnimationLabelUp* gpp = new AnimationLabelUp(this);
-    gpp->setText("功德+1");
-    gpp->setStyleSheet("color:#ffffff");
-    gpp->move(ui->muyu->pos().x()+10,ui->muyu->pos().y()-30);
-    gpp->AniHide();
-    if (!Config.contains("gd")){
-        Config["gd"] = 0;
-    }else{
-        Config["gd"] = Config.value("gd").toInteger() + 1;
-    }
-    QFile config_file(CONFIG_JSON);
-    config_file.open(QFile::WriteOnly);
-    QJsonDocument temp_doc;
-    temp_doc.setObject(Config);
-    config_file.write(temp_doc.toJson(QJsonDocument::Indented));
-    config_file.close();
-    if (Config["muyu_status"].toBool()){
-        m_gongde = new QAction(tr("功德：") + QString::number(Config.value("gd").toInteger()),this);
-        tray_menu->deleteLater();
-        createMenu();
-    }
-}
+
 void MainTableWidget::setStyleSheetFromFile(QWidget* widget,QString file){
     QFile styleFile(file);
     if(styleFile.open(QIODevice::ReadOnly))
@@ -638,54 +516,5 @@ void MainTableWidget::setStyleSheetFromFile(QWidget* widget,QString file){
     }
 }
 
-void MainTableWidget::on_todo_clicked()
-{
-    if (!TodoisOpen){
-        TWTodoWidget* todo = new TWTodoWidget();
-        QHBoxLayout *layout = new QHBoxLayout();
-        layout->addWidget(todo);
-        todo->setParent(ui->pushButton_5);
-        ui->pushButton_5->setLayout(layout);
-        todomovea->setDirection(QAbstractAnimation::Forward);
-        todomoveb->setDirection(QAbstractAnimation::Forward);
-        muyumovea->setDirection(QAbstractAnimation::Forward);
-        muyumoveb->setDirection(QAbstractAnimation::Forward);
-        todomovea->start();
-        todomoveb->start();
-        muyumovea->start();
-        muyumoveb->start();
-        connect(muyumoveb,&QAbstractAnimation::finished,this,[=]{
-            muyuding = new QPropertyAnimation(ui->muyu, "geometry");
-            muyuding->setStartValue(QRect(ui->muyu->pos().x(),ui->muyu->pos().y(),ui->muyu->width(),ui->muyu->height()));
-            muyuding->setEndValue(QRect(730,18,21,21));
-            muyuding->setDuration(100);
-            muyuding->setEasingCurve(QEasingCurve::InOutQuad);
-            connect(muyuding,&QPropertyAnimation::finished,this,[=]{
-                ui->muyu->setGeometry(QRect(730,18,19,19));
-            });
-        });
 
-        TodoisOpen=true;
-    }else{
-        todomovea->setDirection(QAbstractAnimation::Backward);
-        todomoveb->setDirection(QAbstractAnimation::Backward);
-        muyumovea->setDirection(QAbstractAnimation::Backward);
-        muyumoveb->setDirection(QAbstractAnimation::Backward);
-        todomovea->start();
-        todomoveb->start();
-        muyumovea->start();
-        muyumoveb->start();
-        connect(muyumoveb,&QAbstractAnimation::finished,this,[=]{
-            muyuding = new QPropertyAnimation(ui->muyu, "geometry");
-            muyuding->setStartValue(QRect(ui->muyu->pos().x(),ui->muyu->pos().y(),ui->muyu->width(),ui->muyu->height()));
-            muyuding->setEndValue(QRect(770,18,21,21));
-            muyuding->setDuration(100);
-            muyuding->setEasingCurve(QEasingCurve::InOutQuad);
-            connect(muyuding,&QPropertyAnimation::finished,this,[=]{
-                ui->muyu->setGeometry(QRect(770,18,19,19));
-            });
-        });
-        TodoisOpen=false;
-    }
-}
 

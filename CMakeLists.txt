@@ -51,6 +51,14 @@ set(PROJECT_SOURCES
         cpp/daytimerwidget.cpp
         headers/daytimerwidget.h
         ui/daytimerwidget.ui
+        cpp/syncingdialog.cpp
+        headers/syncingdialog.h
+        ui/syncingdialog.ui
+        headers/syncingdialog.h
+        cpp/syncingdialog.cpp
+        cpp/NetworkRequests.cpp
+        headers/NetworkRequests.h
+        cpp/NetworkRequests.cpp
 )
 set(useWin32 TRUE)
 qt_add_executable(SchoolTools WIN32

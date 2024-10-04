@@ -18,11 +18,10 @@
         <file>res/DTF-1.ttf</file>
         <file>res/DTF-2.ttf</file>
         <file>res/DTF-3.ttf</file>
-    </qresource>
-    <qresource prefix="/radiobutton">
         <file>res/radiobutton/checked.png</file>
         <file>res/radiobutton/stable.png</file>
         <file>res/radiobutton/hover.png</file>
+        <file>res/ring.png</file>
     </qresource>
     <qresource prefix="/lang">
         <file>lang/lang_cn.qm</file>

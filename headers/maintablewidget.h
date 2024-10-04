@@ -32,9 +32,11 @@
 #include "getstartwidget.h"
 #include "mainwindow.h"
 #include "twtodowidget.h"
+#include"NetworkRequests.h"
 #include <windows.h>
 #include<QTranslator>
 #include"AppLog.h"
+#include<dwmapi.h>
 QT_BEGIN_NAMESPACE
 
 namespace Ui {
@@ -51,10 +53,12 @@ public:
 signals:
     void setTable(QString str);
     void repaint();
-    void pss(QString text);
-    void pst(QString text);
-    void tss(QString text);
     void tst(QString text);
+    void showStatusMessage(QString str);
+    void changeStackedIndex(int idx);
+    void addClass(QString text);
+    void setClassStyleSheet(int idx,QString styleSheet);
+    void toDone();
 };
 class MainTableWidget : public QWidget
 {
@@ -68,9 +72,6 @@ public:
     void readConfig();
     void initTodayTable();
     void swithToYiYan();
-    void refechYiYan();
-    void configZuanyan();
-    void refechZuanyan();
     void setWidgetBlur(QWidget* widget);
     void createActions();
     void createMenu();
@@ -86,24 +87,21 @@ public:
     QSqlDatabase db;
     refechTableThread* rtt;
     QString getToken();
-    QPropertyAnimation *muyuding;
-    QPropertyAnimation *todomovea;
-    QPropertyAnimation *todomoveb;
-    QPropertyAnimation *muyumovea;
-    QPropertyAnimation *muyumoveb;
+    QPropertyAnimation* status_msg_animation;
     QAction* m_showmain;
-    QPropertyAnimation *hideani;
     QJsonObject Config;
     bool ishide = false;
     int flag = 0;
+    NetworkRequests req;
+
 public slots:
-    void setTable_SLOT(QString str);
     void refechTable_slot();
     void do_repaint();
     void startMainWindow();
     void startGetStart();
     void on_showConfig_modal();
     void hk_slot(QString day);
+    void showStatus(QString str);
     // void do_pss();
     // void do_pst();
     // void do_tss();
@@ -113,17 +111,12 @@ private slots:
     void on_label_clicked();
     void on_showMainAction();
     void on_exitAppAction();
-    void on_label_2_clicked();
-
-    void on_muyu_clicked();
-
-    void on_todo_clicked();
-
 private:
     Ui::MainTableWidget *ui;
     void initSysTrayIcon();
     void initSignal();
     void initUi();
+    QHBoxLayout* class_show_widget_layout;
 };
 
 

@@ -2,9 +2,9 @@
 ; SEE THE DOCUMENTATION FOR DETAILS ON CREATING INNO SETUP SCRIPT FILES!
 
 #define MyAppName "Ð£Ô°Ðü¸¡´°"
-#define MyAppVersion "4.1"
+#define MyAppVersion "5.0"
 #define MyAppPublisher "Aero8m"
-#define MyAppURL "https://aero80wd.github.io"
+#define MyAppURL "https://github.com/Aero80wd/SchoolTools"
 #define MyAppExeName "SchoolTools.exe"
 
 [Setup]
@@ -62,8 +62,8 @@ Name: "ukrainian"; MessagesFile: "compiler:Languages\Ukrainian.isl"
 Name: "desktopicon"; Description: "{cm:CreateDesktopIcon}"; GroupDescription: "{cm:AdditionalIcons}"; Flags: unchecked
 
 [Files]
-Source: "C:\Users\JH182\Documents\TodayCurriculum\cmake-build-release-visual-studio\Release\{#MyAppExeName}"; DestDir: "{app}"; Flags: ignoreversion
-Source: "C:\Users\JH182\Documents\TodayCurriculum\cmake-build-release-visual-studio\Release\*"; DestDir: "{app}"; Flags: ignoreversion recursesubdirs createallsubdirs
+Source: "C:\Users\JH182\Documents\SchoolTools\cmake-build-release-visual-studio\Release\{#MyAppExeName}"; DestDir: "{app}"; Flags: ignoreversion
+Source: "C:\Users\JH182\Documents\SchoolTools\cmake-build-release-visual-studio\Release\*"; DestDir: "{app}"; Flags: ignoreversion recursesubdirs createallsubdirs
 ; NOTE: Don't use "Flags: ignoreversion" on any shared system files
 
 [Icons]

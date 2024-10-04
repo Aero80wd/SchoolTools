@@ -11,7 +11,7 @@
 
 <p align="center">
   <a href="https://pypi.org/project/PyQt-Fluent-Widgets" target="_blank">
-    <img src="https://img.shields.io/badge/Version-v3.5_fix1-2334D05" alt="Version">
+    <img src="https://img.shields.io/badge/Version-v5.0-2334D05" alt="Version">
   </a>
 
   <a style="text-decoration:none" href="/LICENSE">
@@ -48,11 +48,19 @@
 - 该版本为第一个较稳定版本，功能bug基本修复完毕
 - 更改项目目录结构，将源文件、头文件、UI文件、资源文件进行分类
 - 使用资源文件字体避免需安装字体后才可使用倒计时
+### [v5.0] - 2024-10-5
+- UI大更新：
+1. 将灵动岛连体，更改主题色，添加毛玻璃效果
+2. 将一言和岛上Todo删除，一言将会在5.1回归。
+3. 在悬浮窗上显示所有课程
+- 支持课表同步，可同步服务端上的课表。
+- ~~移除了him~~
 ## 关于插件
 ### 安装
 打开设置中的工具栏设置，将插件文件或快捷方式放入插件列表中。
 ### 制作
-请查看[SchoolTools-Plugin-example-win32](https://github.com/Aero80wd/SchoolTools-Plugin-example-win32)仓库的示例和README
-
+请查看[SchoolTools-Plugin-example-win32](https://github.com/Aero80wd/SchoolTools-Plugin-example-win32)仓库的示例和README。
+## 关于同步
+具体见[SchoolTools-Sync-Server](https://github.com/Aero80wd/SchoolTools-Sync-Server)仓库。
 ## 许可证
 本项目使用<a style="text-decoration:none" href="/LICENSE">GPLv2</a>协议开源，修改请遵循协议。

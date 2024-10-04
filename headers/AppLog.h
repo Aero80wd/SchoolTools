@@ -28,3 +28,4 @@ enum LogStatus{
     EXIT
 };
 void showLog(const char* LogText,LogStatus LogSt = LogStatus::ALL);
+void showLog(const QString LogText,LogStatus LogSt = LogStatus::ALL);

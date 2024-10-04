@@ -6,19 +6,20 @@ TableEditWidget::TableEditWidget(QWidget *parent)
     , ui(new Ui::TableEditWidget)
 {
     ui->setupUi(this);
-    ui->tabWidget->removeTab(4);
+    ui->tabWidget->removeTab(5);
     connect(ui->radioButton,SIGNAL(toggled(bool)),this,SLOT(toggleded()));
     connect(ui->radioButton_2,SIGNAL(toggled(bool)),this,SLOT(toggleded()));
     connect(ui->radioButton_3,SIGNAL(toggled(bool)),this,SLOT(toggleded()));
     connect(ui->radioButton_4,SIGNAL(toggled(bool)),this,SLOT(toggleded()));
     connect(ui->radioButton_5,SIGNAL(toggled(bool)),this,SLOT(toggleded()));
+    connect(ui->save_syncset,&QPushButton::clicked,this,&TableEditWidget::saveSyncSettings);
     connect(ui->pushButton_2,&QPushButton::clicked,this,[=]{
-        ui->tabWidget->removeTab(4);
+        ui->tabWidget->removeTab(5);
     });
     connect(ui->label,&ClickLabel::clicked,this,[=]{
         if (clickcnt >=10){
             clickcnt=0;
-            ui->tabWidget->insertTab(4,ui->tab_3,QString(tr("彩蛋设置")));
+            ui->tabWidget->insertTab(5,ui->tab_3,QString(tr("彩蛋设置")));
         }else{
             clickcnt++;
         }
@@ -71,6 +72,50 @@ void TableEditWidget::closeEvent(QCloseEvent *event){
     this->hide();
     event->ignore();
 }
+void TableEditWidget::saveSyncSettings() {
+    ui->sync_log->clear();
+    ui->sync_log->setReadOnly(true);
+    QNetworkAccessManager *netManager = new QNetworkAccessManager(this);
+    QNetworkRequest request;
+    request.setUrl(QUrl(QString("http://%1:%2/create_class?class_name=%3").arg(ui->sync_server->text()).arg(ui->sync_port->value()).arg(ui->sync_class->text())));
+    QNetworkReply *reply;
+    reply = netManager->get(request);
+    ui->sync_log->insertPlainText("请求服务器中，目标" + QString("http://%1:%2/create_class?class_name=%3").arg(ui->sync_server->text()).arg(ui->sync_port->value()).arg(ui->sync_class->text()) + "\n");
+    connect(reply,&QNetworkReply::finished,this,[=]{
+        if (reply->error()){
+            showLog("请求发生错误！请求终止！",LogStatus::ERR);
+            ui->sync_log->insertPlainText("请求失败！状态码："+QString::number(reply->attribute(QNetworkRequest::HttpStatusCodeAttribute).toInt()) + "\n");
+            ui->sync_log->insertPlainText("错误信息：" + reply->errorString() + "\n");
+            ui->sync_log->insertPlainText(QString("服务器不可用！请重新配置！") + "\n");
+        }else{
+            showLog(("请求完成！状态码："+QString::number(reply->attribute(QNetworkRequest::HttpStatusCodeAttribute).toInt())).toStdString().c_str(),LogStatus::INFO);
+            ui->sync_log->insertPlainText("请求完成！状态码："+QString::number(reply->attribute(QNetworkRequest::HttpStatusCodeAttribute).toInt()) + "\n");
+            QJsonObject obj = QJsonDocument::fromJson(reply->readAll()).object();
+            if (obj["code"].toInt() == 0)
+            {
+                ui->sync_log->insertPlainText("班级状态：创建成功！\n");
+            }else
+            {
+                ui->sync_log->insertPlainText("班级状态：已创建！\n");
+            }
+
+            ui->sync_log->insertPlainText(QString("服务器可用！已保存配置！重启生效！") + "\n");
+            config["sync_open"] = ui->syncopen->isChecked();
+            config["sync_server"] = ui->sync_server->text();
+            config["sync_server_port"] = ui->sync_port->value();
+            config["class_name"] = ui->sync_class->text();
+            QMessageBox::information(this,tr("提示"),tr("重启生效"));
+        }
+
+    });
+    QFile config_file(QDir::currentPath() + "/config.json");
+    config_file.open(QFile::WriteOnly);
+    QJsonDocument temp_doc;
+    temp_doc.setObject(config);
+    config_file.write(temp_doc.toJson(QJsonDocument::Indented));
+    config_file.close();
+
+}
 void TableEditWidget::setConfig(QJsonObject obj){
     config=obj;
     ui->checkBox_2->setChecked(config.value("zuan_status").toBool());
@@ -80,6 +125,10 @@ void TableEditWidget::setConfig(QJsonObject obj){
     ui->timer_time->setDateTime(QDateTime::fromString(config["end_time"].toString(),"yyyy-MM-dd hh:mm:ss"));
     ui->edit_name->setText(config["label_tag"].toString());
     ui->edit_name_eng->setText(config["english_tag"].toString());
+    ui->syncopen->setChecked(config.value("sync_open").toBool());
+    ui->sync_server->setText(config["sync_server"].toString());
+    ui->sync_port->setValue(config["sync_server_port"].toInt());
+    ui->sync_class->setText(config["class_name"].toString());
 }
 void TableEditWidget::on_timerInfo_changed(){
     config["end_time"] = ui->timer_time->dateTime().toString("yyyy-MM-dd hh:mm:ss");
@@ -229,7 +278,7 @@ bool TableEditWidget::eventFilter(QObject *watched,QEvent*event)
 {
     if (event->type() == QEvent::Resize)
     {
-        ui->tabWidget->setStyleSheet(QString("QTabBar::tab{background:#ffffff;width:%1;border-radius:3px;border:1px solid #1191d3;padding:5px;}QTabBar::tab:hover{background:rgb(217, 217, 217);}QTabBar::tab:selected{color:#ffffff;background:#1191d3;}QTabWidget::tab-bar{alignment:center;}").arg(ui->tabWidget->width()/4*0.9)); //1
+        ui->tabWidget->setStyleSheet(QString("QTabBar::tab{background:#ffffff;width:%1;border-radius:3px;border:1px solid #1191d3;padding:5px;}QTabBar::tab:hover{background:rgb(217, 217, 217);}QTabBar::tab:selected{color:#ffffff;background:#1191d3;}QTabWidget::tab-bar{alignment:center;}").arg(ui->tabWidget->width()/5*0.9)); //1
         QCoreApplication::processEvents(QEventLoop::AllEvents,1145141919810);
         return true;
     }
