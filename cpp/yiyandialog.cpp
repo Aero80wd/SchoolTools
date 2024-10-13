@@ -68,8 +68,7 @@ void yiyanDialog::setWidgetBlur(QWidget* widget){
         }
     }
     HWND hWnd = HWND(widget->winId());
-    int gradientColor = DWORD(0x50F2F2F2);
-    AccentPolicy policy = { ACCENT_ENABLE_ACRYLICBLURBEHIND, 0, gradientColor, 0 };
+    AccentPolicy policy = { ACCENT_ENABLE_ACRYLICBLURBEHIND, 0, int(0x66FFFFFF), 0 };
     WindowCompositionAttributeData data = { 19, &policy, sizeof(AccentPolicy) };
     SetWindowCompositionAttribute(hWnd, &data);
 }

@@ -81,6 +81,7 @@ public:
     QAction *m_showedit;
     QAction *m_gongde;
     QAction *m_exitApp;
+    QAction *m_hidewindow;
     QSystemTrayIcon *m_sysTrayIcon; //系统托盘
     bool ZuanYanisOpen = false;
     bool TodoisOpeninBack = false;

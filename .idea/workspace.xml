@@ -24,23 +24,17 @@
     </configurations>
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="17245380-76f1-4830-8dac-6092e5c83626" name="更改" comment="4.1 update">
+    <list default="true" id="17245380-76f1-4830-8dac-6092e5c83626" name="更改" comment="5.0 update">
+      <change afterPath="$PROJECT_DIR$/.idea/editor.xml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/.idea/statistic.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/CMakeLists.txt" beforeDir="false" afterPath="$PROJECT_DIR$/CMakeLists.txt" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/README.md" beforeDir="false" afterPath="$PROJECT_DIR$/README.md" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/cpp/AppLog.cpp" beforeDir="false" afterPath="$PROJECT_DIR$/cpp/AppLog.cpp" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/cpp/maintablewidget.cpp" beforeDir="false" afterPath="$PROJECT_DIR$/cpp/maintablewidget.cpp" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/cpp/tableeditwidget.cpp" beforeDir="false" afterPath="$PROJECT_DIR$/cpp/tableeditwidget.cpp" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/headers/AppLog.h" beforeDir="false" afterPath="$PROJECT_DIR$/headers/AppLog.h" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/cpp/toolbox.cpp" beforeDir="false" afterPath="$PROJECT_DIR$/cpp/toolbox.cpp" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/cpp/yiyandialog.cpp" beforeDir="false" afterPath="$PROJECT_DIR$/cpp/yiyandialog.cpp" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/headers/maintablewidget.h" beforeDir="false" afterPath="$PROJECT_DIR$/headers/maintablewidget.h" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/headers/tableeditwidget.h" beforeDir="false" afterPath="$PROJECT_DIR$/headers/tableeditwidget.h" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/main.cpp" beforeDir="false" afterPath="$PROJECT_DIR$/main.cpp" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/res.qrc" beforeDir="false" afterPath="$PROJECT_DIR$/res.qrc" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/setup.iss" beforeDir="false" afterPath="$PROJECT_DIR$/setup.iss" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/headers/toolbox.h" beforeDir="false" afterPath="$PROJECT_DIR$/headers/toolbox.h" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/icon.rc" beforeDir="false" afterPath="$PROJECT_DIR$/icon.rc" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/setup/SchoolTools-setup.exe" beforeDir="false" afterPath="$PROJECT_DIR$/setup/SchoolTools-setup.exe" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/ui/daytimerwidget.ui" beforeDir="false" afterPath="$PROJECT_DIR$/ui/daytimerwidget.ui" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/ui/maintablewidget.ui" beforeDir="false" afterPath="$PROJECT_DIR$/ui/maintablewidget.ui" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/ui/tableeditwidget.ui" beforeDir="false" afterPath="$PROJECT_DIR$/ui/tableeditwidget.ui" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -76,7 +70,7 @@
   <component name="GithubPullRequestsUISettings">{
   &quot;selectedUrlAndAccountId&quot;: {
     &quot;url&quot;: &quot;https://github.com/Aero80wd/SchoolTools.git&quot;,
-    &quot;accountId&quot;: &quot;7c1aecc4-07ce-4081-a0dd-4e9d78b74cf3&quot;
+    &quot;accountId&quot;: &quot;79af6f3c-1d96-457f-ab6c-d748cc771c6e&quot;
   }
 }</component>
   <component name="HighlightingSettingsPerFile">
@@ -524,7 +518,7 @@
   </component>
   <component name="PropertiesComponent"><![CDATA[{
   "keyToString": {
-    "CMake 应用程序.SchoolTools.executor": "Run",
+    "CMake 应用程序.SchoolTools.executor": "Debug",
     "RunOnceActivity.RadMigrateCodeStyle": "true",
     "RunOnceActivity.ShowReadmeOnStart": "true",
     "RunOnceActivity.cidr.known.project.marker": "true",
@@ -539,7 +533,7 @@
     "node.js.selected.package.eslint": "(autodetect)",
     "node.js.selected.package.tslint": "(autodetect)",
     "nodejs_package_manager_path": "npm",
-    "settings.editor.selected.configurable": "preferences.language.and.region",
+    "settings.editor.selected.configurable": "reference.settings.project.statistic.project.settings",
     "structure.view.defaults.are.configured": "true",
     "vue.rearranger.settings.migration": "true"
   }
@@ -595,7 +589,10 @@
       <workItem from="1726966637134" duration="12933000" />
       <workItem from="1727830779973" duration="11365000" />
       <workItem from="1727958912112" duration="5194000" />
-      <workItem from="1728032737856" duration="5637000" />
+      <workItem from="1728032737856" duration="6385000" />
+      <workItem from="1728131294975" duration="1999000" />
+      <workItem from="1728202052213" duration="6223000" />
+      <workItem from="1728804469453" duration="3600000" />
     </task>
     <task id="LOCAL-00001" summary="4.0 update">
       <option name="closed" value="true" />
@@ -613,7 +610,15 @@
       <option name="project" value="LOCAL" />
       <updated>1726395808587</updated>
     </task>
-    <option name="localTasksCounter" value="3" />
+    <task id="LOCAL-00003" summary="5.0 update">
+      <option name="closed" value="true" />
+      <created>1728040869601</created>
+      <option name="number" value="00003" />
+      <option name="presentableId" value="LOCAL-00003" />
+      <option name="project" value="LOCAL" />
+      <updated>1728040869601</updated>
+    </task>
+    <option name="localTasksCounter" value="4" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -638,38 +643,8 @@
   <component name="VcsManagerConfiguration">
     <MESSAGE value="4.0 update" />
     <MESSAGE value="4.1 update" />
-    <option name="LAST_COMMIT_MESSAGE" value="4.1 update" />
-  </component>
-  <component name="XDebuggerManager">
-    <breakpoint-manager>
-      <breakpoints>
-        <line-breakpoint enabled="true" type="com.jetbrains.cidr.execution.debugger.OCBreakpointType">
-          <url>file://$PROJECT_DIR$/cpp/maintablewidget.cpp</url>
-          <line>297</line>
-          <option name="timeStamp" value="31" />
-        </line-breakpoint>
-        <line-breakpoint enabled="true" type="com.jetbrains.cidr.execution.debugger.OCBreakpointType">
-          <url>file://$PROJECT_DIR$/cpp/maintablewidget.cpp</url>
-          <line>298</line>
-          <option name="timeStamp" value="32" />
-        </line-breakpoint>
-        <line-breakpoint enabled="true" type="com.jetbrains.cidr.execution.debugger.OCBreakpointType">
-          <url>file://$PROJECT_DIR$/cpp/maintablewidget.cpp</url>
-          <line>296</line>
-          <option name="timeStamp" value="51" />
-        </line-breakpoint>
-        <line-breakpoint enabled="true" type="com.jetbrains.cidr.execution.debugger.OCBreakpointType">
-          <url>file://$PROJECT_DIR$/cpp/maintablewidget.cpp</url>
-          <line>140</line>
-          <option name="timeStamp" value="98" />
-        </line-breakpoint>
-        <line-breakpoint enabled="true" type="com.jetbrains.cidr.execution.debugger.OCBreakpointType">
-          <url>file://$PROJECT_DIR$/cpp/maintablewidget.cpp</url>
-          <line>141</line>
-          <option name="timeStamp" value="99" />
-        </line-breakpoint>
-      </breakpoints>
-    </breakpoint-manager>
+    <MESSAGE value="5.0 update" />
+    <option name="LAST_COMMIT_MESSAGE" value="5.0 update" />
   </component>
   <component name="XSLT-Support.FileAssociations.UIState">
     <expand />

@@ -18,6 +18,7 @@
 #pragma comment(lib,"Dwmapi.lib")
 #include<QColorDialog>
 #include"AppLog.h"
+#include "yiyandialog.h"
 namespace Ui {
 class ToolBox;
 }

@@ -41,22 +41,6 @@ struct WindowCompositionAttributeData {
 typedef BOOL(WINAPI*pSetWindowCompositionAttribute114)(HWND, WindowCompositionAttributeData*);
 pSetWindowCompositionAttribute114 SetWindowCompositionAttribute114 = nullptr;
 
-COLORREF GetWindowsThemeColor()
-{
-    DWORD crColorization;
-    BOOL fOpaqueBlend;
-    COLORREF theme_color{};
-    HRESULT result = DwmGetColorizationColor(&crColorization, &fOpaqueBlend);
-    if (result == S_OK)
-    {
-        BYTE r, g, b;
-        r = int((crColorization >> 16) * 1.06) % 256;
-        g = int((crColorization >> 8) * 1.06) % 256;
-        b = int(crColorization * 1.06) % 256;
-        theme_color = RGB(r, g, b);
-    }
-    return theme_color;
-}
 void ToolBox::setWidgetBlur(QWidget* widget){
     if (!SetWindowCompositionAttribute114) {
         HMODULE hModule = LoadLibrary(TEXT("user32.dll"));
@@ -66,8 +50,7 @@ void ToolBox::setWidgetBlur(QWidget* widget){
         }
     }
     HWND hWnd = HWND(widget->winId());
-    int gradientColor = DWORD(GetWindowsThemeColor());
-    AccentPolicy policy = { ACCENT_ENABLE_ACRYLICBLURBEHIND , 0, gradientColor, 0 };
+    AccentPolicy policy = { ACCENT_ENABLE_ACRYLICBLURBEHIND , 0, int(0x11FFFFFF), 0 };
     WindowCompositionAttributeData data = { 19, &policy, sizeof(AccentPolicy) };
     SetWindowCompositionAttribute114(hWnd, &data);
 }
@@ -82,6 +65,43 @@ void ToolBox::LoadPlugins(){
         return;
     }
     QFileInfoList fileList = plugin_dir.entryInfoList();
+    ClickLabel *PluginBut = new ClickLabel(this);
+    ui->verticalLayout->addWidget(PluginBut);
+    connect(PluginBut,&ClickLabel::clicked,this,[=]
+    {
+        QFile file(QDir::currentPath() + "/config.json");
+        file.open(QIODevice::ReadWrite | QIODevice::Text);
+
+        QTextStream stream(&file);
+        QString file_str = stream.readAll();
+        file.close();
+        QJsonParseError jsonError;
+        QJsonDocument jsondoc = QJsonDocument::fromJson(file_str.toUtf8(),&jsonError);
+        if (jsonError.error != QJsonParseError::NoError && !jsondoc.isNull()) {
+            showLog("Config.json is Error!",LogStatus::ERR);
+            return true;
+        }
+        bool zuanyanisopen = false;
+        if (jsondoc.object().contains("zuan_status"))
+        {
+            zuanyanisopen = jsondoc.object().value("zuan_status").toBool();
+        }
+        QJsonObject Config = jsondoc.object();
+        yiyanDialog *yiyan = new yiyanDialog(this);
+        yiyan->setConfig(Config);
+        yiyan->setZuanYanOpen(zuanyanisopen);
+        QScreen *scr = qApp->primaryScreen();
+        int scr_w = scr->size().width();
+        int scr_h = scr->size().height();
+        yiyan->move((scr_w - yiyan->width()) / 2, (scr_h - yiyan->height()) / 3);
+        yiyan->setModal(false);
+        yiyan->show();
+    });
+    PluginBut->setMinimumSize(QSize(50,50));
+    PluginBut->setAniOpen(true);
+    PluginBut->setCursor(Qt::PointingHandCursor);
+    PluginBut->setStyleSheet("border-image: url(:/res/speak.png);");
+    adjustSize();
     for (auto x : fileList){
         QString JsonPath = x.filePath() + "/pluginConfig.json";
         if (x.filePath()[x.filePath().size() -1] == '.'){

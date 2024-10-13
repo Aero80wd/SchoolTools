@@ -138,8 +138,6 @@ void MainTableWidget::initSignal(){
     {
         QList<QLabel*> class_list = ui->class_show_widget->findChildren<QLabel*>();
         class_list[idx]->setStyleSheet(styleSheet);
-        qDebug() << class_list[idx]->text();
-        qDebug() << class_list[idx]->styleSheet();
     },Qt::QueuedConnection);
     connect(rtt,&refechTableThread::toDone,this,[=]
     {
@@ -260,6 +258,12 @@ void refechTableThread::run(){
 
         if (current_date_time.secsTo(class_start_time) <= 0 and current_date_time.secsTo(class_end_time) <= 0){
             shangkelema = true;
+            emit setClassStyleSheet(x,"");
+            if (x+1 != today_table.count())
+            {
+                emit setClassStyleSheet(x+1,"border-width: 0px 0px 4px 0px; border-color:#1191d3; border-style: solid;");
+            }
+
             emit showStatusMessage("下课时间到");
             x++;
             continue;
@@ -370,6 +374,14 @@ void MainTableWidget::on_label_clicked()
 void MainTableWidget::hk_slot(QString day){
     rtt->quit();
     today_table = time_table.value(day).toArray();
+    QScreen *scr = qApp->primaryScreen();
+    int scr_w = scr->size().width();
+    int scr_h = scr->size().height();
+    move((scr_w - width()) / 2, (scr_h - height()) / 9999999999999999999);
+    for (QWidget*widget : ui->class_show_widget->findChildren<QWidget*>())
+    {
+        delete widget;
+    }
     rtt->start();
 }
 
@@ -487,7 +499,7 @@ void MainTableWidget::on_exitAppAction(){
 void MainTableWidget::refechTable_slot(){
     rtt->quit();
     readTimeTable();
-    rtt->start();
+
     QScreen *scr = qApp->primaryScreen();
     int scr_w = scr->size().width();
     int scr_h = scr->size().height();
@@ -496,6 +508,7 @@ void MainTableWidget::refechTable_slot(){
     {
         delete widget;
     }
+    rtt->start();
     m_sysTrayIcon->showMessage(tr("提示"),tr("配置已成功应用！"),QSystemTrayIcon::MessageIcon::Information,500);
 
 }
@@ -515,6 +528,3 @@ void MainTableWidget::setStyleSheetFromFile(QWidget* widget,QString file){
         showLog("StyleSheet is Load failed",LogStatus::ERR);
     }
 }
-
-
-
