@@ -29,6 +29,7 @@
 #include <QNetworkReply>
 #include <QNetworkRequest>
 #include <QNetworkAccessManager>
+#include "NetworkRequests.h"
 
 namespace Ui {
 class TableEditWidget;
@@ -44,7 +45,7 @@ public:
     void readTableJson();
     void refechTableWidget(QJsonArray today_table);
     QJsonObject config;
-    QString APP_VERSION = "5.0";
+    QString APP_VERSION = "5.2";
     void setConfig(QJsonObject obj);
     QJsonObject timeTable;
     void closeEvent(QCloseEvent *event) override;
@@ -75,7 +76,8 @@ private slots:
 
     void on_chkHide_clicked(bool checked);
 
-
+    void searchWeatherLocaltions();
+    void saveWeatherLocaltions();
 
     void on_pluginList_currentItemChanged(QListWidgetItem *current, QListWidgetItem *previous);
 
@@ -88,6 +90,7 @@ signals:
     void refechToolBar_signal();
 private:
     Ui::TableEditWidget *ui;
+    NetworkRequests weather_search_req;
 };
 
 #endif // TABLEEDITWIDGET_H

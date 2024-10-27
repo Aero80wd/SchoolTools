@@ -105,7 +105,7 @@
    <widget class="QWidget" name="page_2">
     <layout class="QHBoxLayout" name="horizontalLayout_3" stretch="1,0">
      <property name="leftMargin">
-      <number>20</number>
+      <number>40</number>
      </property>
      <property name="topMargin">
       <number>0</number>
@@ -140,7 +140,26 @@
     </layout>
    </widget>
   </widget>
+  <widget class="QPushButton" name="hide_window">
+   <property name="geometry">
+    <rect>
+     <x>11</x>
+     <y>8</y>
+     <width>28</width>
+     <height>36</height>
+    </rect>
+   </property>
+   <property name="styleSheet">
+    <string notr="true">background: rgba(0,0,0,0);
+border:none;
+image: url(&quot;:/res/right_arrow.svg&quot;);</string>
+   </property>
+   <property name="text">
+    <string/>
+   </property>
+  </widget>
   <zorder>stackedWidget</zorder>
+  <zorder>hide_window</zorder>
   <zorder>status_show</zorder>
  </widget>
  <resources/>

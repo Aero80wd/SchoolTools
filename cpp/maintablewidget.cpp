@@ -87,6 +87,19 @@ void MainTableWidget::setWidgetBlur(QWidget* widget){
     WindowCompositionAttributeDataForMainTableWidget data = { 19, &policy, sizeof(AccentPolicyForMainTableWidget) };
     SetWindowCompositionAttributeForMainTableWidget(hWnd, &data);
 }
+void MainTableWidget::initAnimation()
+{
+    QScreen *scr = qApp->primaryScreen();
+    int scr_w = scr->size().width();
+    int scr_h = scr->size().height();
+    move((scr_w - width()) / 2, 0);
+    hide_animation = new QPropertyAnimation(this,"pos");
+    hide_animation->setDuration(500);
+    hide_animation->setEasingCurve(QEasingCurve::InOutSine);
+    hide_animation->setStartValue(pos());
+    hide_animation->setEndValue(QPoint(scr_w-41,0));
+
+}
 void MainTableWidget::initUi(){
     setWindowFlags(Qt::WindowType::FramelessWindowHint | Qt::WindowType::Tool | Qt::WindowType::WindowStaysOnTopHint);
     setAttribute(Qt::WidgetAttribute::WA_TranslucentBackground);
@@ -104,6 +117,8 @@ void MainTableWidget::initUi(){
     class_show_widget_layout->setContentsMargins(0,0,0,0);
     class_show_widget_layout->setSpacing(0);
     ui->class_show_widget->setLayout(class_show_widget_layout);
+
+
 //    setWidgetBlur(ui->table_show_2);
 //    setWidgetBlur(ui->table_show_3);
 //    setWidgetBlur(ui->pushButton_2);
@@ -112,6 +127,22 @@ void MainTableWidget::initUi(){
 //    setWidgetBlur(ui->pushButton_5);
 
 
+}
+void MainTableWidget::on_hideWindow()
+{
+    if (!WindowHide)
+    {
+        hide_animation->setDirection(QAbstractAnimation::Forward);
+        hide_animation->start();
+        ui->hide_window->setStyleSheet("background: rgba(0,0,0,0);border:none;image: url(:/res/left_arrow.svg);");
+        WindowHide = true;
+    }else
+    {
+        hide_animation->setDirection(QAbstractAnimation::Backward);
+        hide_animation->start();
+        ui->hide_window->setStyleSheet("background: rgba(0,0,0,0);border:none;image: url(:/res/right_arrow.svg);");
+        WindowHide = false;
+    }
 }
 void MainTableWidget::initSignal(){
 
@@ -147,9 +178,12 @@ void MainTableWidget::initSignal(){
         QScreen *scr = qApp->primaryScreen();
         int scr_w = scr->size().width();
         int scr_h = scr->size().height();
-        move((scr_w - width()) / 2, (scr_h - height()) / 9999999999999999999);
+        move((scr_w - width()) / 2, 0);
 
     },Qt::QueuedConnection);
+    connect(rtt,&refechTableThread::initMainWindowAnimation,this,&MainTableWidget::initAnimation,Qt::QueuedConnection);
+    connect(ui->hide_window,&QPushButton::clicked,this,&MainTableWidget::on_hideWindow);
+
 }
 void MainTableWidget::readTimeTable(){
     QFileInfo fi(TABLE_JSON);
@@ -247,7 +281,11 @@ void refechTableThread::run(){
         emit addClass(QString(today_table[i].toObject()["name"].toString().at(0)));
     }
     emit changeStackedIndex(1);
-    for(int x = 0;x < today_table.count();){
+
+    emit initMainWindowAnimation();
+
+    for(int x = 0;x < today_table.count();)
+    {
         QDateTime current_date_time = QDateTime::currentDateTime();
         QDateTime class_start_time = getTodayTime(today_table[x].toObject().value("start").toString());
 
@@ -308,14 +346,16 @@ void refechTableThread::run(){
             display_string = QString("%1:%2:%3").arg(hour, 2, 10, QLatin1Char('0')).arg(min, 2, 10, QLatin1Char('0')).arg(sec, 2, 10, QLatin1Char('0'));
             emit tst(display_string);
             Sleep(1000);
-        }else{
+                   }else{
 
-            x++;
-            continue;
-        }
+                       x++;
+                       continue;
+                   }
     }
     emit changeStackedIndex(0);
     emit toDone();
+    emit initMainWindowAnimation();
+
 }
 QDateTime refechTableThread::getTodayTime(QString str){
     QString timeString = str;
@@ -372,17 +412,22 @@ void MainTableWidget::on_label_clicked()
     swithToYiYan();
 }
 void MainTableWidget::hk_slot(QString day){
-    rtt->quit();
+    rtt->terminate();;
     today_table = time_table.value(day).toArray();
-    QScreen *scr = qApp->primaryScreen();
-    int scr_w = scr->size().width();
-    int scr_h = scr->size().height();
-    move((scr_w - width()) / 2, (scr_h - height()) / 9999999999999999999);
+
+
     for (QWidget*widget : ui->class_show_widget->findChildren<QWidget*>())
     {
         delete widget;
     }
     rtt->start();
+    resize(154+20+today_table.count()*49,height());
+    ui->stackedWidget->resize(154+20+today_table.count()*49,height());
+    ui->status_show->resize(154+20+today_table.count()*49,height());
+    QScreen *scr = qApp->primaryScreen();
+    int scr_w = scr->size().width();
+    int scr_h = scr->size().height();
+    move((scr_w - width()) / 2, 0);
 }
 
 
@@ -497,18 +542,23 @@ void MainTableWidget::on_exitAppAction(){
     qApp->exit();
 }
 void MainTableWidget::refechTable_slot(){
-    rtt->quit();
+    rtt->terminate();
     readTimeTable();
 
-    QScreen *scr = qApp->primaryScreen();
-    int scr_w = scr->size().width();
-    int scr_h = scr->size().height();
-    move((scr_w - width()) / 2, (scr_h - height()) / 9999999999999999999);
+
+
     for (QWidget*widget : ui->class_show_widget->findChildren<QWidget*>())
     {
         delete widget;
     }
     rtt->start();
+    resize(154+20+today_table.count()*49,height());
+    ui->stackedWidget->resize(154+20+today_table.count()*49,height());
+    ui->status_show->resize(154+20+today_table.count()*49,height());
+    QScreen *scr = qApp->primaryScreen();
+    int scr_w = scr->size().width();
+    int scr_h = scr->size().height();
+    move((scr_w - width()) / 2, 0);
     m_sysTrayIcon->showMessage(tr("提示"),tr("配置已成功应用！"),QSystemTrayIcon::MessageIcon::Information,500);
 
 }

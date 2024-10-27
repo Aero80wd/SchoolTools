@@ -1,12 +1,13 @@
 #include "../headers/tableeditwidget.h"
 #include "ui_tableeditwidget.h"
 
+
 TableEditWidget::TableEditWidget(QWidget *parent)
     : QWidget(parent)
     , ui(new Ui::TableEditWidget)
 {
     ui->setupUi(this);
-    ui->tabWidget->removeTab(5);
+    ui->tabWidget->removeTab(6);
     connect(ui->radioButton,SIGNAL(toggled(bool)),this,SLOT(toggleded()));
     connect(ui->radioButton_2,SIGNAL(toggled(bool)),this,SLOT(toggleded()));
     connect(ui->radioButton_3,SIGNAL(toggled(bool)),this,SLOT(toggleded()));
@@ -14,12 +15,12 @@ TableEditWidget::TableEditWidget(QWidget *parent)
     connect(ui->radioButton_5,SIGNAL(toggled(bool)),this,SLOT(toggleded()));
     connect(ui->save_syncset,&QPushButton::clicked,this,&TableEditWidget::saveSyncSettings);
     connect(ui->pushButton_2,&QPushButton::clicked,this,[=]{
-        ui->tabWidget->removeTab(5);
+        ui->tabWidget->removeTab(6);
     });
     connect(ui->label,&ClickLabel::clicked,this,[=]{
         if (clickcnt >=10){
             clickcnt=0;
-            ui->tabWidget->insertTab(5,ui->tab_3,QString(tr("彩蛋设置")));
+            ui->tabWidget->insertTab(6,ui->tab_3,QString(tr("彩蛋设置")));
         }else{
             clickcnt++;
         }
@@ -30,6 +31,8 @@ TableEditWidget::TableEditWidget(QWidget *parent)
         QDesktopServices::openUrl(QUrl("https://github.com/Aero80wd/SchoolTools"));
     });
     connect(ui->save_text_config,&QPushButton::clicked,this,&TableEditWidget::on_timerInfo_changed);
+    connect(ui->weather_localtion_edit,&QLineEdit::returnPressed,this,&TableEditWidget::searchWeatherLocaltions);
+    connect(ui->save_weather_localtion,&QPushButton::clicked,this,&TableEditWidget::saveWeatherLocaltions);
     QTranslator translator;
     QLocale::Language lab = QLocale::system().language();
     if(QLocale::Chinese == lab)
@@ -56,6 +59,46 @@ TableEditWidget::~TableEditWidget()
 {
 
     delete ui;
+}
+void TableEditWidget::searchWeatherLocaltions()
+{
+    weather_search_req = NetworkRequests(GET,QUrl(QString("https://geoapi.qweather.com/v2/city/lookup?location=%1&key=b7f4a7d1bfca4f13b6f265ea8676c297").arg(ui->weather_localtion_edit->text())));
+    weather_search_req.start();
+    connect(&weather_search_req,&NetworkRequests::finished,this,[=](QJsonObject json,QString text,QString error_string)
+    {
+        showLog("Weather Request OK!",INFO);
+        showLog("Weather Request Code:" + json["code"].toString(),INFO);
+        showLog(text,INFO);
+        if (json["code"].toString() == "200")
+        {
+            QJsonArray locations = json["location"].toArray();
+            ui->weather_localtion_select->clear();
+            for (auto x : locations)
+            {
+                ui->weather_localtion_select->addItem(x.toObject()["adm1"].toString() + QString(" ") + x.toObject()["adm2"].toString() + QString(" ") +x.toObject()["name"].toString(), x.toObject()["id"].toString());
+            }
+        }else
+        {
+            QMessageBox::critical(this,"错误","获取信息错误！");
+        }
+    });
+}
+void TableEditWidget::saveWeatherLocaltions()
+{
+    if (ui->weather_localtion_select->count() == 0)
+    {
+        QMessageBox::critical(this,"错误","您未选择城市！");
+        return;
+    }
+    config["weather_localtion_id"] = ui->weather_localtion_select->currentData().toString();
+    config["weather_localtion_name"] = ui->weather_localtion_select->currentText();
+    QFile config_file(QDir::currentPath() + "/config.json");
+    config_file.open(QFile::WriteOnly);
+    QJsonDocument temp_doc;
+    temp_doc.setObject(config);
+    config_file.write(temp_doc.toJson(QJsonDocument::Indented));
+    config_file.close();
+    QMessageBox::information(this,tr("提示"),tr("重启生效"));
 }
 bool TableEditWidget::timesort(QJsonObject &obj1, QJsonObject &obj2){
     QTime time1 = QTime::fromString(obj1.value("start").toString());
@@ -129,6 +172,7 @@ void TableEditWidget::setConfig(QJsonObject obj){
     ui->sync_server->setText(config["sync_server"].toString());
     ui->sync_port->setValue(config["sync_server_port"].toInt());
     ui->sync_class->setText(config["class_name"].toString());
+    ui->weather_localtion_edit->setText(config["weather_localtion_name"].toString());
 }
 void TableEditWidget::on_timerInfo_changed(){
     config["end_time"] = ui->timer_time->dateTime().toString("yyyy-MM-dd hh:mm:ss");
@@ -278,7 +322,7 @@ bool TableEditWidget::eventFilter(QObject *watched,QEvent*event)
 {
     if (event->type() == QEvent::Resize)
     {
-        ui->tabWidget->setStyleSheet(QString("QTabBar::tab{background:#ffffff;width:%1;border-radius:3px;border:1px solid #1191d3;padding:5px;}QTabBar::tab:hover{background:rgb(217, 217, 217);}QTabBar::tab:selected{color:#ffffff;background:#1191d3;}QTabWidget::tab-bar{alignment:center;}").arg(ui->tabWidget->width()/5*0.9)); //1
+        ui->tabWidget->setStyleSheet(QString("QTabBar::tab{background:#ffffff;width:%1;border-radius:3px;border:1px solid #1191d3;padding:5px;}QTabBar::tab:hover{background:rgb(217, 217, 217);}QTabBar::tab:selected{color:#ffffff;background:#1191d3;}QTabWidget::tab-bar{alignment:center;}").arg(ui->tabWidget->width()/6*0.9)); //1
         QCoreApplication::processEvents(QEventLoop::AllEvents,1145141919810);
         return true;
     }

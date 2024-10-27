@@ -46,7 +46,6 @@ public:
     QNetworkReply* initReply;
 private slots:
     void on_butAdd_clicked();
-    void getYunShi();
     void on_btnhk_clicked();
 
 signals:

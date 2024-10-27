@@ -26,50 +26,39 @@ MainWindow::~MainWindow()
 {
     delete ui;
 }
-void MainWindow::getYunShi(){
-    QByteArray responseData;
-    responseData = initReply->readAll();
-    //解析json
-    QString imageData;//接收到服务器的base64数据是string类型
-    QString txt;
-    QJsonParseError json_error;
-    QJsonDocument doucment = QJsonDocument::fromJson(responseData, &json_error);
-    if (json_error.error == QJsonParseError::NoError) {
-        if (doucment.isObject()) {
-            const QJsonObject obj = doucment.object();
-            if (obj.contains("yilist")) {
-                for (auto x : obj.value("yilist").toArray()){
-                    yilist << x.toString();
-                }
-            }
-            if (obj.contains("jilist")) {
-                for (auto x : obj.value("jilist").toArray()){
-                    jilist << x.toString();
-                }
-            }
-            initReply->deleteLater();
-        }
-    }
-    if (yilist.empty() or jilist.empty()){
-        return;
-    }
-    QString s1 = "宜\n";
-    s1 = s1+yilist[QDate::currentDate().day()%yilist.size()]+"\n";
-    s1 = s1+yilist[QDate::currentDate().day()%yilist.size()+1];
-    QString s2 = "忌\n";
-    s2 = s2+jilist[QDate::currentDate().day()%jilist.size()]+"\n";
-    s2 = s2+jilist[QDate::currentDate().day()%jilist.size()+1];
-    ui->jilabel->setText(s2);
-    ui->yilabel->setText(s1);
-    ui->label_4->setText("中平");
-}
 void MainWindow::showEvent(QShowEvent* event){
     smsManager = new QNetworkAccessManager(this);
     smsManager->setProxy(QNetworkProxy::NoProxy);
-    QString url = "http://aero80wd.github.io/apis/school/list.json";
+    QString url = QString("https://devapi.qweather.com/v7/weather/now?key=b7f4a7d1bfca4f13b6f265ea8676c297&location=%1").arg(Config["weather_localtion_id"].toString());
     Request = new QNetworkRequest(QUrl(url));
     QNetworkProxyFactory::setUseSystemConfiguration(false);
-    connect(smsManager , &QNetworkAccessManager::finished, this,&MainWindow::getYunShi);
+    connect(smsManager , &QNetworkAccessManager::finished, this,[=](QNetworkReply *reply)
+    {
+        showLog(QString("Status Code:%1").arg(reply->attribute(QNetworkRequest::HttpStatusCodeAttribute).toInt()),INFO);
+        if (reply->error())
+        {
+            showLog("Request Error" + reply->errorString(),ERR);
+            return;
+        }else
+        {
+            showLog(QString("Request ok, Reading..."),INFO);
+            QByteArray data = reply->readAll();
+            QJsonParseError error;
+            QJsonDocument document = QJsonDocument::fromJson(data,&error);
+            if(document.isNull())
+            {
+                showLog(QString("JSON Parse Error" + error.errorString()));
+                return;
+            }else
+            {
+                QJsonObject weather = document.object();
+                qDebug()<<weather;
+                ui->weather_icon_show->setStyleSheet(QString("image:url(:/res/qweather_icons/%1.svg)").arg(weather["now"].toObject()["icon"].toString()));
+                ui->weather_show->setText(QString("天气：%1\n温度：%2  体感温度：%3").arg(weather["now"].toObject()["text"].toString()).arg(weather["now"].toObject()["temp"].toString()).arg(weather["now"].toObject()["text"].toString()));
+            }
+
+        }
+    });
     initReply = smsManager ->get(*Request);
 }
 

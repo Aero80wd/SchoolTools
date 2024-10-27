@@ -59,6 +59,7 @@ signals:
     void addClass(QString text);
     void setClassStyleSheet(int idx,QString styleSheet);
     void toDone();
+    void initMainWindowAnimation();
 };
 class MainTableWidget : public QWidget
 {
@@ -89,6 +90,7 @@ public:
     refechTableThread* rtt;
     QString getToken();
     QPropertyAnimation* status_msg_animation;
+    QPropertyAnimation* hide_animation;
     QAction* m_showmain;
     QJsonObject Config;
     bool ishide = false;
@@ -103,6 +105,7 @@ public slots:
     void on_showConfig_modal();
     void hk_slot(QString day);
     void showStatus(QString str);
+    void initAnimation();
     // void do_pss();
     // void do_pst();
     // void do_tss();
@@ -112,12 +115,14 @@ private slots:
     void on_label_clicked();
     void on_showMainAction();
     void on_exitAppAction();
+    void on_hideWindow();
 private:
     Ui::MainTableWidget *ui;
     void initSysTrayIcon();
     void initSignal();
     void initUi();
     QHBoxLayout* class_show_widget_layout;
+    bool WindowHide = false;
 };
 
 

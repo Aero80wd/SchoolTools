@@ -108,7 +108,7 @@ int main(int argc, char *argv[])
     QScreen *scr = a.primaryScreen();
     int scr_w = scr->size().width();
     int scr_h = scr->size().height();
-    w->move((scr_w - w->width()) / 2, (scr_h - w->height()) / 9999999999999999999);
+    w->move((scr_w - w->width()) / 2, 0);
     ToolBox *tb = new ToolBox();
     tb->move((scr_w - tb->width()) * 0.9975, (scr_h - tb->height()) / 2*0.9);
     if (ToolBoxisOpen()){
