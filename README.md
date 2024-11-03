@@ -11,7 +11,7 @@
 
 <p align="center">
   <a href="https://pypi.org/project/PyQt-Fluent-Widgets" target="_blank">
-    <img src="https://img.shields.io/badge/Version-v5.0-2334D05" alt="Version">
+    <img src="https://img.shields.io/badge/Version-v5.3-2334D05" alt="Version">
   </a>
 
   <a style="text-decoration:none" href="/LICENSE">
@@ -44,6 +44,8 @@
 > **注意**
 > 如运行出现缺失DLL，请下载安装[VS2019运行库](https://aka.ms/vs/17/release/vc_redist.x64.exe)。
 ## 更新日志
+### [5.3] - 2024-11-3
+- 添加倒计时
 ### [v5.2] - 2024-10-27
 - 添加课表隐藏功能
 - 将运势改为天气

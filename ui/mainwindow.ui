@@ -6,8 +6,8 @@
    <rect>
     <x>0</x>
     <y>0</y>
-    <width>908</width>
-    <height>577</height>
+    <width>813</width>
+    <height>475</height>
    </rect>
   </property>
   <property name="windowTitle">
@@ -95,7 +95,7 @@
        <height>0</height>
       </size>
      </property>
-     <layout class="QGridLayout" name="gridLayout_2" rowstretch="5,3" columnstretch="3,2" rowminimumheight="0,0">
+     <layout class="QGridLayout" name="gridLayout_2" rowstretch="5,4" columnstretch="3,2">
       <item row="0" column="0">
        <widget class="QWidget" name="widget_3" native="true">
         <property name="styleSheet">
@@ -127,7 +127,7 @@ border-radius: 10px;</string>
              </property>
              <property name="font">
               <font>
-               <pointsize>18</pointsize>
+               <pointsize>16</pointsize>
               </font>
              </property>
              <property name="styleSheet">
@@ -207,7 +207,7 @@ border-radius: 10px;
           <number>10</number>
          </property>
          <property name="topMargin">
-          <number>10</number>
+          <number>20</number>
          </property>
          <property name="rightMargin">
           <number>10</number>
@@ -225,7 +225,7 @@ border-radius: 10px;
            </property>
            <property name="font">
             <font>
-             <pointsize>18</pointsize>
+             <pointsize>16</pointsize>
             </font>
            </property>
            <property name="styleSheet">
@@ -240,8 +240,8 @@ border-radius: 10px;
           <widget class="QLabel" name="weather_icon_show">
            <property name="maximumSize">
             <size>
-             <width>100</width>
-             <height>100</height>
+             <width>70</width>
+             <height>70</height>
             </size>
            </property>
            <property name="text">
@@ -273,8 +273,14 @@ border-radius: 10px;
             <widget class="QLabel" name="label_6">
              <property name="minimumSize">
               <size>
-               <width>50</width>
-               <height>0</height>
+               <width>30</width>
+               <height>30</height>
+              </size>
+             </property>
+             <property name="maximumSize">
+              <size>
+               <width>30</width>
+               <height>30</height>
               </size>
              </property>
              <property name="styleSheet">
@@ -322,7 +328,7 @@ border-radius: 10px;</string>
           <number>10</number>
          </property>
          <property name="topMargin">
-          <number>10</number>
+          <number>20</number>
          </property>
          <property name="rightMargin">
           <number>10</number>
@@ -334,7 +340,7 @@ border-radius: 10px;</string>
           <widget class="QLabel" name="label_5">
            <property name="font">
             <font>
-             <pointsize>18</pointsize>
+             <pointsize>16</pointsize>
             </font>
            </property>
            <property name="styleSheet">
@@ -411,6 +417,180 @@ background:rgb(11, 96, 139);
             </size>
            </property>
           </spacer>
+         </item>
+        </layout>
+       </widget>
+      </item>
+      <item row="1" column="1">
+       <widget class="QWidget" name="widget_6" native="true">
+        <property name="styleSheet">
+         <string notr="true">background: rgb(245, 245, 245);
+border-radius: 10px;
+</string>
+        </property>
+        <layout class="QVBoxLayout" name="verticalLayout_5">
+         <property name="topMargin">
+          <number>15</number>
+         </property>
+         <item>
+          <widget class="QLabel" name="label_7">
+           <property name="maximumSize">
+            <size>
+             <width>16777215</width>
+             <height>50</height>
+            </size>
+           </property>
+           <property name="font">
+            <font>
+             <pointsize>16</pointsize>
+            </font>
+           </property>
+           <property name="styleSheet">
+            <string notr="true">color:#000000;</string>
+           </property>
+           <property name="text">
+            <string>计时器</string>
+           </property>
+          </widget>
+         </item>
+         <item>
+          <layout class="QVBoxLayout" name="verticalLayout_6">
+           <item>
+            <layout class="QHBoxLayout" name="horizontalLayout_7">
+             <property name="spacing">
+              <number>0</number>
+             </property>
+             <item>
+              <widget class="QToolButton" name="min_up">
+               <property name="styleSheet">
+                <string notr="true">image: url(&quot;:/res/up_arrow.svg&quot;);
+background: #ffffff;</string>
+               </property>
+               <property name="text">
+                <string/>
+               </property>
+              </widget>
+             </item>
+             <item>
+              <widget class="QToolButton" name="sec_up">
+               <property name="styleSheet">
+                <string notr="true">image: url(&quot;:/res/up_arrow.svg&quot;);
+background: #ffffff;</string>
+               </property>
+               <property name="text">
+                <string/>
+               </property>
+              </widget>
+             </item>
+            </layout>
+           </item>
+           <item>
+            <widget class="ClickLabel" name="time_label">
+             <property name="font">
+              <font>
+               <pointsize>20</pointsize>
+              </font>
+             </property>
+             <property name="text">
+              <string> 00:00</string>
+             </property>
+             <property name="alignment">
+              <set>Qt::AlignmentFlag::AlignCenter</set>
+             </property>
+            </widget>
+           </item>
+           <item>
+            <layout class="QHBoxLayout" name="horizontalLayout_8">
+             <item>
+              <widget class="QToolButton" name="min_down">
+               <property name="styleSheet">
+                <string notr="true">image: url(&quot;:/res/down_arrow.svg&quot;);
+background: #ffffff;</string>
+               </property>
+               <property name="text">
+                <string/>
+               </property>
+              </widget>
+             </item>
+             <item>
+              <widget class="QToolButton" name="sec_down">
+               <property name="styleSheet">
+                <string notr="true">image: url(&quot;:/res/down_arrow.svg&quot;);
+background: #ffffff;</string>
+               </property>
+               <property name="text">
+                <string/>
+               </property>
+              </widget>
+             </item>
+            </layout>
+           </item>
+          </layout>
+         </item>
+         <item>
+          <layout class="QHBoxLayout" name="horizontalLayout_9">
+           <item>
+            <widget class="QPushButton" name="timer_start">
+             <property name="minimumSize">
+              <size>
+               <width>0</width>
+               <height>30</height>
+              </size>
+             </property>
+             <property name="styleSheet">
+              <string notr="true">QPushButton{
+	border-radius: 3px; /* 边框圆角 */
+	color:#ffffff;
+	background-color: #1191d3; /* 背景颜色 */
+	padding:3px;
+
+}
+QPushButton:hover{
+background:rgb(11, 96, 139);
+}
+</string>
+             </property>
+             <property name="text">
+              <string>开始</string>
+             </property>
+            </widget>
+           </item>
+           <item>
+            <widget class="QPushButton" name="pushButton">
+             <property name="enabled">
+              <bool>true</bool>
+             </property>
+             <property name="minimumSize">
+              <size>
+               <width>0</width>
+               <height>30</height>
+              </size>
+             </property>
+             <property name="styleSheet">
+              <string notr="true">QPushButton{
+	border-radius: 3px; /* 边框圆角 */
+	color:#ffffff;
+	background-color: #1191d3; /* 背景颜色 */
+	padding:3px;
+
+}
+QPushButton:hover{
+background:rgb(11, 96, 139);
+}
+QPushButton:disabled{
+background-color: rgb(177, 177, 177)
+}
+</string>
+             </property>
+             <property name="text">
+              <string>重置</string>
+             </property>
+             <property name="flat">
+              <bool>false</bool>
+             </property>
+            </widget>
+           </item>
+          </layout>
          </item>
         </layout>
        </widget>

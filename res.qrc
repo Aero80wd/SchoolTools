@@ -504,6 +504,8 @@
         <file>res/qweather_icons/qweather.svg</file>
         <file>res/left_arrow.svg</file>
         <file>res/right_arrow.svg</file>
+        <file>res/up_arrow.svg</file>
+        <file>res/down_arrow.svg</file>
     </qresource>
     <qresource prefix="/lang">
         <file>lang/lang_cn.qm</file>

@@ -45,7 +45,7 @@ public:
     void readTableJson();
     void refechTableWidget(QJsonArray today_table);
     QJsonObject config;
-    QString APP_VERSION = "5.2";
+    QString APP_VERSION = "5.3";
     void setConfig(QJsonObject obj);
     QJsonObject timeTable;
     void closeEvent(QCloseEvent *event) override;

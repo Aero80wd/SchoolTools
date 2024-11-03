@@ -36,6 +36,7 @@
 #include <windows.h>
 #include<QTranslator>
 #include"AppLog.h"
+#include<QTimerEvent>
 #include<dwmapi.h>
 QT_BEGIN_NAMESPACE
 
@@ -91,6 +92,7 @@ public:
     QString getToken();
     QPropertyAnimation* status_msg_animation;
     QPropertyAnimation* hide_animation;
+    QPropertyAnimation* timer_animation;
     QAction* m_showmain;
     QJsonObject Config;
     bool ishide = false;
@@ -110,19 +112,33 @@ public slots:
     // void do_pst();
     // void do_tss();
     // void do_tst();
+    void on_startTimer(QString timer_str);
+    void on_stopTimer();
+    void on_timerisStart(bool &st);
 
 private slots:
     void on_label_clicked();
     void on_showMainAction();
     void on_exitAppAction();
     void on_hideWindow();
+    void on_showTimer();
+    void on_getTimer(int &m,int &s);
+
+signals:
+    void showTimer();
+    void reText();
 private:
     Ui::MainTableWidget *ui;
     void initSysTrayIcon();
     void initSignal();
     void initUi();
+    bool timerStart = false;
     QHBoxLayout* class_show_widget_layout;
     bool WindowHide = false;
+    int timer_id;
+    qint64 min_time=0;
+    qint64 sec_time=0;
+    void timerEvent(QTimerEvent *event);
 };
 
 

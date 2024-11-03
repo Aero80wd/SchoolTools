@@ -40,6 +40,66 @@ MainTableWidget::~MainTableWidget()
 {
     delete ui;
 }
+void MainTableWidget::on_startTimer(QString timer_str)
+{
+    timerStart = true;
+    QStringList strList = timer_str.split(":");
+    min_time = strList[0].toLongLong();
+    sec_time = strList[1].toLongLong();
+    if (min_time == 0 && sec_time == 0)
+    {
+        timerStart=false;
+        showStatus("倒计时结束");
+        return;
+    }
+    timer_id = startTimer(1000);
+
+}
+void MainTableWidget::on_stopTimer()
+{
+    timerStart = false;
+    killTimer(timer_id);
+}
+void MainTableWidget::on_timerisStart(bool &st)
+{
+    st = timerStart;
+}
+void MainTableWidget::timerEvent(QTimerEvent *event)
+{
+
+    if (sec_time == 0 && min_time >0)
+    {
+        sec_time = 59;
+        min_time--;
+    }else
+    {
+        sec_time--;
+    }
+    if (min_time == 0 && sec_time == 0)
+    {
+        timerStart=false;
+        killTimer(timer_id);
+        showStatus("倒计时结束");
+        emit reText();
+        return;
+    }
+    ui->label_4->setText(QString("%1:%2").arg(min_time, 2, 10, QLatin1Char('0')).arg(sec_time, 2, 10, QLatin1Char('0')));
+    if (sec_time % 15 ==0 || (min_time == 0 && sec_time == 5))
+    {
+        emit showTimer();
+
+    }
+}
+void MainTableWidget::on_showTimer()
+{
+    timer_animation->setDirection(QAbstractAnimation::Forward);
+    timer_animation->start();
+    QEventLoop loop;//定义一个新的事件循环
+    QTimer::singleShot(5000, &loop, SLOT(quit()));//创建单次定时器，槽函数为事件循环的退出函数
+    loop.exec();//事件循环开始执行，程序会卡在这里，直到定时时间到，本循环被退出
+    timer_animation->setDirection(QAbstractAnimation::Backward);
+    timer_animation->start();
+}
 void MainTableWidget::showStatus(QString str)
 {
     showLog("ShowStatused!",INFO);
@@ -51,6 +111,11 @@ void MainTableWidget::showStatus(QString str)
         status_msg_animation->setDirection(QAbstractAnimation::Backward);
         status_msg_animation->start();
     });
+}
+void MainTableWidget::on_getTimer(int &m,int &s)
+{
+    m = min_time;
+    s = sec_time;
 }
 enum AccentStateForMainTableWidget {
     ACCENT_DISABLED = 0,
@@ -93,12 +158,19 @@ void MainTableWidget::initAnimation()
     int scr_w = scr->size().width();
     int scr_h = scr->size().height();
     move((scr_w - width()) / 2, 0);
+    ui->timer_show->move(width() + ui->timer_show->width(),0);
+    // 窗口隐藏/显示动画
     hide_animation = new QPropertyAnimation(this,"pos");
     hide_animation->setDuration(500);
     hide_animation->setEasingCurve(QEasingCurve::InOutSine);
     hide_animation->setStartValue(pos());
     hide_animation->setEndValue(QPoint(scr_w-41,0));
-
+    // 计时器隐藏/显示动画
+    timer_animation = new QPropertyAnimation(ui->timer_show,"pos");
+    timer_animation->setDuration(500);
+    timer_animation->setEasingCurve(QEasingCurve::InOutSine);
+    timer_animation->setStartValue(pos());
+    timer_animation->setEndValue(QPoint(width()-ui->timer_show->width(),0));
 }
 void MainTableWidget::initUi(){
     setWindowFlags(Qt::WindowType::FramelessWindowHint | Qt::WindowType::Tool | Qt::WindowType::WindowStaysOnTopHint);
@@ -183,6 +255,8 @@ void MainTableWidget::initSignal(){
     },Qt::QueuedConnection);
     connect(rtt,&refechTableThread::initMainWindowAnimation,this,&MainTableWidget::initAnimation,Qt::QueuedConnection);
     connect(ui->hide_window,&QPushButton::clicked,this,&MainTableWidget::on_hideWindow);
+    connect(this,&MainTableWidget::showTimer,this,&MainTableWidget::on_showTimer,Qt::QueuedConnection);
+
 
 }
 void MainTableWidget::readTimeTable(){
@@ -494,6 +568,11 @@ void MainTableWidget::createActions(){
 void MainTableWidget::startMainWindow(){
     MainWindow *mainwin = new MainWindow(this);
     connect(mainwin,&MainWindow::hk,this,&MainTableWidget::hk_slot);
+    connect(mainwin,&MainWindow::timerisStart,this,&MainTableWidget::on_timerisStart);
+    connect(mainwin,&MainWindow::stopTm,this,&MainTableWidget::on_stopTimer);
+    connect(mainwin,&MainWindow::startTm,this,&MainTableWidget::on_startTimer);
+    connect(mainwin,&MainWindow::getTimer,this,&MainTableWidget::on_getTimer);
+    connect(this,&MainTableWidget::reText,mainwin,&MainWindow::on_reText);
     QScreen *scr = qApp->primaryScreen();
     int scr_w = scr->size().width();
     int scr_h = scr->size().height();

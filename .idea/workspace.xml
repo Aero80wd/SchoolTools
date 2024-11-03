@@ -25,505 +25,16 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="17245380-76f1-4830-8dac-6092e5c83626" name="更改" comment="5.2 update">
-      <change afterPath="$PROJECT_DIR$/res/left_arrow.svg" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/res/qweather_icons/100-fill.svg" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/res/qweather_icons/100.svg" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/res/qweather_icons/1001.svg" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/res/qweather_icons/1002.svg" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/res/qweather_icons/1003.svg" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/res/qweather_icons/1004.svg" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/res/qweather_icons/1005.svg" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/res/qweather_icons/1006.svg" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/res/qweather_icons/1007.svg" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/res/qweather_icons/1008.svg" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/res/qweather_icons/1009.svg" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/res/qweather_icons/101-fill.svg" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/res/qweather_icons/101.svg" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/res/qweather_icons/1010.svg" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/res/qweather_icons/1011.svg" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/res/qweather_icons/1012.svg" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/res/qweather_icons/1013.svg" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/res/qweather_icons/1014.svg" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/res/qweather_icons/1015.svg" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/res/qweather_icons/1016.svg" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/res/qweather_icons/1017.svg" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/res/qweather_icons/1018.svg" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/res/qweather_icons/1019.svg" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/res/qweather_icons/102-fill.svg" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/res/qweather_icons/102.svg" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/res/qweather_icons/1020.svg" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/res/qweather_icons/1021.svg" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/res/qweather_icons/1022.svg" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/res/qweather_icons/1023.svg" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/res/qweather_icons/1024.svg" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/res/qweather_icons/1025.svg" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/res/qweather_icons/1026.svg" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/res/qweather_icons/1027.svg" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/res/qweather_icons/1028.svg" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/res/qweather_icons/1029.svg" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/res/qweather_icons/103-fill.svg" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/res/qweather_icons/103.svg" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/res/qweather_icons/1030.svg" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/res/qweather_icons/1031.svg" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/res/qweather_icons/1032.svg" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/res/qweather_icons/1033.svg" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/res/qweather_icons/1034.svg" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/res/qweather_icons/1035.svg" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/res/qweather_icons/1036.svg" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/res/qweather_icons/1037.svg" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/res/qweather_icons/1038.svg" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/res/qweather_icons/1039.svg" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/res/qweather_icons/104-fill.svg" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/res/qweather_icons/104.svg" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/res/qweather_icons/1040.svg" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/res/qweather_icons/1041.svg" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/res/qweather_icons/1042.svg" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/res/qweather_icons/1043.svg" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/res/qweather_icons/1044.svg" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/res/qweather_icons/1045.svg" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/res/qweather_icons/1046.svg" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/res/qweather_icons/1047.svg" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/res/qweather_icons/1048.svg" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/res/qweather_icons/1049.svg" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/res/qweather_icons/1050.svg" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/res/qweather_icons/1051.svg" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/res/qweather_icons/1052.svg" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/res/qweather_icons/1053.svg" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/res/qweather_icons/1054.svg" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/res/qweather_icons/1055.svg" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/res/qweather_icons/1056.svg" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/res/qweather_icons/1057.svg" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/res/qweather_icons/1058.svg" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/res/qweather_icons/1059.svg" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/res/qweather_icons/1060.svg" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/res/qweather_icons/1061.svg" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/res/qweather_icons/1062.svg" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/res/qweather_icons/1063.svg" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/res/qweather_icons/1064.svg" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/res/qweather_icons/1065.svg" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/res/qweather_icons/1066.svg" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/res/qweather_icons/1067.svg" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/res/qweather_icons/1068.svg" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/res/qweather_icons/1069.svg" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/res/qweather_icons/1071.svg" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/res/qweather_icons/1072.svg" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/res/qweather_icons/1073.svg" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/res/qweather_icons/1074.svg" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/res/qweather_icons/1075.svg" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/res/qweather_icons/1076.svg" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/res/qweather_icons/1077.svg" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/res/qweather_icons/1078.svg" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/res/qweather_icons/1079.svg" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/res/qweather_icons/1080.svg" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/res/qweather_icons/1081.svg" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/res/qweather_icons/1082.svg" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/res/qweather_icons/1084.svg" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/res/qweather_icons/1085.svg" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/res/qweather_icons/1086.svg" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/res/qweather_icons/1087.svg" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/res/qweather_icons/1088.svg" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/res/qweather_icons/1089.svg" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/res/qweather_icons/1201.svg" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/res/qweather_icons/1202.svg" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/res/qweather_icons/1203.svg" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/res/qweather_icons/1204.svg" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/res/qweather_icons/1205.svg" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/res/qweather_icons/1206.svg" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/res/qweather_icons/1207.svg" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/res/qweather_icons/1208.svg" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/res/qweather_icons/1209.svg" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/res/qweather_icons/1210.svg" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/res/qweather_icons/1211.svg" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/res/qweather_icons/1212.svg" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/res/qweather_icons/1213.svg" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/res/qweather_icons/1214.svg" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/res/qweather_icons/1215.svg" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/res/qweather_icons/1216.svg" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/res/qweather_icons/1217.svg" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/res/qweather_icons/1218.svg" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/res/qweather_icons/1219.svg" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/res/qweather_icons/1221.svg" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/res/qweather_icons/1241.svg" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/res/qweather_icons/1242.svg" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/res/qweather_icons/1243.svg" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/res/qweather_icons/1244.svg" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/res/qweather_icons/1245.svg" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/res/qweather_icons/1246.svg" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/res/qweather_icons/1247.svg" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/res/qweather_icons/1248.svg" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/res/qweather_icons/1249.svg" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/res/qweather_icons/1250.svg" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/res/qweather_icons/1251.svg" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/res/qweather_icons/1271.svg" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/res/qweather_icons/1272.svg" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/res/qweather_icons/1273.svg" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/res/qweather_icons/1274.svg" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/res/qweather_icons/150-fill.svg" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/res/qweather_icons/150.svg" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/res/qweather_icons/151-fill.svg" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/res/qweather_icons/151.svg" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/res/qweather_icons/152-fill.svg" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/res/qweather_icons/152.svg" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/res/qweather_icons/153-fill.svg" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/res/qweather_icons/153.svg" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/res/qweather_icons/1601.svg" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/res/qweather_icons/1602.svg" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/res/qweather_icons/1603.svg" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/res/qweather_icons/1604.svg" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/res/qweather_icons/1605.svg" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/res/qweather_icons/1606.svg" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/res/qweather_icons/1607.svg" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/res/qweather_icons/1608.svg" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/res/qweather_icons/1609.svg" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/res/qweather_icons/1610.svg" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/res/qweather_icons/1701.svg" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/res/qweather_icons/1702.svg" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/res/qweather_icons/1703.svg" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/res/qweather_icons/1801.svg" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/res/qweather_icons/1802.svg" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/res/qweather_icons/1803.svg" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/res/qweather_icons/1804.svg" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/res/qweather_icons/1805.svg" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/res/qweather_icons/2001.svg" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/res/qweather_icons/2002.svg" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/res/qweather_icons/2003.svg" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/res/qweather_icons/2004.svg" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/res/qweather_icons/2005.svg" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/res/qweather_icons/2006.svg" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/res/qweather_icons/2007.svg" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/res/qweather_icons/2029.svg" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/res/qweather_icons/2030.svg" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/res/qweather_icons/2031.svg" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/res/qweather_icons/2032.svg" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/res/qweather_icons/2033.svg" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/res/qweather_icons/2050.svg" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/res/qweather_icons/2051.svg" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/res/qweather_icons/2052.svg" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/res/qweather_icons/2053.svg" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/res/qweather_icons/2054.svg" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/res/qweather_icons/2070.svg" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/res/qweather_icons/2071.svg" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/res/qweather_icons/2072.svg" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/res/qweather_icons/2073.svg" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/res/qweather_icons/2074.svg" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/res/qweather_icons/2075.svg" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/res/qweather_icons/2076.svg" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/res/qweather_icons/2077.svg" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/res/qweather_icons/2078.svg" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/res/qweather_icons/2079.svg" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/res/qweather_icons/2080.svg" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/res/qweather_icons/2081.svg" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/res/qweather_icons/2082.svg" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/res/qweather_icons/2083.svg" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/res/qweather_icons/2084.svg" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/res/qweather_icons/2085.svg" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/res/qweather_icons/2100.svg" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/res/qweather_icons/2101.svg" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/res/qweather_icons/2102.svg" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/res/qweather_icons/2103.svg" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/res/qweather_icons/2104.svg" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/res/qweather_icons/2105.svg" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/res/qweather_icons/2106.svg" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/res/qweather_icons/2107.svg" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/res/qweather_icons/2108.svg" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/res/qweather_icons/2109.svg" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/res/qweather_icons/2111.svg" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/res/qweather_icons/2120.svg" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/res/qweather_icons/2121.svg" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/res/qweather_icons/2122.svg" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/res/qweather_icons/2123.svg" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/res/qweather_icons/2124.svg" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/res/qweather_icons/2125.svg" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/res/qweather_icons/2126.svg" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/res/qweather_icons/2127.svg" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/res/qweather_icons/2128.svg" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/res/qweather_icons/2129.svg" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/res/qweather_icons/2130.svg" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/res/qweather_icons/2131.svg" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/res/qweather_icons/2132.svg" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/res/qweather_icons/2133.svg" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/res/qweather_icons/2134.svg" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/res/qweather_icons/2135.svg" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/res/qweather_icons/2150.svg" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/res/qweather_icons/2151.svg" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/res/qweather_icons/2152.svg" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/res/qweather_icons/2153.svg" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/res/qweather_icons/2154.svg" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/res/qweather_icons/2155.svg" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/res/qweather_icons/2156.svg" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/res/qweather_icons/2157.svg" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/res/qweather_icons/2158.svg" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/res/qweather_icons/2159.svg" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/res/qweather_icons/2160.svg" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/res/qweather_icons/2161.svg" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/res/qweather_icons/2162.svg" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/res/qweather_icons/2163.svg" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/res/qweather_icons/2164.svg" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/res/qweather_icons/2165.svg" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/res/qweather_icons/2166.svg" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/res/qweather_icons/2190.svg" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/res/qweather_icons/2191.svg" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/res/qweather_icons/2192.svg" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/res/qweather_icons/2193.svg" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/res/qweather_icons/2200.svg" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/res/qweather_icons/2201.svg" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/res/qweather_icons/2202.svg" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/res/qweather_icons/2203.svg" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/res/qweather_icons/2204.svg" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/res/qweather_icons/2205.svg" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/res/qweather_icons/2207.svg" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/res/qweather_icons/2208.svg" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/res/qweather_icons/2209.svg" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/res/qweather_icons/2210.svg" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/res/qweather_icons/2211.svg" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/res/qweather_icons/2212.svg" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/res/qweather_icons/2213.svg" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/res/qweather_icons/2214.svg" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/res/qweather_icons/2215.svg" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/res/qweather_icons/2216.svg" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/res/qweather_icons/2217.svg" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/res/qweather_icons/2218.svg" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/res/qweather_icons/2300.svg" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/res/qweather_icons/2301.svg" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/res/qweather_icons/2302.svg" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/res/qweather_icons/2303.svg" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/res/qweather_icons/2304.svg" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/res/qweather_icons/2305.svg" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/res/qweather_icons/2306.svg" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/res/qweather_icons/2307.svg" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/res/qweather_icons/2308.svg" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/res/qweather_icons/2309.svg" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/res/qweather_icons/2311.svg" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/res/qweather_icons/2312.svg" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/res/qweather_icons/2313.svg" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/res/qweather_icons/2314.svg" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/res/qweather_icons/2315.svg" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/res/qweather_icons/2316.svg" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/res/qweather_icons/2317.svg" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/res/qweather_icons/2318.svg" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/res/qweather_icons/2319.svg" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/res/qweather_icons/2320.svg" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/res/qweather_icons/2321.svg" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/res/qweather_icons/2322.svg" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/res/qweather_icons/2323.svg" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/res/qweather_icons/2324.svg" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/res/qweather_icons/2325.svg" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/res/qweather_icons/2326.svg" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/res/qweather_icons/2327.svg" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/res/qweather_icons/2328.svg" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/res/qweather_icons/2330.svg" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/res/qweather_icons/2331.svg" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/res/qweather_icons/2332.svg" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/res/qweather_icons/2333.svg" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/res/qweather_icons/2341.svg" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/res/qweather_icons/2343.svg" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/res/qweather_icons/2345.svg" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/res/qweather_icons/2346.svg" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/res/qweather_icons/2348.svg" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/res/qweather_icons/2349.svg" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/res/qweather_icons/2350.svg" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/res/qweather_icons/2351.svg" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/res/qweather_icons/2352.svg" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/res/qweather_icons/2353.svg" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/res/qweather_icons/2354.svg" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/res/qweather_icons/2355.svg" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/res/qweather_icons/2356.svg" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/res/qweather_icons/2357.svg" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/res/qweather_icons/2358.svg" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/res/qweather_icons/2359.svg" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/res/qweather_icons/2360.svg" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/res/qweather_icons/2361.svg" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/res/qweather_icons/2362.svg" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/res/qweather_icons/2363.svg" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/res/qweather_icons/2364.svg" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/res/qweather_icons/2365.svg" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/res/qweather_icons/2366.svg" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/res/qweather_icons/2367.svg" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/res/qweather_icons/2368.svg" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/res/qweather_icons/2369.svg" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/res/qweather_icons/2370.svg" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/res/qweather_icons/2371.svg" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/res/qweather_icons/2372.svg" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/res/qweather_icons/2373.svg" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/res/qweather_icons/2374.svg" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/res/qweather_icons/2375.svg" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/res/qweather_icons/2376.svg" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/res/qweather_icons/2377.svg" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/res/qweather_icons/2378.svg" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/res/qweather_icons/2379.svg" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/res/qweather_icons/2380.svg" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/res/qweather_icons/2381.svg" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/res/qweather_icons/2382.svg" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/res/qweather_icons/2383.svg" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/res/qweather_icons/2384.svg" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/res/qweather_icons/2385.svg" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/res/qweather_icons/2386.svg" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/res/qweather_icons/2387.svg" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/res/qweather_icons/2388.svg" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/res/qweather_icons/2389.svg" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/res/qweather_icons/2390.svg" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/res/qweather_icons/2391.svg" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/res/qweather_icons/2392.svg" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/res/qweather_icons/2393.svg" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/res/qweather_icons/2394.svg" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/res/qweather_icons/2395.svg" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/res/qweather_icons/2396.svg" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/res/qweather_icons/2397.svg" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/res/qweather_icons/2398.svg" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/res/qweather_icons/2399.svg" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/res/qweather_icons/2400.svg" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/res/qweather_icons/2409.svg" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/res/qweather_icons/2411.svg" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/res/qweather_icons/2412.svg" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/res/qweather_icons/2413.svg" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/res/qweather_icons/2414.svg" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/res/qweather_icons/2415.svg" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/res/qweather_icons/2416.svg" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/res/qweather_icons/2417.svg" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/res/qweather_icons/2418.svg" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/res/qweather_icons/2419.svg" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/res/qweather_icons/2420.svg" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/res/qweather_icons/2421.svg" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/res/qweather_icons/2422.svg" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/res/qweather_icons/2423.svg" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/res/qweather_icons/2424.svg" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/res/qweather_icons/2425.svg" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/res/qweather_icons/2426.svg" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/res/qweather_icons/300-fill.svg" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/res/qweather_icons/300.svg" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/res/qweather_icons/301-fill.svg" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/res/qweather_icons/301.svg" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/res/qweather_icons/302-fill.svg" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/res/qweather_icons/302.svg" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/res/qweather_icons/303-fill.svg" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/res/qweather_icons/303.svg" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/res/qweather_icons/304-fill.svg" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/res/qweather_icons/304.svg" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/res/qweather_icons/305-fill.svg" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/res/qweather_icons/305.svg" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/res/qweather_icons/306-fill.svg" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/res/qweather_icons/306.svg" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/res/qweather_icons/307-fill.svg" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/res/qweather_icons/307.svg" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/res/qweather_icons/308-fill.svg" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/res/qweather_icons/308.svg" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/res/qweather_icons/309-fill.svg" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/res/qweather_icons/309.svg" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/res/qweather_icons/310-fill.svg" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/res/qweather_icons/310.svg" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/res/qweather_icons/311-fill.svg" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/res/qweather_icons/311.svg" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/res/qweather_icons/312-fill.svg" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/res/qweather_icons/312.svg" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/res/qweather_icons/313-fill.svg" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/res/qweather_icons/313.svg" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/res/qweather_icons/314-fill.svg" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/res/qweather_icons/314.svg" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/res/qweather_icons/315-fill.svg" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/res/qweather_icons/315.svg" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/res/qweather_icons/316-fill.svg" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/res/qweather_icons/316.svg" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/res/qweather_icons/317-fill.svg" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/res/qweather_icons/317.svg" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/res/qweather_icons/318-fill.svg" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/res/qweather_icons/318.svg" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/res/qweather_icons/350-fill.svg" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/res/qweather_icons/350.svg" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/res/qweather_icons/351-fill.svg" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/res/qweather_icons/351.svg" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/res/qweather_icons/399-fill.svg" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/res/qweather_icons/399.svg" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/res/qweather_icons/400-fill.svg" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/res/qweather_icons/400.svg" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/res/qweather_icons/401-fill.svg" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/res/qweather_icons/401.svg" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/res/qweather_icons/402-fill.svg" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/res/qweather_icons/402.svg" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/res/qweather_icons/403-fill.svg" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/res/qweather_icons/403.svg" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/res/qweather_icons/404-fill.svg" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/res/qweather_icons/404.svg" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/res/qweather_icons/405-fill.svg" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/res/qweather_icons/405.svg" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/res/qweather_icons/406-fill.svg" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/res/qweather_icons/406.svg" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/res/qweather_icons/407-fill.svg" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/res/qweather_icons/407.svg" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/res/qweather_icons/408-fill.svg" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/res/qweather_icons/408.svg" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/res/qweather_icons/409-fill.svg" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/res/qweather_icons/409.svg" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/res/qweather_icons/410-fill.svg" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/res/qweather_icons/410.svg" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/res/qweather_icons/456-fill.svg" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/res/qweather_icons/456.svg" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/res/qweather_icons/457-fill.svg" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/res/qweather_icons/457.svg" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/res/qweather_icons/499-fill.svg" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/res/qweather_icons/499.svg" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/res/qweather_icons/500-fill.svg" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/res/qweather_icons/500.svg" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/res/qweather_icons/501-fill.svg" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/res/qweather_icons/501.svg" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/res/qweather_icons/502-fill.svg" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/res/qweather_icons/502.svg" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/res/qweather_icons/503-fill.svg" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/res/qweather_icons/503.svg" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/res/qweather_icons/504-fill.svg" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/res/qweather_icons/504.svg" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/res/qweather_icons/507-fill.svg" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/res/qweather_icons/507.svg" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/res/qweather_icons/508-fill.svg" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/res/qweather_icons/508.svg" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/res/qweather_icons/509-fill.svg" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/res/qweather_icons/509.svg" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/res/qweather_icons/510-fill.svg" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/res/qweather_icons/510.svg" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/res/qweather_icons/511-fill.svg" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/res/qweather_icons/511.svg" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/res/qweather_icons/512-fill.svg" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/res/qweather_icons/512.svg" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/res/qweather_icons/513-fill.svg" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/res/qweather_icons/513.svg" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/res/qweather_icons/514-fill.svg" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/res/qweather_icons/514.svg" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/res/qweather_icons/515-fill.svg" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/res/qweather_icons/515.svg" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/res/qweather_icons/800.svg" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/res/qweather_icons/801.svg" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/res/qweather_icons/802.svg" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/res/qweather_icons/803.svg" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/res/qweather_icons/804.svg" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/res/qweather_icons/805.svg" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/res/qweather_icons/806.svg" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/res/qweather_icons/807.svg" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/res/qweather_icons/900-fill.svg" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/res/qweather_icons/900.svg" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/res/qweather_icons/901-fill.svg" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/res/qweather_icons/901.svg" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/res/qweather_icons/999-fill.svg" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/res/qweather_icons/999.svg" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/res/qweather_icons/9998.svg" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/res/qweather_icons/9999.svg" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/res/qweather_icons/qweather-fill.svg" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/res/qweather_icons/qweather.svg" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/res/right_arrow.svg" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/editor.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/editor.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/QtSettings.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/QtSettings.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/cpp/maintablewidget.cpp" beforeDir="false" afterPath="$PROJECT_DIR$/cpp/maintablewidget.cpp" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/cpp/mainwindow.cpp" beforeDir="false" afterPath="$PROJECT_DIR$/cpp/mainwindow.cpp" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/cpp/tableeditwidget.cpp" beforeDir="false" afterPath="$PROJECT_DIR$/cpp/tableeditwidget.cpp" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/headers/maintablewidget.h" beforeDir="false" afterPath="$PROJECT_DIR$/headers/maintablewidget.h" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/headers/mainwindow.h" beforeDir="false" afterPath="$PROJECT_DIR$/headers/mainwindow.h" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/headers/tableeditwidget.h" beforeDir="false" afterPath="$PROJECT_DIR$/headers/tableeditwidget.h" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/icon.rc" beforeDir="false" afterPath="$PROJECT_DIR$/icon.rc" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/main.cpp" beforeDir="false" afterPath="$PROJECT_DIR$/main.cpp" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/res.qrc" beforeDir="false" afterPath="$PROJECT_DIR$/res.qrc" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/setup.iss" beforeDir="false" afterPath="$PROJECT_DIR$/setup.iss" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/setup/SchoolTools-setup.exe" beforeDir="false" afterPath="$PROJECT_DIR$/setup/SchoolTools-setup.exe" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/ui/maintablewidget.ui" beforeDir="false" afterPath="$PROJECT_DIR$/ui/maintablewidget.ui" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/ui/mainwindow.ui" beforeDir="false" afterPath="$PROJECT_DIR$/ui/mainwindow.ui" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/ui/tableeditwidget.ui" beforeDir="false" afterPath="$PROJECT_DIR$/ui/tableeditwidget.ui" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -533,7 +44,7 @@
   <component name="ClangdSettings">
     <option name="formatViaClangd" value="false" />
   </component>
-  <component name="ExecutionTargetManager" SELECTED_TARGET="CMakeBuildProfile:Release-Visual Studio" />
+  <component name="ExecutionTargetManager" SELECTED_TARGET="CMakeBuildProfile:Debug-Visual Studio" />
   <component name="Git.Settings">
     <excluded-from-favorite>
       <branch-storage>
@@ -661,64 +172,6 @@
     <setting file="mock:///dummy.cpp" root0="SKIP_HIGHLIGHTING" />
     <setting file="mock:///dummy.cpp" root0="SKIP_HIGHLIGHTING" />
     <setting file="mock:///dummy.cpp" root0="SKIP_HIGHLIGHTING" />
-    <setting file="mock:///dummy.cpp" root0="SKIP_HIGHLIGHTING" />
-    <setting file="mock:///dummy.cpp" root0="SKIP_HIGHLIGHTING" />
-    <setting file="mock:///dummy.cpp" root0="SKIP_HIGHLIGHTING" />
-    <setting file="mock:///dummy.cpp" root0="SKIP_HIGHLIGHTING" />
-    <setting file="mock:///dummy.cpp" root0="SKIP_HIGHLIGHTING" />
-    <setting file="mock:///dummy.cpp" root0="SKIP_HIGHLIGHTING" />
-    <setting file="mock:///dummy.cpp" root0="SKIP_HIGHLIGHTING" />
-    <setting file="mock:///dummy.cpp" root0="SKIP_HIGHLIGHTING" />
-    <setting file="mock:///dummy.cpp" root0="SKIP_HIGHLIGHTING" />
-    <setting file="mock:///dummy.cpp" root0="SKIP_HIGHLIGHTING" />
-    <setting file="mock:///dummy.cpp" root0="SKIP_HIGHLIGHTING" />
-    <setting file="mock:///dummy.cpp" root0="SKIP_HIGHLIGHTING" />
-    <setting file="mock:///dummy.cpp" root0="SKIP_HIGHLIGHTING" />
-    <setting file="mock:///dummy.cpp" root0="SKIP_HIGHLIGHTING" />
-    <setting file="mock:///dummy.cpp" root0="SKIP_HIGHLIGHTING" />
-    <setting file="mock:///dummy.cpp" root0="SKIP_HIGHLIGHTING" />
-    <setting file="mock:///dummy.cpp" root0="SKIP_HIGHLIGHTING" />
-    <setting file="mock:///dummy.cpp" root0="SKIP_HIGHLIGHTING" />
-    <setting file="mock:///dummy.cpp" root0="SKIP_HIGHLIGHTING" />
-    <setting file="mock:///dummy.cpp" root0="SKIP_HIGHLIGHTING" />
-    <setting file="mock:///dummy.cpp" root0="SKIP_HIGHLIGHTING" />
-    <setting file="mock:///dummy.cpp" root0="SKIP_HIGHLIGHTING" />
-    <setting file="mock:///dummy.cpp" root0="SKIP_HIGHLIGHTING" />
-    <setting file="mock:///dummy.cpp" root0="SKIP_HIGHLIGHTING" />
-    <setting file="mock:///dummy.cpp" root0="SKIP_HIGHLIGHTING" />
-    <setting file="mock:///dummy.cpp" root0="SKIP_HIGHLIGHTING" />
-    <setting file="mock:///dummy.cpp" root0="SKIP_HIGHLIGHTING" />
-    <setting file="mock:///dummy.cpp" root0="SKIP_HIGHLIGHTING" />
-    <setting file="mock:///dummy.cpp" root0="SKIP_HIGHLIGHTING" />
-    <setting file="mock:///dummy.cpp" root0="SKIP_HIGHLIGHTING" />
-    <setting file="mock:///dummy.cpp" root0="SKIP_HIGHLIGHTING" />
-    <setting file="mock:///dummy.cpp" root0="SKIP_HIGHLIGHTING" />
-    <setting file="mock:///dummy.cpp" root0="SKIP_HIGHLIGHTING" />
-    <setting file="mock:///dummy.cpp" root0="SKIP_HIGHLIGHTING" />
-    <setting file="mock:///dummy.cpp" root0="SKIP_HIGHLIGHTING" />
-    <setting file="mock:///dummy.cpp" root0="SKIP_HIGHLIGHTING" />
-    <setting file="mock:///dummy.cpp" root0="SKIP_HIGHLIGHTING" />
-    <setting file="mock:///dummy.cpp" root0="SKIP_HIGHLIGHTING" />
-    <setting file="mock:///dummy.cpp" root0="SKIP_HIGHLIGHTING" />
-    <setting file="mock:///dummy.cpp" root0="SKIP_HIGHLIGHTING" />
-    <setting file="mock:///dummy.cpp" root0="SKIP_HIGHLIGHTING" />
-    <setting file="mock:///dummy.cpp" root0="SKIP_HIGHLIGHTING" />
-    <setting file="mock:///dummy.cpp" root0="SKIP_HIGHLIGHTING" />
-    <setting file="mock:///dummy.cpp" root0="SKIP_HIGHLIGHTING" />
-    <setting file="mock:///dummy.cpp" root0="SKIP_HIGHLIGHTING" />
-    <setting file="mock:///dummy.cpp" root0="SKIP_HIGHLIGHTING" />
-    <setting file="mock:///dummy.cpp" root0="SKIP_HIGHLIGHTING" />
-    <setting file="mock:///dummy.cpp" root0="SKIP_HIGHLIGHTING" />
-    <setting file="mock:///dummy.cpp" root0="SKIP_HIGHLIGHTING" />
-    <setting file="mock:///dummy.cpp" root0="SKIP_HIGHLIGHTING" />
-    <setting file="mock:///dummy.cpp" root0="SKIP_HIGHLIGHTING" />
-    <setting file="mock:///dummy.cpp" root0="SKIP_HIGHLIGHTING" />
-    <setting file="mock:///dummy.cpp" root0="SKIP_HIGHLIGHTING" />
-    <setting file="mock:///dummy.cpp" root0="SKIP_HIGHLIGHTING" />
-    <setting file="mock:///dummy.cpp" root0="SKIP_HIGHLIGHTING" />
-    <setting file="mock:///dummy.cpp" root0="SKIP_HIGHLIGHTING" />
-    <setting file="mock:///dummy.cpp" root0="SKIP_HIGHLIGHTING" />
-    <setting file="mock:///dummy.cpp" root0="SKIP_HIGHLIGHTING" />
     <setting file="file://$PROJECT_DIR$/../../../../Program Files (x86)/Windows Kits/10/Include/10.0.22621.0/um/dwmapi.h" root0="FORCE_HIGHLIGHTING" />
     <setting file="file://$PROJECT_DIR$/../../../../Qt/6.7.2/msvc2019_64/include/QtCore/qpropertyanimation.h" root0="FORCE_HIGHLIGHTING" />
   </component>
@@ -736,28 +189,28 @@
     <option name="hideEmptyMiddlePackages" value="true" />
     <option name="showLibraryContents" value="true" />
   </component>
-  <component name="PropertiesComponent"><![CDATA[{
-  "keyToString": {
-    "CMake 应用程序.SchoolTools.executor": "Debug",
-    "RunOnceActivity.RadMigrateCodeStyle": "true",
-    "RunOnceActivity.ShowReadmeOnStart": "true",
-    "RunOnceActivity.cidr.known.project.marker": "true",
-    "RunOnceActivity.readMode.enableVisualFormatting": "true",
-    "SHARE_PROJECT_CONFIGURATION_FILES": "true",
-    "cf.first.check.clang-format": "false",
-    "cidr.known.project.marker": "true",
-    "git-widget-placeholder": "main",
-    "last_opened_file_path": "F:/phm-service",
-    "node.js.detected.package.eslint": "true",
-    "node.js.detected.package.tslint": "true",
-    "node.js.selected.package.eslint": "(autodetect)",
-    "node.js.selected.package.tslint": "(autodetect)",
-    "nodejs_package_manager_path": "npm",
-    "settings.editor.selected.configurable": "reference.settings.project.statistic.project.settings",
-    "structure.view.defaults.are.configured": "true",
-    "vue.rearranger.settings.migration": "true"
+  <component name="PropertiesComponent">{
+  &quot;keyToString&quot;: {
+    &quot;CMake 应用程序.SchoolTools.executor&quot;: &quot;Debug&quot;,
+    &quot;RunOnceActivity.RadMigrateCodeStyle&quot;: &quot;true&quot;,
+    &quot;RunOnceActivity.ShowReadmeOnStart&quot;: &quot;true&quot;,
+    &quot;RunOnceActivity.cidr.known.project.marker&quot;: &quot;true&quot;,
+    &quot;RunOnceActivity.readMode.enableVisualFormatting&quot;: &quot;true&quot;,
+    &quot;SHARE_PROJECT_CONFIGURATION_FILES&quot;: &quot;true&quot;,
+    &quot;cf.first.check.clang-format&quot;: &quot;false&quot;,
+    &quot;cidr.known.project.marker&quot;: &quot;true&quot;,
+    &quot;git-widget-placeholder&quot;: &quot;main&quot;,
+    &quot;last_opened_file_path&quot;: &quot;F:/phm-service&quot;,
+    &quot;node.js.detected.package.eslint&quot;: &quot;true&quot;,
+    &quot;node.js.detected.package.tslint&quot;: &quot;true&quot;,
+    &quot;node.js.selected.package.eslint&quot;: &quot;(autodetect)&quot;,
+    &quot;node.js.selected.package.tslint&quot;: &quot;(autodetect)&quot;,
+    &quot;nodejs_package_manager_path&quot;: &quot;npm&quot;,
+    &quot;settings.editor.selected.configurable&quot;: &quot;reference.settings.project.statistic.project.settings&quot;,
+    &quot;structure.view.defaults.are.configured&quot;: &quot;true&quot;,
+    &quot;vue.rearranger.settings.migration&quot;: &quot;true&quot;
   }
-}]]></component>
+}</component>
   <component name="RunManager">
     <configuration name="SchoolTools" type="CMakeRunConfiguration" factoryName="Application" REDIRECT_INPUT="false" ELEVATE="false" USE_EXTERNAL_CONSOLE="false" EMULATE_TERMINAL="false" PASS_PARENT_ENVS_2="true" PROJECT_NAME="SchoolTools" TARGET_NAME="SchoolTools" CONFIG_NAME="Debug-Visual Studio" RUN_TARGET_PROJECT_NAME="SchoolTools" RUN_TARGET_NAME="SchoolTools">
       <envs>
@@ -815,7 +268,10 @@
       <workItem from="1728804469453" duration="5120000" />
       <workItem from="1729338731641" duration="6427000" />
       <workItem from="1729407885052" duration="5374000" />
-      <workItem from="1730011387808" duration="3117000" />
+      <workItem from="1730011387808" duration="5217000" />
+      <workItem from="1730595802329" duration="2413000" />
+      <workItem from="1730599224803" duration="6353000" />
+      <workItem from="1730606155900" duration="2329000" />
     </task>
     <task id="LOCAL-00001" summary="4.0 update">
       <option name="closed" value="true" />
@@ -857,7 +313,23 @@
       <option name="project" value="LOCAL" />
       <updated>1728808639324</updated>
     </task>
-    <option name="localTasksCounter" value="6" />
+    <task id="LOCAL-00006" summary="5.2 update">
+      <option name="closed" value="true" />
+      <created>1730014513435</created>
+      <option name="number" value="00006" />
+      <option name="presentableId" value="LOCAL-00006" />
+      <option name="project" value="LOCAL" />
+      <updated>1730014513435</updated>
+    </task>
+    <task id="LOCAL-00007" summary="5.2 update">
+      <option name="closed" value="true" />
+      <created>1730014700350</created>
+      <option name="number" value="00007" />
+      <option name="presentableId" value="LOCAL-00007" />
+      <option name="project" value="LOCAL" />
+      <updated>1730014700350</updated>
+    </task>
+    <option name="localTasksCounter" value="8" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -892,188 +364,188 @@
       <breakpoints>
         <line-breakpoint enabled="true" type="com.jetbrains.cidr.execution.debugger.OCBreakpointType">
           <url>file://$PROJECT_DIR$/cpp/maintablewidget.cpp</url>
-          <line>95</line>
+          <line>162</line>
           <option name="timeStamp" value="11" />
         </line-breakpoint>
         <line-breakpoint enabled="true" type="com.jetbrains.cidr.execution.debugger.OCBreakpointType">
           <url>file://$PROJECT_DIR$/cpp/maintablewidget.cpp</url>
-          <line>97</line>
+          <line>164</line>
           <option name="timeStamp" value="12" />
         </line-breakpoint>
         <line-breakpoint enabled="true" type="com.jetbrains.cidr.execution.debugger.OCBreakpointType">
           <url>file://$PROJECT_DIR$/cpp/maintablewidget.cpp</url>
-          <line>96</line>
+          <line>163</line>
           <option name="timeStamp" value="13" />
         </line-breakpoint>
         <line-breakpoint enabled="true" type="com.jetbrains.cidr.execution.debugger.OCBreakpointType">
           <url>file://$PROJECT_DIR$/cpp/maintablewidget.cpp</url>
-          <line>98</line>
+          <line>165</line>
           <option name="timeStamp" value="14" />
         </line-breakpoint>
         <line-breakpoint enabled="true" type="com.jetbrains.cidr.execution.debugger.OCBreakpointType">
           <url>file://$PROJECT_DIR$/cpp/maintablewidget.cpp</url>
-          <line>560</line>
+          <line>639</line>
           <option name="timeStamp" value="15" />
         </line-breakpoint>
         <line-breakpoint enabled="true" type="com.jetbrains.cidr.execution.debugger.OCBreakpointType">
           <url>file://$PROJECT_DIR$/cpp/maintablewidget.cpp</url>
-          <line>559</line>
+          <line>638</line>
           <option name="timeStamp" value="16" />
         </line-breakpoint>
         <line-breakpoint enabled="true" type="com.jetbrains.cidr.execution.debugger.OCBreakpointType">
           <url>file://$PROJECT_DIR$/cpp/maintablewidget.cpp</url>
-          <line>558</line>
+          <line>637</line>
           <option name="timeStamp" value="17" />
         </line-breakpoint>
         <line-breakpoint enabled="true" type="com.jetbrains.cidr.execution.debugger.OCBreakpointType">
           <url>file://$PROJECT_DIR$/cpp/maintablewidget.cpp</url>
-          <line>561</line>
+          <line>640</line>
           <option name="timeStamp" value="18" />
         </line-breakpoint>
         <line-breakpoint enabled="true" type="com.jetbrains.cidr.execution.debugger.OCBreakpointType">
           <url>file://$PROJECT_DIR$/cpp/maintablewidget.cpp</url>
-          <line>549</line>
+          <line>628</line>
           <option name="timeStamp" value="19" />
         </line-breakpoint>
         <line-breakpoint enabled="true" type="com.jetbrains.cidr.execution.debugger.OCBreakpointType">
           <url>file://$PROJECT_DIR$/cpp/maintablewidget.cpp</url>
-          <line>550</line>
+          <line>629</line>
           <option name="timeStamp" value="20" />
         </line-breakpoint>
         <line-breakpoint enabled="true" type="com.jetbrains.cidr.execution.debugger.OCBreakpointType">
           <url>file://$PROJECT_DIR$/cpp/maintablewidget.cpp</url>
-          <line>552</line>
+          <line>631</line>
           <option name="timeStamp" value="21" />
         </line-breakpoint>
         <line-breakpoint enabled="true" type="com.jetbrains.cidr.execution.debugger.OCBreakpointType">
           <url>file://$PROJECT_DIR$/cpp/maintablewidget.cpp</url>
-          <line>553</line>
+          <line>632</line>
           <option name="timeStamp" value="22" />
         </line-breakpoint>
         <line-breakpoint enabled="true" type="com.jetbrains.cidr.execution.debugger.OCBreakpointType">
           <url>file://$PROJECT_DIR$/cpp/maintablewidget.cpp</url>
-          <line>551</line>
+          <line>630</line>
           <option name="timeStamp" value="23" />
         </line-breakpoint>
         <line-breakpoint enabled="true" type="com.jetbrains.cidr.execution.debugger.OCBreakpointType">
-          <url>file://$PROJECT_DIR$/cpp/maintablewidget.cpp</url>
-          <line>274</line>
-          <option name="timeStamp" value="25" />
+          <url>file://$PROJECT_DIR$/cpp/mainwindow.cpp</url>
+          <line>242</line>
+          <option name="timeStamp" value="49" />
+        </line-breakpoint>
+        <line-breakpoint enabled="true" type="com.jetbrains.cidr.execution.debugger.OCBreakpointType">
+          <url>file://$PROJECT_DIR$/cpp/mainwindow.cpp</url>
+          <line>245</line>
+          <option name="timeStamp" value="50" />
+        </line-breakpoint>
+        <line-breakpoint enabled="true" type="com.jetbrains.cidr.execution.debugger.OCBreakpointType">
+          <url>file://$PROJECT_DIR$/cpp/mainwindow.cpp</url>
+          <line>247</line>
+          <option name="timeStamp" value="51" />
+        </line-breakpoint>
+        <line-breakpoint enabled="true" type="com.jetbrains.cidr.execution.debugger.OCBreakpointType">
+          <url>file://$PROJECT_DIR$/cpp/mainwindow.cpp</url>
+          <line>250</line>
+          <option name="timeStamp" value="52" />
+        </line-breakpoint>
+        <line-breakpoint enabled="true" type="com.jetbrains.cidr.execution.debugger.OCBreakpointType">
+          <url>file://$PROJECT_DIR$/cpp/mainwindow.cpp</url>
+          <line>252</line>
+          <option name="timeStamp" value="53" />
+        </line-breakpoint>
+        <line-breakpoint enabled="true" type="com.jetbrains.cidr.execution.debugger.OCBreakpointType">
+          <url>file://$PROJECT_DIR$/cpp/mainwindow.cpp</url>
+          <line>254</line>
+          <option name="timeStamp" value="54" />
+        </line-breakpoint>
+        <line-breakpoint enabled="true" type="com.jetbrains.cidr.execution.debugger.OCBreakpointType">
+          <url>file://$PROJECT_DIR$/cpp/mainwindow.cpp</url>
+          <line>256</line>
+          <option name="timeStamp" value="55" />
+        </line-breakpoint>
+        <line-breakpoint enabled="true" type="com.jetbrains.cidr.execution.debugger.OCBreakpointType">
+          <url>file://$PROJECT_DIR$/cpp/mainwindow.cpp</url>
+          <line>258</line>
+          <option name="timeStamp" value="56" />
         </line-breakpoint>
         <line-breakpoint enabled="true" type="com.jetbrains.cidr.execution.debugger.OCBreakpointType">
           <url>file://$PROJECT_DIR$/cpp/maintablewidget.cpp</url>
-          <line>275</line>
-          <option name="timeStamp" value="26" />
+          <line>43</line>
+          <option name="timeStamp" value="57" />
         </line-breakpoint>
         <line-breakpoint enabled="true" type="com.jetbrains.cidr.execution.debugger.OCBreakpointType">
           <url>file://$PROJECT_DIR$/cpp/maintablewidget.cpp</url>
-          <line>276</line>
-          <option name="timeStamp" value="27" />
+          <line>46</line>
+          <option name="timeStamp" value="59" />
         </line-breakpoint>
         <line-breakpoint enabled="true" type="com.jetbrains.cidr.execution.debugger.OCBreakpointType">
           <url>file://$PROJECT_DIR$/cpp/maintablewidget.cpp</url>
-          <line>277</line>
-          <option name="timeStamp" value="28" />
+          <line>45</line>
+          <option name="timeStamp" value="60" />
         </line-breakpoint>
         <line-breakpoint enabled="true" type="com.jetbrains.cidr.execution.debugger.OCBreakpointType">
           <url>file://$PROJECT_DIR$/cpp/maintablewidget.cpp</url>
-          <line>278</line>
-          <option name="timeStamp" value="29" />
+          <line>44</line>
+          <option name="timeStamp" value="61" />
         </line-breakpoint>
         <line-breakpoint enabled="true" type="com.jetbrains.cidr.execution.debugger.OCBreakpointType">
           <url>file://$PROJECT_DIR$/cpp/maintablewidget.cpp</url>
-          <line>279</line>
-          <option name="timeStamp" value="30" />
+          <line>47</line>
+          <option name="timeStamp" value="62" />
         </line-breakpoint>
         <line-breakpoint enabled="true" type="com.jetbrains.cidr.execution.debugger.OCBreakpointType">
           <url>file://$PROJECT_DIR$/cpp/maintablewidget.cpp</url>
-          <line>280</line>
-          <option name="timeStamp" value="31" />
+          <line>54</line>
+          <option name="timeStamp" value="63" />
         </line-breakpoint>
         <line-breakpoint enabled="true" type="com.jetbrains.cidr.execution.debugger.OCBreakpointType">
           <url>file://$PROJECT_DIR$/cpp/maintablewidget.cpp</url>
-          <line>281</line>
-          <option name="timeStamp" value="32" />
+          <line>56</line>
+          <option name="timeStamp" value="64" />
         </line-breakpoint>
         <line-breakpoint enabled="true" type="com.jetbrains.cidr.execution.debugger.OCBreakpointType">
           <url>file://$PROJECT_DIR$/cpp/maintablewidget.cpp</url>
-          <line>282</line>
-          <option name="timeStamp" value="33" />
+          <line>92</line>
+          <option name="timeStamp" value="85" />
         </line-breakpoint>
         <line-breakpoint enabled="true" type="com.jetbrains.cidr.execution.debugger.OCBreakpointType">
           <url>file://$PROJECT_DIR$/cpp/maintablewidget.cpp</url>
-          <line>286</line>
-          <option name="timeStamp" value="34" />
+          <line>93</line>
+          <option name="timeStamp" value="86" />
         </line-breakpoint>
         <line-breakpoint enabled="true" type="com.jetbrains.cidr.execution.debugger.OCBreakpointType">
           <url>file://$PROJECT_DIR$/cpp/maintablewidget.cpp</url>
-          <line>300</line>
-          <option name="timeStamp" value="35" />
+          <line>94</line>
+          <option name="timeStamp" value="87" />
         </line-breakpoint>
         <line-breakpoint enabled="true" type="com.jetbrains.cidr.execution.debugger.OCBreakpointType">
           <url>file://$PROJECT_DIR$/cpp/maintablewidget.cpp</url>
-          <line>299</line>
-          <option name="timeStamp" value="36" />
+          <line>95</line>
+          <option name="timeStamp" value="88" />
         </line-breakpoint>
         <line-breakpoint enabled="true" type="com.jetbrains.cidr.execution.debugger.OCBreakpointType">
           <url>file://$PROJECT_DIR$/cpp/maintablewidget.cpp</url>
-          <line>301</line>
-          <option name="timeStamp" value="37" />
+          <line>96</line>
+          <option name="timeStamp" value="89" />
         </line-breakpoint>
         <line-breakpoint enabled="true" type="com.jetbrains.cidr.execution.debugger.OCBreakpointType">
           <url>file://$PROJECT_DIR$/cpp/maintablewidget.cpp</url>
-          <line>302</line>
-          <option name="timeStamp" value="38" />
+          <line>97</line>
+          <option name="timeStamp" value="90" />
         </line-breakpoint>
         <line-breakpoint enabled="true" type="com.jetbrains.cidr.execution.debugger.OCBreakpointType">
           <url>file://$PROJECT_DIR$/cpp/maintablewidget.cpp</url>
-          <line>312</line>
-          <option name="timeStamp" value="39" />
+          <line>100</line>
+          <option name="timeStamp" value="93" />
         </line-breakpoint>
         <line-breakpoint enabled="true" type="com.jetbrains.cidr.execution.debugger.OCBreakpointType">
           <url>file://$PROJECT_DIR$/cpp/maintablewidget.cpp</url>
-          <line>313</line>
-          <option name="timeStamp" value="40" />
+          <line>98</line>
+          <option name="timeStamp" value="94" />
         </line-breakpoint>
         <line-breakpoint enabled="true" type="com.jetbrains.cidr.execution.debugger.OCBreakpointType">
           <url>file://$PROJECT_DIR$/cpp/maintablewidget.cpp</url>
-          <line>315</line>
-          <option name="timeStamp" value="41" />
-        </line-breakpoint>
-        <line-breakpoint enabled="true" type="com.jetbrains.cidr.execution.debugger.OCBreakpointType">
-          <url>file://$PROJECT_DIR$/cpp/maintablewidget.cpp</url>
-          <line>314</line>
-          <option name="timeStamp" value="42" />
-        </line-breakpoint>
-        <line-breakpoint enabled="true" type="com.jetbrains.cidr.execution.debugger.OCBreakpointType">
-          <url>file://$PROJECT_DIR$/cpp/maintablewidget.cpp</url>
-          <line>316</line>
-          <option name="timeStamp" value="43" />
-        </line-breakpoint>
-        <line-breakpoint enabled="true" type="com.jetbrains.cidr.execution.debugger.OCBreakpointType">
-          <url>file://$PROJECT_DIR$/cpp/maintablewidget.cpp</url>
-          <line>334</line>
-          <option name="timeStamp" value="44" />
-        </line-breakpoint>
-        <line-breakpoint enabled="true" type="com.jetbrains.cidr.execution.debugger.OCBreakpointType">
-          <url>file://$PROJECT_DIR$/cpp/maintablewidget.cpp</url>
-          <line>335</line>
-          <option name="timeStamp" value="45" />
-        </line-breakpoint>
-        <line-breakpoint enabled="true" type="com.jetbrains.cidr.execution.debugger.OCBreakpointType">
-          <url>file://$PROJECT_DIR$/cpp/maintablewidget.cpp</url>
-          <line>336</line>
-          <option name="timeStamp" value="46" />
-        </line-breakpoint>
-        <line-breakpoint enabled="true" type="com.jetbrains.cidr.execution.debugger.OCBreakpointType">
-          <url>file://$PROJECT_DIR$/cpp/maintablewidget.cpp</url>
-          <line>337</line>
-          <option name="timeStamp" value="47" />
-        </line-breakpoint>
-        <line-breakpoint enabled="true" type="com.jetbrains.cidr.execution.debugger.OCBreakpointType">
-          <url>file://$PROJECT_DIR$/cpp/maintablewidget.cpp</url>
-          <line>338</line>
-          <option name="timeStamp" value="48" />
+          <line>99</line>
+          <option name="timeStamp" value="95" />
         </line-breakpoint>
       </breakpoints>
     </breakpoint-manager>

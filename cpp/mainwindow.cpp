@@ -20,11 +20,43 @@ MainWindow::MainWindow(QWidget *parent) :
         ui->retranslateUi(this);
     }
     readTodos();
+    connect(ui->min_up,&QToolButton::clicked,this,&MainWindow::on_time_changed);
+    connect(ui->min_down,&QToolButton::clicked,this,&MainWindow::on_time_changed);
+    connect(ui->sec_up,&QToolButton::clicked,this,&MainWindow::on_time_changed);
+    connect(ui->sec_down,&QToolButton::clicked,this,&MainWindow::on_time_changed);
+    connect(ui->timer_start,&QPushButton::clicked,this,&MainWindow::on_startTimer_Click);
+    connect(ui->pushButton,&QPushButton::clicked,this,[=]
+    {
+        ui->time_label->setText("00:00");
+    });
+    startTimer(10);
 }
 
 MainWindow::~MainWindow()
 {
     delete ui;
+}
+void MainWindow::on_reText()
+{
+    ui->time_label->setText("00:00");
+}
+void MainWindow::timerEvent(QTimerEvent *event)
+{
+    bool timerStart;
+    emit timerisStart(timerStart);
+    if (timerStart)
+    {
+        int min,sec;
+        emit getTimer(min,sec);
+        ui->time_label->setText(QString("%1:%2").arg(min, 2, 10, QLatin1Char('0')).arg(sec, 2, 10, QLatin1Char('0')));
+        ui->timer_start->setText("停止");
+        ui->pushButton->setEnabled(false);
+    }else{
+
+        ui->timer_start->setText("开始");
+        ui->pushButton->setEnabled(true);
+    }
+
 }
 void MainWindow::showEvent(QShowEvent* event){
     smsManager = new QNetworkAccessManager(this);
@@ -189,7 +221,59 @@ void MainWindow::on_btnhk_clicked()
     en_cnday["星期三"] = "Wed";
     en_cnday["星期四"] = "Thu";
     en_cnday["星期五"] = "Fri";
-    QString day = QInputDialog::getItem(this,"换课","选择使用的星期",items);
-    emit hk(en_cnday[day]);
+    bool ok;
+    QString day = QInputDialog::getItem(this,"换课","选择使用的星期",items,0,false,&ok);
+    qDebug() << day;
+    if (ok)
+    {
+        emit hk(en_cnday[day]);
+    }
+
 }
 
+void MainWindow::on_time_changed()
+{
+    QObject *sender_button = sender();
+    QStringList times = ui->time_label->text().split(":");
+    QList<qint64> times_int;
+    foreach (QString t, times)
+    {
+        times_int.append(t.toLongLong());
+    }
+    if (sender_button->objectName() == "min_up")
+    {
+
+        times_int[0]++;
+    }
+    else if (sender_button->objectName() == "min_down" && times_int[0] > 0)
+    {
+
+        times_int[0]--;
+    }
+    else if (sender_button->objectName() == "sec_up")
+    {
+        times_int[1]++;
+    }
+    else if (sender_button->objectName() == "sec_down" && times_int[1] > 0)
+    {
+        times_int[1]--;
+    }
+    ui->time_label->setText(QString("%1:%2").arg(times_int[0], 2, 10, QLatin1Char('0')).arg(times_int[1], 2, 10, QLatin1Char('0')));
+}
+
+void MainWindow::on_startTimer_Click()
+{
+    bool timerStart;
+    emit timerisStart(timerStart);
+    if (!timerStart)
+    {
+        emit startTm(ui->time_label->text());
+        ui->timer_start->setText("停止");
+        ui->pushButton->setEnabled(false);
+    }else{
+        emit stopTm();
+        ui->timer_start->setText("开始");
+        ui->pushButton->setEnabled(true);
+    }
+
+}

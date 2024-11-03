@@ -44,12 +44,21 @@ public:
     QNetworkRequest *Request;
     void newTodo(QString name,bool n=false);
     QNetworkReply* initReply;
+    void timerEvent(QTimerEvent *event) override;
 private slots:
     void on_butAdd_clicked();
     void on_btnhk_clicked();
+    void on_time_changed();
+    void on_startTimer_Click();
 
 signals:
     void hk(QString day);
+    void timerisStart(bool &st);
+    void startTm(QString timer_st);
+    void stopTm();
+    void getTimer(int &m,int &s);
+public slots:
+    void on_reText();
 private:
     Ui::MainWindow *ui;
 };
