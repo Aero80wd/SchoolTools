@@ -6,8 +6,8 @@
    <rect>
     <x>0</x>
     <y>0</y>
-    <width>719</width>
-    <height>325</height>
+    <width>721</width>
+    <height>330</height>
    </rect>
   </property>
   <property name="windowTitle">
@@ -16,7 +16,7 @@
   <widget class="QLabel" name="label">
    <property name="geometry">
     <rect>
-     <x>139</x>
+     <x>209</x>
      <y>120</y>
      <width>6</width>
      <height>131</height>
@@ -32,7 +32,7 @@
   <widget class="QLabel" name="label_2">
    <property name="geometry">
     <rect>
-     <x>80</x>
+     <x>150</x>
      <y>70</y>
      <width>191</width>
      <height>41</height>
@@ -58,7 +58,7 @@
   <widget class="QLabel" name="label_3">
    <property name="geometry">
     <rect>
-     <x>150</x>
+     <x>220</x>
      <y>120</y>
      <width>141</width>
      <height>61</height>
@@ -81,7 +81,7 @@
   <widget class="QLabel" name="label_4">
    <property name="geometry">
     <rect>
-     <x>280</x>
+     <x>350</x>
      <y>70</y>
      <width>81</width>
      <height>111</height>
@@ -104,7 +104,7 @@ color: rgb(252, 4, 13);</string>
   <widget class="QLabel" name="label_5">
    <property name="geometry">
     <rect>
-     <x>380</x>
+     <x>450</x>
      <y>120</y>
      <width>211</width>
      <height>61</height>
@@ -127,7 +127,7 @@ color: rgb(252, 4, 13);</string>
   <widget class="QLabel" name="label_6">
    <property name="geometry">
     <rect>
-     <x>160</x>
+     <x>230</x>
      <y>190</y>
      <width>351</width>
      <height>61</height>
@@ -151,7 +151,7 @@ left until the holiday</string>
   <widget class="QLabel" name="label_7">
    <property name="geometry">
     <rect>
-     <x>400</x>
+     <x>470</x>
      <y>100</y>
      <width>411</width>
      <height>21</height>

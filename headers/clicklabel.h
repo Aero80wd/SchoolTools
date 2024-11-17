@@ -14,6 +14,7 @@ public:
     virtual void mouseDoubleClickEvent(QMouseEvent* e);
     virtual bool event(QEvent *e);
     QPropertyAnimation* resize_animation;
+    QPropertyAnimation* jump_animation;
     bool anisettinged = false;
     bool aniopen = false;
     void setAniOpen(bool status){

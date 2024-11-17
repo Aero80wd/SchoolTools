@@ -158,18 +158,19 @@ void MainTableWidget::initAnimation()
     int scr_w = scr->size().width();
     int scr_h = scr->size().height();
     move((scr_w - width()) / 2, 0);
+    move((scr_w - width()) / 2, 0);
     ui->timer_show->move(width() + ui->timer_show->width(),0);
     // 窗口隐藏/显示动画
     hide_animation = new QPropertyAnimation(this,"pos");
     hide_animation->setDuration(500);
     hide_animation->setEasingCurve(QEasingCurve::InOutSine);
     hide_animation->setStartValue(pos());
-    hide_animation->setEndValue(QPoint(scr_w-41,0));
+    hide_animation->setEndValue(QPoint(scr_w-21,0));
     // 计时器隐藏/显示动画
     timer_animation = new QPropertyAnimation(ui->timer_show,"pos");
-    timer_animation->setDuration(500);
+    timer_animation->setDuration(1000);
     timer_animation->setEasingCurve(QEasingCurve::InOutSine);
-    timer_animation->setStartValue(pos());
+    timer_animation->setStartValue(ui->timer_show->pos());
     timer_animation->setEndValue(QPoint(width()-ui->timer_show->width(),0));
 }
 void MainTableWidget::initUi(){
@@ -206,13 +207,11 @@ void MainTableWidget::on_hideWindow()
     {
         hide_animation->setDirection(QAbstractAnimation::Forward);
         hide_animation->start();
-        ui->hide_window->setStyleSheet("background: rgba(0,0,0,0);border:none;image: url(:/res/left_arrow.svg);");
         WindowHide = true;
     }else
     {
         hide_animation->setDirection(QAbstractAnimation::Backward);
         hide_animation->start();
-        ui->hide_window->setStyleSheet("background: rgba(0,0,0,0);border:none;image: url(:/res/right_arrow.svg);");
         WindowHide = false;
     }
 }

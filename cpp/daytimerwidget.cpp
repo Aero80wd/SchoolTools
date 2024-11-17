@@ -31,6 +31,8 @@ DayTimerWidget::DayTimerWidget(QWidget *parent) :
     ui->label_4->setFont(QFont(fontName2,110));
     ui->label_7->setFont(QFont(fontName2,20));
     ui->label_6->setFont(QFont(fontName3,20));
+    fm = new QFontMetrics(QFont(fontName2,110));
+
 }
 
 DayTimerWidget::~DayTimerWidget() {
@@ -86,8 +88,8 @@ void DayTimerWidget::reload_timer() {
         ui->label_5->setText("");
         ui->label_4->setText("一天不剩");
         ui->label_7->setText("");
-        ui->label_6->setText(TimeJson["english_end"].toString());
-        ui->label_4->setGeometry(QRect(280, 70, 200 * 4, 111));
+        ui->label_6->setText(TimeJson["english_end"].toString().replace("$","DAY"));
+        ui->label_4->setGeometry(QRect(170, 100, 200 * 4, 111));
         int fontId1 = QFontDatabase::addApplicationFont(":/res/DTF-1.ttf");
         QString fontName1 = QFontDatabase::applicationFontFamilies(fontId1).at(0);
         QFont font = QFont(fontName1,47);
@@ -114,11 +116,11 @@ void DayTimerWidget::reload_timer() {
         return;
     }
 
-    ui->label_7->setGeometry(QRect(380 + (50 * QString::number(retime).length()), 100, 411, 21));
+    ui->label_7->setGeometry(QRect(350 + fm->horizontalAdvance(QString::number(retime)) +10 , 100, 411, 21));
     dw_e = dw_e.toUpper();
     ui->label_5->setText(dw);
-    ui->label_4->setGeometry(QRect(290, 70, 100 * QString::number(retime).length(), 111));
-    ui->label_5->setGeometry(QRect(300+80 * QString::number(retime).length(), 120, 211, 61));
+    ui->label_4->setGeometry(QRect(350, 70, fm->horizontalAdvance(QString::number(retime)) , 111));
+    ui->label_5->setGeometry(QRect(350+fm->horizontalAdvance(QString::number(retime))+10, 120, 211, 61));
     ui->label_4->setNum(retime);
     ui->label_6->setText(TimeJson["english"].toString().replace("()", QString::number(retime)).replace("$",dw_e));
 }

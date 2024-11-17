@@ -115,7 +115,7 @@ int main(int argc, char *argv[])
         tb->show();
     }
     DayTimerWidget *dtw = new DayTimerWidget();
-    dtw->move((scr_w - dtw->width())*1.3,(scr_h - dtw->height()) * 0.95);
+    dtw->move((scr_w - dtw->width()),(scr_h - dtw->height()) * 0.95);
     if (TimerisOpen()) {
         dtw->show();
     }

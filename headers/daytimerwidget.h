@@ -25,7 +25,7 @@ Q_OBJECT
 public:
     explicit DayTimerWidget(QWidget *parent = nullptr);
     QTimer* timer_timer;
-
+    QFontMetrics *fm = nullptr;
     void readTimeJson();
     QJsonObject TimeJson;
     ~DayTimerWidget() override;
