@@ -349,6 +349,11 @@ background:rgb(11, 96, 139);
            <layout class="QHBoxLayout" name="horizontalLayout_2">
             <item>
              <widget class="QRadioButton" name="radioButton">
+              <property name="font">
+               <font>
+                <pointsize>10</pointsize>
+               </font>
+              </property>
               <property name="styleSheet">
                <string notr="true">QRadioButton::indicator{
 	width:15px;
@@ -375,6 +380,11 @@ QRadioButton::indicator:unchecked{
             </item>
             <item>
              <widget class="QRadioButton" name="radioButton_2">
+              <property name="font">
+               <font>
+                <pointsize>10</pointsize>
+               </font>
+              </property>
               <property name="styleSheet">
                <string notr="true">QRadioButton::indicator{
 	width:15px;
@@ -398,6 +408,11 @@ QRadioButton::indicator:unchecked{
             </item>
             <item>
              <widget class="QRadioButton" name="radioButton_3">
+              <property name="font">
+               <font>
+                <pointsize>10</pointsize>
+               </font>
+              </property>
               <property name="styleSheet">
                <string notr="true">QRadioButton::indicator{
 	width:15px;
@@ -421,6 +436,11 @@ QRadioButton::indicator:unchecked{
             </item>
             <item>
              <widget class="QRadioButton" name="radioButton_4">
+              <property name="font">
+               <font>
+                <pointsize>10</pointsize>
+               </font>
+              </property>
               <property name="styleSheet">
                <string notr="true">QRadioButton::indicator{
 	width:15px;
@@ -444,6 +464,11 @@ QRadioButton::indicator:unchecked{
             </item>
             <item>
              <widget class="QRadioButton" name="radioButton_5">
+              <property name="font">
+               <font>
+                <pointsize>10</pointsize>
+               </font>
+              </property>
               <property name="styleSheet">
                <string notr="true">QRadioButton::indicator{
 	width:15px;
@@ -462,6 +487,63 @@ QRadioButton::indicator:unchecked{
               </property>
               <property name="text">
                <string>周五</string>
+              </property>
+             </widget>
+            </item>
+            <item>
+             <widget class="QRadioButton" name="radioButton_6">
+              <property name="enabled">
+               <bool>false</bool>
+              </property>
+              <property name="font">
+               <font>
+                <pointsize>10</pointsize>
+               </font>
+              </property>
+              <property name="styleSheet">
+               <string notr="true">QRadioButton::indicator{
+	width:15px;
+	height:15px;
+	border-image:url(&quot;:/res/radiobutton/stable.png&quot;);
+}
+QRadioButton::indicator:unchecked:hover{
+	border-image:url(&quot;:/res/radiobutton/hover.png&quot;);
+}
+QRadioButton::indicator:checked{
+	border-image:url(&quot;:/res/radiobutton/checked.png&quot;);
+}
+QRadioButton::indicator:unchecked{
+	border-image:url(&quot;:/res/radiobutton/stable.png&quot;);
+}</string>
+              </property>
+              <property name="text">
+               <string>附加课表</string>
+              </property>
+             </widget>
+            </item>
+            <item>
+             <widget class="QPushButton" name="start_table_manager">
+              <property name="minimumSize">
+               <size>
+                <width>0</width>
+                <height>25</height>
+               </size>
+              </property>
+              <property name="styleSheet">
+               <string notr="true">QPushButton{
+	border-radius: 3px; /* 边框圆角 */
+	color:#ffffff;
+	background-color: #1191d3; /* 背景颜色 */
+	padding:3px;
+
+}
+QPushButton:hover{
+background:rgb(11, 96, 139);
+}
+</string>
+              </property>
+              <property name="text">
+               <string>管理附加</string>
               </property>
              </widget>
             </item>

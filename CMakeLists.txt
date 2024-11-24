@@ -1,6 +1,6 @@
 cmake_minimum_required(VERSION 3.5)
 
-project(SchoolTools VERSION 3.5 LANGUAGES CXX)
+project(SchoolTools VERSION 5.4 LANGUAGES CXX)
 
 file(GLOB_RECURSE QRC_SOURCE_FILES ${CMAKE_CURRENT_SOURCE_DIR}/*.qrc)
 list(APPEND CMAKE_AUTOUIC_SEARCH_PATHS "ui")
@@ -9,7 +9,7 @@ set(CMAKE_AUTOMOC ON)
 set(CMAKE_AUTORCC ON)
 set(CMAKE_CXX_STANDARD 20)
 set(CMAKE_CXX_STANDARD_REQUIRED ON)
-set(QT6_VERSION_USER "6.7.3")
+set(QT6_VERSION_USER "6.7.2")
 set(CMAKE_PREFIX_PATH "C:/Qt/${QT6_VERSION_USER}/msvc2019_64/lib/cmake/")
 set(QRC_SOURCE_FILES res.qrc)
 set(CMAKE_BUILD_PARALLEL_LEVEL 16)
@@ -60,6 +60,9 @@ set(PROJECT_SOURCES
         cpp/NetworkRequests.cpp
         headers/NetworkRequests.h
         cpp/NetworkRequests.cpp
+        cpp/AppendixTableManager.cpp
+        headers/AppendixTableManager.h
+        ui/AppendixTableManager.ui
 )
 set(useWin32 TRUE)
 qt_add_executable(SchoolTools WIN32

@@ -8,6 +8,7 @@
 #include<QDateTime>
 #include<QProcess>
 #include<QFontDatabase>
+#include<QStyleFactory>
 #include"headers/AppLog.h"
 #include"headers/NetworkRequests.h"
 #include"headers/syncingdialog.h"
@@ -98,6 +99,7 @@ int main(int argc, char *argv[])
     QApplication::setQuitOnLastWindowClosed(false);
     showLog("MainWindow is Show",LogStatus::INFO);
     SyncingDialog *syncDialog = new SyncingDialog();
+
     if (SyncisOpen())
     {
         syncDialog->syncRemoteJson();

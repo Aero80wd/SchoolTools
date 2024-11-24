@@ -20,7 +20,41 @@ TableEditWidget::TableEditWidget(QWidget *parent)
     connect(ui->label,&ClickLabel::clicked,this,[=]{
         if (clickcnt >=10){
             clickcnt=0;
-            ui->tabWidget->insertTab(6,ui->tab_3,QString(tr("彩蛋设置")));
+            QInputDialog dialog{this, Qt::WindowCloseButtonHint};
+            dialog.setWindowTitle(tr("新建待办"));
+            dialog.setInputMode(QInputDialog::InputMode::TextInput);
+            dialog.setTextEchoMode(QLineEdit::Normal);
+            dialog.setLabelText(tr("Enter Debug Code To Run"));
+            dialog.setOkButtonText(QObject::tr("确定"));
+            dialog.setCancelButtonText(QObject::tr("取消"));
+            dialog.setFixedSize(350,250);
+            dialog.setTextValue("");
+            // 设置了 QPushButtuon 的三态， QLineEdit 的样式， QLable 和 整体的背景色
+            QString style = "QPushButton{background:#1191d3; color:rgb(255,255,255); border-radius:3px; min-height:30px; min-width:60px; font:13px \"Microsoft YaHei\";}"
+                            "QPushButton:hover{background:#1191d0;}"
+                            "QPushButton:pressed{background:rgb(32,75,148);}"
+                            "QLineEdit{border:2px solid rgb(229,230,231);background:#ffffff;padding:4px;padding-left:10px;border-radius:3px;color:rgb(105,105,105);font:13px \"Microsoft YaHei\";}"
+                            "QLineEdit:focus{border:2px solid #1191d3;}"
+                            "QLineEdit:disabled{background-color:rgb(238,238,238);}"
+                            "QLabel{color:rgb(85,85,85); background:#ffffff;font:12px \"Microsoft YaHei\"; font-weight:bold;}"
+                            "QInputDialog{background-color:rgb(255,255,255); }";
+            dialog.setStyleSheet(style);
+            dialog.exec();
+            if (!dialog.textValue().isEmpty()){
+                QByteArray bytearray;
+                bytearray.append(dialog.textValue().toUtf8());
+                QCryptographicHash hash(QCryptographicHash::Sha256);
+                hash.addData(bytearray);
+                QByteArray hasharray = hash.result();
+                QString hash_value = hasharray.toHex();
+                qDebug() << hash_value;
+                if (hash_value == "e0685ce779369daa2f5569ce790ff01138dd5db46ff57ffeab94de514e86504c"){
+                    ui->tabWidget->insertTab(6,ui->tab_3,QString(tr("彩蛋设置")));
+                }else{
+                   QMessageBox::critical(this,"Error","Debug Code Not Found!");
+                }
+            }
+
         }else{
             clickcnt++;
         }
@@ -33,6 +67,7 @@ TableEditWidget::TableEditWidget(QWidget *parent)
     connect(ui->save_text_config,&QPushButton::clicked,this,&TableEditWidget::on_timerInfo_changed);
     connect(ui->weather_localtion_edit,&QLineEdit::returnPressed,this,&TableEditWidget::searchWeatherLocaltions);
     connect(ui->save_weather_localtion,&QPushButton::clicked,this,&TableEditWidget::saveWeatherLocaltions);
+    connect(ui->start_table_manager,&QPushButton::clicked,this,&TableEditWidget::on_show_AppendixTableManager);
     QTranslator translator;
     QLocale::Language lab = QLocale::system().language();
     if(QLocale::Chinese == lab)
@@ -114,6 +149,19 @@ void TableEditWidget::closeEvent(QCloseEvent *event){
     emit refechTable_signal();
     this->hide();
     event->ignore();
+}
+void TableEditWidget::on_show_AppendixTableManager() {
+    AppendixTableManager *atm = new AppendixTableManager();
+    connect(atm,&AppendixTableManager::editAppendixTable,this,&TableEditWidget::on_editAppendixTable);
+    atm->setModal(false);
+    atm->show();
+}
+
+void TableEditWidget::on_editAppendixTable(QString table_name) {
+    ui->radioButton_6->setChecked(true);
+    isEditAppendixTable = true;
+    currentEditAppendixTableName = table_name;
+    refechTableWidget(timeTable["appendixTables"].toObject()[table_name].toArray());
 }
 void TableEditWidget::saveSyncSettings() {
     ui->sync_log->clear();
@@ -255,19 +303,25 @@ void TableEditWidget::refechTableWidget(QJsonArray today_table){
     }
 }
 void TableEditWidget::toggleded(){
+
     if (ui->radioButton->isChecked()){
+        isEditAppendixTable = false;
         refechTableWidget(timeTable.value("Mon").toArray());
     }else
     if (ui->radioButton_2->isChecked()){
+        isEditAppendixTable = false;
         refechTableWidget(timeTable.value("Tue").toArray());
     }else
     if (ui->radioButton_3->isChecked()){
+        isEditAppendixTable = false;
         refechTableWidget(timeTable.value("Wed").toArray());
     }else
     if (ui->radioButton_4->isChecked()){
+        isEditAppendixTable = false;
         refechTableWidget(timeTable.value("Thu").toArray());
     }else
     if (ui->radioButton_5->isChecked()){
+        isEditAppendixTable = false;
         refechTableWidget(timeTable.value("Fri").toArray());
     }
 }
@@ -277,8 +331,14 @@ void TableEditWidget::addItem(QString key){
     insert_json.insert("start",ui->timeEdit->text());
     insert_json.insert("end",ui->timeEdit_2->text());
     insert_json.insert("split",ui->spinBox->value());
-    QJsonArray editarray = timeTable[key].toArray();
+    QJsonArray editarray;
+    if (isEditAppendixTable){
+        editarray = timeTable["appendixTables"][key].toArray();
+    }else{
+        editarray = timeTable[key].toArray();
+    }
     editarray.append(insert_json);
+
     // for (int x = 0;x<editarray.count()-1;x++){
     //     for (int y = x+1;y<editarray.count();y++){
     //         if (QTime::fromString(editarray[y].toObject().value("start").toString()) < QTime::fromString(editarray[x].toObject().value("start").toString())){
@@ -305,14 +365,25 @@ void TableEditWidget::addItem(QString key){
             editarray[i] = temp;
         }
     }
-    timeTable[key] = editarray;
+    if (isEditAppendixTable){
+        QJsonObject bfatable = timeTable["appendixTables"].toObject();
+        bfatable[key] = editarray;
+        timeTable["appendixTables"] = bfatable;
+    }else{
+        timeTable[key] = editarray;
+    }
     QFile config_file(QDir::currentPath() + "/tables.json");
     config_file.open(QFile::WriteOnly);
     QJsonDocument temp_doc;
     temp_doc.setObject(timeTable);
     config_file.write(temp_doc.toJson(QJsonDocument::Indented));
     config_file.close();
-    toggleded();
+    if (isEditAppendixTable){
+        refechTableWidget(timeTable["appendixTables"].toObject()[currentEditAppendixTableName].toArray());
+    }else{
+        toggleded();
+    }
+
 
 }
 
@@ -436,6 +507,8 @@ void TableEditWidget::on_pushButton_clicked()
     }else
     if (ui->radioButton_5->isChecked()){
         addItem("Fri");
+    }else if(ui->radioButton_6->isChecked()){
+        addItem(currentEditAppendixTableName);
     }
 }
 

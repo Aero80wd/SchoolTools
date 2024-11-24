@@ -2,7 +2,7 @@
 ; SEE THE DOCUMENTATION FOR DETAILS ON CREATING INNO SETUP SCRIPT FILES!
 
 #define MyAppName "Ð£Ô°Ðü¸¡´°"
-#define MyAppVersion "5.3"
+#define MyAppVersion "5.4"
 #define MyAppPublisher "Aero8m"
 #define MyAppURL "https://github.com/Aero80wd/SchoolTools"
 #define MyAppExeName "SchoolTools.exe"
@@ -22,9 +22,9 @@ DefaultDirName={localappdata}\Programs\SchoolTools
 DisableProgramGroupPage=yes
 ; Uncomment the following line to run in non administrative install mode (install for current user only.)
 ;PrivilegesRequired=lowest
-OutputDir=C:\Users\JH182\Documents\SchoolTools\setup
+OutputDir=D:\QtProjects\SchoolTools-VS\setup
 OutputBaseFilename=SchoolTools-setup
-SetupIconFile=C:\Users\JH182\Documents\SchoolTools\icon.ico
+SetupIconFile=D:\QtProjects\SchoolTools-VS\icon.ico
 Compression=lzma
 SolidCompression=yes
 WizardStyle=modern
@@ -62,8 +62,8 @@ Name: "ukrainian"; MessagesFile: "compiler:Languages\Ukrainian.isl"
 Name: "desktopicon"; Description: "{cm:CreateDesktopIcon}"; GroupDescription: "{cm:AdditionalIcons}"; Flags: unchecked
 
 [Files]
-Source: "C:\Users\JH182\Documents\SchoolTools\cmake-build-release-visual-studio\Release\{#MyAppExeName}"; DestDir: "{app}"; Flags: ignoreversion
-Source: "C:\Users\JH182\Documents\SchoolTools\cmake-build-release-visual-studio\Release\*"; DestDir: "{app}"; Flags: ignoreversion recursesubdirs createallsubdirs
+Source: "D:\QtProjects\SchoolTools-VS\release\{#MyAppExeName}"; DestDir: "{app}"; Flags: ignoreversion
+Source: "D:\QtProjects\SchoolTools-VS\release\*"; DestDir: "{app}"; Flags: ignoreversion recursesubdirs createallsubdirs
 ; NOTE: Don't use "Flags: ignoreversion" on any shared system files
 
 [Icons]

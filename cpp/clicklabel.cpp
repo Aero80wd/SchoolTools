@@ -6,10 +6,6 @@ ClickLabel::ClickLabel(QWidget* parent) {
 void ClickLabel::mouseClickEvent(QMouseEvent* e){
     setWindowFlags(Qt::Widget);
     emit clicked();
-    if (aniopen)
-    {
-        jump_animation->start();
-    }
 }
 void ClickLabel::mouseDoubleClickEvent(QMouseEvent* e){
     setWindowFlags(Qt::Widget);
@@ -20,8 +16,7 @@ bool ClickLabel::event(QEvent *e)
     if (e->type() == QEvent::MouseButtonPress)
     {
         QMouseEvent *mouseEvent = static_cast<QMouseEvent*>(e);
-        if(mouseEvent->button() == Qt::LeftButton)
-        {
+        if(mouseEvent->button() == Qt::LeftButton){
             emit clicked();
             return true;
         }
@@ -50,13 +45,7 @@ bool ClickLabel::event(QEvent *e)
         resize_animation->setStartValue(QRect(pos().x(),pos().y(),width(),height()));
         resize_animation->setEndValue(QRect(pos().x()-((width()*1.2-width())/2),pos().y()-((height()*1.2-height())/2),width()*1.2,height()*1.2));
         resize_animation->setDuration(200);
-        resize_animation->setEasingCurve(QEasingCurve::InOutQuad);
-        jump_animation = new QPropertyAnimation(this,"pos");
-        jump_animation->setKeyValueAt(0,pos());
-        jump_animation->setKeyValueAt(0.5,QPoint(x(),y()+30));
-        jump_animation->setKeyValueAt(1,pos());
-        jump_animation->setDuration(500);
-        jump_animation->setEasingCurve(QEasingCurve::InOutQuad);
+        resize_animation->setEasingCurve(QEasingCurve::OutInExpo);
         anisettinged = true;
         return true;
     }

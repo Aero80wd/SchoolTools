@@ -5,6 +5,7 @@
 #include<QDir>
 #include<QJsonObject>
 #include<QJsonArray>
+#include<QCoreApplication>
 
 QString TABLE_JSON = QDir::currentPath() + "/tables.json";
 QString CONFIG_JSON = QDir::currentPath() + "/config.json";

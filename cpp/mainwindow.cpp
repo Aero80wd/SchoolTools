@@ -221,8 +221,24 @@ void MainWindow::on_btnhk_clicked()
     en_cnday["星期三"] = "Wed";
     en_cnday["星期四"] = "Thu";
     en_cnday["星期五"] = "Fri";
+    QFile file(QDir::currentPath() + "/tables.json");
+    file.open(QIODevice::ReadWrite | QIODevice::Text);
+    QTextStream stream(&file);
+    QString file_str = stream.readAll();
+    file.close();
+    QJsonParseError jsonError;
+    QJsonDocument jsondoc = QJsonDocument::fromJson(file_str.toUtf8(),&jsonError);
+    if (jsonError.error != QJsonParseError::NoError && !jsondoc.isNull()) {
+        showLog("table.json is Error!",LogStatus::ERR);
+        return;
+    }
+    QJsonObject appendixTables = jsondoc.object()["appendixTables"].toObject();
+    for (auto iter = appendixTables.begin();iter != appendixTables.end();iter++){
+        items << "附加课表：" + iter.key();
+        en_cnday["附加课表：" + iter.key()] = "APPEND_" + iter.key();
+    }
     bool ok;
-    QString day = QInputDialog::getItem(this,"换课","选择使用的星期",items,0,false,&ok);
+    QString day = QInputDialog::getItem(this,"换课","选择使用的星期或附加课表",items,0,false,&ok);
     qDebug() << day;
     if (ok)
     {

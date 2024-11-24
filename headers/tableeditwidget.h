@@ -29,7 +29,10 @@
 #include <QNetworkReply>
 #include <QNetworkRequest>
 #include <QNetworkAccessManager>
+#include<QInputDialog>
+#include<QCryptographicHash>
 #include "NetworkRequests.h"
+#include "AppendixTableManager.h"
 
 namespace Ui {
 class TableEditWidget;
@@ -45,7 +48,7 @@ public:
     void readTableJson();
     void refechTableWidget(QJsonArray today_table);
     QJsonObject config;
-    QString APP_VERSION = "5.3";
+    QString APP_VERSION = "5.4";
     void setConfig(QJsonObject obj);
     QJsonObject timeTable;
     void closeEvent(QCloseEvent *event) override;
@@ -83,12 +86,15 @@ private slots:
 
     void on_pluginList_itemDoubleClicked(QListWidgetItem *item);
 
-
+    void on_show_AppendixTableManager();
     void on_timerInfo_changed();
+    void on_editAppendixTable(QString table_name);
 signals:
     void refechTable_signal();
     void refechToolBar_signal();
 private:
+    bool isEditAppendixTable = false;
+    QString currentEditAppendixTableName;
     Ui::TableEditWidget *ui;
     NetworkRequests weather_search_req;
 };

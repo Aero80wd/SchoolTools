@@ -298,8 +298,7 @@ void MainTableWidget::readTimeTable(){
     }
 }
 void MainTableWidget::readConfig(){
-    QFileInfo fi(CONFIG_JSON);
-    if (!fi.isFile()){
+    if (!QFileInfo::exists(CONFIG_JSON)){
         QFile file(CONFIG_JSON);
         file.open(QIODevice::ReadWrite | QIODevice::Text);
         QJsonObject config_json;
@@ -485,10 +484,12 @@ void MainTableWidget::on_label_clicked()
     swithToYiYan();
 }
 void MainTableWidget::hk_slot(QString day){
-    rtt->terminate();;
-    today_table = time_table.value(day).toArray();
-
-
+    rtt->terminate();
+    if (day.contains("APPEND_",Qt::CaseSensitive)){
+        today_table = time_table["appendixTables"].toObject()[day.split("_").last()].toArray();
+    }else{
+        today_table = time_table.value(day).toArray();
+    }
     for (QWidget*widget : ui->class_show_widget->findChildren<QWidget*>())
     {
         delete widget;
@@ -644,7 +645,7 @@ void MainTableWidget::refechTable_slot(){
 
 void MainTableWidget::setStyleSheetFromFile(QWidget* widget,QString file){
     QFile styleFile(file);
-    if(styleFile.open(QIODevice::ReadOnly))
+    if(styleFile.open(QIODevice::ReadOnly | QIODevice::Text))
     {
         showLog("StyleSheet is Loaded",LogStatus::INFO);
         QString setStyleSheet(styleFile.readAll());
